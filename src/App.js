@@ -6,7 +6,7 @@ import store from './store'
 /*cookie*/
 import { CookiesProvider } from 'react-cookie';
 /*router*/
-import Login from './pages/login';
+import Auth from './pages/auth';
 import Home from './pages/home';
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
                     <React.Fragment>
                         <CookiesProvider>
                         <Route exact path="/" component={Home}/>
-                        <Route exact path="/login" component={Login}/>
+                        <Route exact path="/auth" component={Auth}/>
                         </CookiesProvider>
                     </React.Fragment>
                 </Router>

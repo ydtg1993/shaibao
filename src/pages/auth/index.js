@@ -3,9 +3,11 @@ import { LoginWrapper,LoginButton,RegisterButton } from './style';
 import {connect} from 'react-redux';
 import { withCookies } from 'react-cookie';
 
-class Login extends React.Component{
+class Auth extends React.Component{
     constructor(props){
         super(props);
+        /*bind function*/
+        this.ShowLoginDialog = this.ShowLoginDialog.bind(this);
         const { cookies } = props;
         cookies.set('token', 'hikki', { path: '/' });
     }
@@ -13,10 +15,14 @@ class Login extends React.Component{
     render() {
         return (
             <LoginWrapper>
-                <LoginButton></LoginButton>
+                <LoginButton onClick={this.ShowLoginDialog}></LoginButton>
                 <RegisterButton></RegisterButton>
             </LoginWrapper>
         )
+    }
+
+    ShowLoginDialog(){
+        alert(1)
     }
 }
 
@@ -26,4 +32,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps,null)(withCookies(Login))
+export default connect(mapStateToProps,null)(withCookies(Auth))
