@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import bg from '../../resource/zhujiemian/bg.jpg';
 import tou_bg from '../../resource/zhujiemian/tou bg.png';
+import di_bg from '../../resource/zhujiemian/di_bg.png';
 
 export const HomeWrapper = styled.div`
     height: 100%;  
@@ -58,5 +59,6 @@ export const RoomFloor = styled.div`
 `;
 
 export const BottomFloor = styled.div`
-    
+    background: url('${di_bg}') center no-repeat 
+    background-size:100% auto;
 `;
