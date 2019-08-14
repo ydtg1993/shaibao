@@ -62,6 +62,16 @@ export const RoomFloor = styled.div`
 
 `;
 
+export const RoomList = styled.div`
+    width:55%;
+    margin:0 auto;
+    height:100%;
+    overflow:scroll;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar { width: 0 !important }
+`;
+
 export const BottomFloor = styled.div`
     background: url('${di_bg}') center no-repeat 
     background-size:100% 100%;
@@ -72,6 +82,12 @@ export const BottomTabList = styled.div`
     width：100%;
     height:100%;
     grid-template-columns:17% 17% 32% 17% 17%;
+`;
+
+export const Room = styled.img`
+    display:block;
+    width:100%;
+    margin-top:15px;
 `;
 
 export const BottomTab = styled.img`

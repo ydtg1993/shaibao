@@ -10,6 +10,8 @@ import {
     RoomFloor,
     BottomTab,
     BottomFloor,
+    RoomList,
+    Room,
     BottomTabList,
     BottomTabMain,
     BottomTabMainImg
@@ -26,6 +28,9 @@ import email from '../../resource/zhujiemian/youjian.png';
 import rank from '../../resource/zhujiemian/paihang.png';
 import recommend from '../../resource/zhujiemian/tuiguang.png';
 import servant from '../../resource/zhujiemian/kefu.png';
+import room1 from '../../resource/zhujiemian/room1.png';
+import room2 from '../../resource/zhujiemian/room2.png';
+import room3 from '../../resource/zhujiemian/room3.png';
 
 class Home extends React.Component {
     constructor(props) {
@@ -36,9 +41,11 @@ class Home extends React.Component {
         return (
             <HomeWrapper>
                 <TopFloor/>
+
                 <AnnouncementFloor>
                     <Announcement></Announcement>
                 </AnnouncementFloor>
+
                 <NavigationFloor>
                     <TabList>
                         <NavigationTab src={lucky}/>
@@ -47,7 +54,15 @@ class Home extends React.Component {
                         <NavigationTab src={activity}/>
                     </TabList>
                 </NavigationFloor>
-                <RoomFloor/>
+
+                <RoomFloor>
+                    <RoomList>
+                        <Room src={room1}></Room>
+                        <Room src={room2}></Room>
+                        <Room src={room3}></Room>
+                    </RoomList>
+                </RoomFloor>
+
                 <BottomFloor>
                     <BottomTabList>
                         <BottomTab src={exchange}/>
