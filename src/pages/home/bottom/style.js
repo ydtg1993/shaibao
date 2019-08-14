@@ -28,7 +28,7 @@ export const BottomTabMain = styled.div`
 export const BottomTabMainImg = styled.img`
     position:absolute;
     width:60%;
-    top:5%;
+    top:10%;
     transform: translateY(-50%) translateX(-50%);
     left:50%;
 `;
