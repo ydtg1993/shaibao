@@ -10,5 +10,5 @@ export const GameWrapper = styled.div`
     overflow:hidden;
     display: grid;
     display: grid;
-    grid-template-rows: 45% 50% 5%
+    grid-template-rows: 44% auto 15%;
 `;
