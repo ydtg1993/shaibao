@@ -11,7 +11,7 @@ export const Announcement = styled.div`
     display:inline-block;
     position:relative;
     width:95%;
-    height:22px;
+    height:24px;
     top: 50%;
     transform: translateY(-50%) translateX(-50%);
     left:50%;

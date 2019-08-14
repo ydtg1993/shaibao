@@ -1,7 +1,11 @@
 import React from 'react';
 import {
-    GameWrrapper,
+    GameWrapper,
 } from './style';
+/*component*/
+import DialComponent from './dial';
+import TableComponent from './table';
+import BetComponent from './bet';
 
 class Game extends React.Component{
     constructor(props) {
@@ -10,7 +14,11 @@ class Game extends React.Component{
 
     render() {
         return (
-            <GameWrrapper></GameWrrapper>
+            <GameWrapper>
+                <DialComponent/>
+                <TableComponent/>
+                <BetComponent/>
+            </GameWrapper>
         )
     }
 }
