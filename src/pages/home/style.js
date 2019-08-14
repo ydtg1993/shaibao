@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import bg from '../../resource/zhujiemian/bg.jpg';
-import tou_bg from '../../resource/zhujiemian/tou bg.png';
 import di_bg from '../../resource/zhujiemian/di_bg.png';
-import gonggao_bg from '../../resource/zhujiemian/gonggao.png';
 
 export const HomeWrapper = styled.div`
     height: 100%;  
@@ -16,27 +14,6 @@ export const HomeWrapper = styled.div`
     overflow:hidden;
     display: grid;
     grid-template-rows: 7% 7% 11% 67% 8%;
-`;
-
-export const TopFloor = styled.div`
-    background: url('${tou_bg}') no-repeat;  
-    background-size: 100% 100%;
-`;
-
-export const AnnouncementFloor = styled.div`
-   
-`;
-
-export const Announcement = styled.div`
-    display:inline-block;
-    position:relative;
-    width:95%;
-    height:22px;
-    top: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    left:50%;
-    background: url('${gonggao_bg}') no-repeat;  
-    background-size: 100%, 100%;
 `;
 
 export const NavigationFloor = styled.div`
