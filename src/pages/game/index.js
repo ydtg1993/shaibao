@@ -1,5 +1,7 @@
 import React from 'react';
-import Home from "../home";
+import {
+    GameWrrapper,
+} from './style';
 
 class Game extends React.Component{
     constructor(props) {
@@ -8,7 +10,7 @@ class Game extends React.Component{
 
     render() {
         return (
-            <div></div>
+            <GameWrrapper></GameWrrapper>
         )
     }
 }

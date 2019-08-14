@@ -19,7 +19,7 @@ class RoomComponent extends React.Component {
         return (
                 <RoomFloor>
                     <RoomList>
-                        <Room src={room1}></Room>
+                        <Link to="/game/1"><Room src={room1}></Room></Link>
                         <Room src={room2}></Room>
                         <Room src={room3}></Room>
                     </RoomList>

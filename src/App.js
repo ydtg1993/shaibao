@@ -19,7 +19,7 @@ class App extends React.Component {
                         <CookiesProvider>
                         <Route exact path="/" component={Home}/>
                         <Route exact path="/auth" component={Auth}/>
-                            <Route exact path="/game" component={Game}/>
+                            <Route exact path="/game/:room_id" component={Game}/>
                         </CookiesProvider>
                     </React.Fragment>
                 </Router>

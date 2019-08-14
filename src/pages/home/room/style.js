@@ -17,6 +17,7 @@ export const RoomList = styled.div`
 export const Room = styled.img`
     display:block;
     width:100%;
-    margin-top:15px;
+    margin-top:5px;
+    &:first-child{margin-top:0}
 `;
 
