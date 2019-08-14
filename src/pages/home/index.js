@@ -17,6 +17,8 @@ import {
     BottomTabMainImg
 } from './style';
 import {Link} from "react-router-dom";
+/*component*/
+import RoomComponent from './room';
 /*img resource*/
 import lucky from '../../resource/zhujiemian/1.png';
 import signIn from '../../resource/zhujiemian/2.png';
@@ -28,9 +30,6 @@ import email from '../../resource/zhujiemian/youjian.png';
 import rank from '../../resource/zhujiemian/paihang.png';
 import recommend from '../../resource/zhujiemian/tuiguang.png';
 import servant from '../../resource/zhujiemian/kefu.png';
-import room1 from '../../resource/zhujiemian/room1.png';
-import room2 from '../../resource/zhujiemian/room2.png';
-import room3 from '../../resource/zhujiemian/room3.png';
 
 class Home extends React.Component {
     constructor(props) {
@@ -55,13 +54,7 @@ class Home extends React.Component {
                     </TabList>
                 </NavigationFloor>
 
-                <RoomFloor>
-                    <RoomList>
-                        <Room src={room1}></Room>
-                        <Room src={room2}></Room>
-                        <Room src={room3}></Room>
-                    </RoomList>
-                </RoomFloor>
+                <RoomComponent/>
 
                 <BottomFloor>
                     <BottomTabList>
