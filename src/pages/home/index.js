@@ -8,15 +8,24 @@ import {
     NavigationTab,
     TabList,
     RoomFloor,
-    BottomFloor} from './style';
+    BottomTab,
+    BottomFloor,
+    BottomTabList,
+    BottomTabMain,
+    BottomTabMainImg
+} from './style';
 import {Link} from "react-router-dom";
-
 /*img resource*/
-import gonggao_bg from '../../resource/zhujiemian/gonggao.png';
 import lucky from '../../resource/zhujiemian/1.png';
 import signIn from '../../resource/zhujiemian/2.png';
 import bet from '../../resource/zhujiemian/3.png';
 import activity from '../../resource/zhujiemian/4.png';
+
+import exchange from '../../resource/zhujiemian/duihuan.png';
+import email from '../../resource/zhujiemian/youjian.png';
+import rank from '../../resource/zhujiemian/paihang.png';
+import recommend from '../../resource/zhujiemian/tuiguang.png';
+import servant from '../../resource/zhujiemian/kefu.png';
 
 class Home extends React.Component {
     constructor(props) {
@@ -28,7 +37,7 @@ class Home extends React.Component {
             <HomeWrapper>
                 <TopFloor/>
                 <AnnouncementFloor>
-                    <Announcement src={gonggao_bg}/>
+                    <Announcement></Announcement>
                 </AnnouncementFloor>
                 <NavigationFloor>
                     <TabList>
@@ -39,7 +48,17 @@ class Home extends React.Component {
                     </TabList>
                 </NavigationFloor>
                 <RoomFloor/>
-                <BottomFloor/>
+                <BottomFloor>
+                    <BottomTabList>
+                        <BottomTab src={exchange}/>
+                        <BottomTab src={email}/>
+                        <BottomTabMain>
+                            <BottomTabMainImg src={rank}/>
+                        </BottomTabMain>
+                        <BottomTab src={recommend}/>
+                        <BottomTab src={servant}/>
+                    </BottomTabList>
+                </BottomFloor>
             </HomeWrapper>
         )
     }
