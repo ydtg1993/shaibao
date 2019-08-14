@@ -5,6 +5,7 @@ import {
 /*component*/
 import DialComponent from './dial';
 import TableComponent from './table';
+import MoneyComponent from './money';
 import BetComponent from './bet';
 
 class Game extends React.Component{
@@ -17,6 +18,7 @@ class Game extends React.Component{
             <GameWrapper>
                 <DialComponent/>
                 <TableComponent/>
+                <MoneyComponent/>
                 <BetComponent/>
             </GameWrapper>
         )
