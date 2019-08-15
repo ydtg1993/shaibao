@@ -89,7 +89,7 @@ export const Text = styled.img`
 `;
 
 export const SText = styled(Text)`
-    width:24px;
+    width:23px;
 `;
 
 export const SSText = styled(SText)`
