@@ -10,14 +10,14 @@ export const Back = styled.img`
     position:absolute;
     top: 0px;
     left:0;
-    width:80px;
+    width:65px;
 `;
 
 export const Announcement = styled.div`
     background:rgba(0, 0, 0, 0.42);
     width:100%;
-    height:25px;
-    line-height:25px;
+    height:20px;
+    line-height:20px;
     padding-left:100px;
 `;
 
@@ -30,7 +30,7 @@ export const Tools = styled.div`
 
 export const Record = styled.img`
     margin-top:40px;
-    width:30px;
+    width:24px;
 `;
 
 export const Tab = styled.img`
