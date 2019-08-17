@@ -1,12 +1,6 @@
-import {USER_IS_LOGIN} from './actions'
+import { combineReducers } from 'redux';
+import AuthReducer from '../pages/auth/store/reducer';
 
-export default (state = [], action) => {
-    switch (action.type) {
-        case USER_IS_LOGIN:
-            return [
-
-            ];
-        default:
-            return state
-    }
-};
+export default combineReducers({
+    auth:AuthReducer
+})

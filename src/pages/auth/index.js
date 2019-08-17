@@ -2,6 +2,7 @@ import  React from 'react';
 import { LoginWrapper,LoginButton,RegisterButton } from './style';
 import {connect} from 'react-redux';
 import { withCookies } from 'react-cookie';
+import * as Actions from './store/actions';
 
 class Auth extends React.Component{
     constructor(props){
@@ -15,7 +16,7 @@ class Auth extends React.Component{
     render() {
         return (
             <LoginWrapper>
-                <LoginButton onClick={this.ShowLoginDialog}></LoginButton>
+                <LoginButton value={this.props.userState} onClick={this.props.changeState}></LoginButton>
                 <RegisterButton></RegisterButton>
             </LoginWrapper>
         )
@@ -28,8 +29,17 @@ class Auth extends React.Component{
 
 const mapStateToProps = (state) => {
     return {
-
+        userState:state.auth.get('userState')
     }
 };
 
-export default connect(mapStateToProps,null)(withCookies(Auth))
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeState(){
+            const action = Actions.UserLogin(true);
+            dispatch(action)
+        }
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(withCookies(Auth))
