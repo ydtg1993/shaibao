@@ -16,20 +16,20 @@ class Register extends React.Component{
                 </div>
                 <div>
                     <Input>
-                        <label htmlFor="mobile">手机号</label>
-                        <input name="mobile" placeholder={'请输入您的手机号'} id="mobile"/>
+                        <label htmlFor="register-mobile">手机号</label>
+                        <input name="register-mobile" placeholder={'请输入您的手机号'} id="register-mobile"/>
                     </Input>
                     <Input>
-                        <label htmlFor="verify">验证码</label>
-                        <input name="verify" placeholder={'请输验证码'} id="verify"/>
+                        <label htmlFor="register-verify">验证码</label>
+                        <input name="register-verify" placeholder={'请输验证码'} id="register-verify"/>
                     </Input>
                     <Input>
-                        <label htmlFor="password">密码</label>
-                        <input name="password" placeholder={'请输入密码'} id="password"/>
+                        <label htmlFor="register-password">密码</label>
+                        <input name="register-password" placeholder={'请输入密码'} id="register-password"/>
                     </Input>
                     <Input>
-                        <label htmlFor="re_password">确认密码</label>
-                        <input name="re_password" placeholder={'请输入密码'} id="re_password"/>
+                        <label htmlFor="register-re-password">确认密码</label>
+                        <input name="register-re-password" placeholder={'请输入密码'} id="register-re-password"/>
                     </Input>
                     <Input>
                         <label htmlFor="invite">邀请码</label>
