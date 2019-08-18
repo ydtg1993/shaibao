@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { LoginBg,Close,LoginDialog,Input,Reset,SubmitButton } from './style';
-import lbg from '../../../resource/dengluye/denglu.png';
+import { Bg,Close,LoginDialog,Input,Reset,SubmitButton } from './style';
+import bg from '../../../resource/dengluye/denglu.png';
 import close from '../../../resource/dengluye/guanbi.png';
 import confirm from '../../../resource/dengluye/queding.png';
 import * as Actions from "../store/actions";
@@ -11,7 +11,7 @@ class Login extends React.Component{
         return (
             <LoginDialog className={this.props.show ? 'show':'hidden'}>
                 <div>
-                    <LoginBg src={lbg}/>
+                    <Bg src={bg}/>
                     <Close src={close} onClick={this.props.closeLogin}/>
                 </div>
                 <div>

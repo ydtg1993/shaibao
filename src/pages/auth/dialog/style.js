@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginBg = styled.img`
+export const Bg = styled.img`
     width:100%;
     position: absolute;
     z-index:1000;
@@ -14,7 +14,7 @@ export const Close = styled.img`
     right: 1px;
 `;
 
-export const LoginDialog = styled.div`
+export const Dialog = styled.div`
     position: absolute; left: 50%; top: 40%;
     transform: translate(-50%, -40%);
     width:85%;
@@ -33,6 +33,14 @@ export const LoginDialog = styled.div`
     &.hidden{
         opacity: 0;
     }
+`;
+
+export const LoginDialog = styled(Dialog)`
+
+`;
+
+export const RegisterDialog = styled(Dialog)`
+
 `;
 
 export const Input = styled.div`

@@ -5,14 +5,20 @@ const defaultState = fromJS({
     userState:false,
     showMongolian:false,
     showLoginDialog:false,
+    showRegisterDialog:false,
+    showResetDialog:false,
 });
 
 export default (state = defaultState, action) => {
     switch (action.type) {
         case Actions.USER_LOGIN:
             return state.set('showMongolian',true).set('showLoginDialog',true);
+        case Actions.USER_REGISTER:
+            return state.set('showMongolian',true).set('showRegisterDialog',true);
         case Actions.CLOSE_LOGIN_DIALOG:
             return state.set('showMongolian',false).set('showLoginDialog',false);
+        case Actions.CLOSE_REGISTER_DIALOG:
+            return state.set('showMongolian',false).set('showRegisterDialog',false);
         default:
             return state
     }

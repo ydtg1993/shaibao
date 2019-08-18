@@ -20,10 +20,11 @@ class Auth extends React.Component {
         return (
             <React.Fragment>
                 <LoginWrapper>
-                    <LoginButton value={this.props.userState} onClick={this.props.login}></LoginButton>
-                    <RegisterButton></RegisterButton>
+                    <LoginButton onClick={this.props.login}></LoginButton>
+                    <RegisterButton onClick={this.props.register}></RegisterButton>
                 </LoginWrapper>
                 <Login show={this.props.showLoginDialog}/>
+                <Register show={this.props.showRegisterDialog}/>
                 <Mongolian show={this.props.showMongolian} />
             </React.Fragment>
         )
@@ -34,15 +35,18 @@ const mapStateToProps = (state) => {
     return {
         userState: state.auth.get('userState'),
         showMongolian: state.auth.get('showMongolian'),
-        showLoginDialog:state.auth.get('showLoginDialog')
+        showLoginDialog:state.auth.get('showLoginDialog'),
+        showRegisterDialog:state.auth.get('showRegisterDialog')
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         login() {
-            const action = Actions.UserLogin();
-            dispatch(action)
+            dispatch(Actions.UserLogin())
+        },
+        register(){
+            dispatch(Actions.UserRegister())
         }
     }
 };
