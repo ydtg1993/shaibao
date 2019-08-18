@@ -2,7 +2,7 @@ import React from 'react';
 import {
     HomeWrapper,
 } from './style';
-import {Link} from "react-router-dom";
+import {connect} from 'react-redux';
 /*component*/
 import TopComponent from './top';
 import NavigationComponent from './navigation';
@@ -28,4 +28,16 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+const mapStateToProps = (state) => {
+    return {
+        userInfo:state.game.get('userInfo')
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home)
