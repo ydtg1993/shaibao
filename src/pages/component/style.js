@@ -11,10 +11,10 @@ export const MongolianWrapper = styled.div`
     visibility: hidden;
     background-color:rgba(0, 0, 0, 0.4); 
     -webkit-transition: opacity .1s ease-in-out;
-        -moz-transition: opacity .1s ease-in-out;
-        -ms-transition: opacity .1s ease-in-out;
-        -o-transition: opacity .1s ease-in-out;
-        transition: opacity .1s ease-in-out;
+    -moz-transition: opacity .1s ease-in-out;
+    -ms-transition: opacity .1s ease-in-out;
+    -o-transition: opacity .1s ease-in-out;
+    transition: opacity .1s ease-in-out;
         
     &.show {
         opacity: 1;

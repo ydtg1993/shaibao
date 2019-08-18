@@ -6,6 +6,7 @@ import * as Actions from './store/actions';
 /*component*/
 import Login from './dialog/login';
 import Register from './dialog/register';
+import Mongolian from "../component/mongolian";
 
 class Auth extends React.Component {
     constructor(props) {
@@ -22,7 +23,8 @@ class Auth extends React.Component {
                     <LoginButton value={this.props.userState} onClick={this.props.login}></LoginButton>
                     <RegisterButton></RegisterButton>
                 </LoginWrapper>
-                <Login showMongolian={this.props.showMongolian}/>
+                <Login show={this.props.showLoginDialog}/>
+                <Mongolian show={this.props.showMongolian} />
             </React.Fragment>
         )
     }
@@ -31,7 +33,8 @@ class Auth extends React.Component {
 const mapStateToProps = (state) => {
     return {
         userState: state.auth.get('userState'),
-        showMongolian: state.auth.get('showMongolian')
+        showMongolian: state.auth.get('showMongolian'),
+        showLoginDialog:state.auth.get('showLoginDialog')
     }
 };
 
