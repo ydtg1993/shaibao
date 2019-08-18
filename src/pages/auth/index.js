@@ -41,7 +41,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         login() {
-            const action = Actions.UserLogin(true);
+            const action = Actions.UserLogin();
             dispatch(action)
         }
     }

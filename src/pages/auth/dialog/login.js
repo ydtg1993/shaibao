@@ -1,8 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { LoginBg,Close,LoginDialog,Input,Reset,SubmitButton } from './style';
 import lbg from '../../../resource/dengluye/denglu.png';
 import close from '../../../resource/dengluye/guanbi.png';
 import confirm from '../../../resource/dengluye/queding.png';
+import * as Actions from "../store/actions";
 
 class Login extends React.Component{
     render() {
@@ -10,7 +12,7 @@ class Login extends React.Component{
             <LoginDialog className={this.props.show ? 'show':'hidden'}>
                 <div>
                     <LoginBg src={lbg}/>
-                    <Close src={close}/>
+                    <Close src={close} onClick={this.props.closeLogin}/>
                 </div>
                 <div>
                     <Input>
@@ -29,4 +31,13 @@ class Login extends React.Component{
     }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        closeLogin() {
+            const action = Actions.CloseLoginDialog();
+            dispatch(action)
+        }
+    }
+};
+
+export default connect(null, mapDispatchToProps)(Login)
