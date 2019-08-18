@@ -16,7 +16,7 @@ export const Close = styled.img`
 
 export const Dialog = styled.div`
     position: absolute; left: 50%; top: 40%;
-    transform: translate(-50%, -40%);
+    transform: translateX(-50%) translateY(-50%);
     width:85%;
     z-index:1000;
     visibility: hidden;
@@ -40,7 +40,7 @@ export const LoginDialog = styled(Dialog)`
 `;
 
 export const RegisterDialog = styled(Dialog)`
-
+grid-template-rows: 15% auto;
 `;
 
 export const Input = styled.div`
@@ -54,10 +54,10 @@ export const Input = styled.div`
     label{
     vertical-align: middle;
     display: inline-block;
-    width: 60px;
+    width: 75px;
     }
     input{
-    width: 65%;
+    width: 63%;
     background-color:#17233a;
     border: 1px #cbd080 solid;
     color: white;
@@ -80,7 +80,7 @@ export const Reset = styled.span`
 `;
 
 export const SubmitButton = styled.img`
-    margin-top:5%;
+    margin-top:4%;
     width:35%;
     z-index: 10000;
     position: relative;
