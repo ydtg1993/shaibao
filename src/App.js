@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 /*redux*/
-import {Provider} from 'react-redux';
-import store from './store'
+import { Provider } from 'react-redux';
+import store from './store';
 /*cookie*/
 import { CookiesProvider } from 'react-cookie';
 /*router*/
@@ -17,8 +17,8 @@ class App extends React.Component {
                 <Router>
                     <React.Fragment>
                         <CookiesProvider>
-                        <Route exact path="/" component={Home}/>
-                        <Route exact path="/auth" component={Auth}/>
+                            <Route exact path="/auth" component={Auth}/>
+                            <Route exact path="/home" component={Home}/>
                             <Route exact path="/game/:room_id" component={Game}/>
                         </CookiesProvider>
                     </React.Fragment>

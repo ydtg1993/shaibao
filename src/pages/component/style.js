@@ -7,6 +7,22 @@ export const MongolianWrapper = styled.div`
     top: 0px;  
     bottom: 0px; 
     z-index:999;
-    background-color:#ffff; 
+    opacity: 0;
+    visibility: hidden;
+    background-color:rgba(0, 0, 0, 0.4); 
+    -webkit-transition: opacity .1s ease-in-out;
+        -moz-transition: opacity .1s ease-in-out;
+        -ms-transition: opacity .1s ease-in-out;
+        -o-transition: opacity .1s ease-in-out;
+        transition: opacity .1s ease-in-out;
+        
+    &.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    &.hidden {
+         opacity: 0;
+    }
 `;
 

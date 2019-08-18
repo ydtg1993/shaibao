@@ -9,6 +9,7 @@ import NavigationComponent from './navigation';
 import AnnouncementComponent from './announcement';
 import RoomComponent from './room';
 import BottomComponent from './bottom';
+import {Redirect} from "react-router";
 
 class Home extends React.Component {
     constructor(props) {
@@ -16,6 +17,11 @@ class Home extends React.Component {
     }
 
     render() {
+        if(!this.props.userState){
+            return (
+                (<Redirect to={{pathname: "/auth"}}/>)
+            )
+        }
         return (
             <HomeWrapper>
                 <TopComponent/>
@@ -30,6 +36,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        userState:state.auth.get('userState'),
         userInfo:state.game.get('userInfo')
     }
 };
