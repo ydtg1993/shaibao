@@ -9,7 +9,7 @@ export const MongolianWrapper = styled.div`
     z-index:999;
     opacity: 0;
     visibility: hidden;
-    background-color:rgba(0, 0, 0, 0.4); 
+    background-color:rgba(0, 0, 0, 0.6); 
     -webkit-transition: opacity .1s ease-in-out;
     -moz-transition: opacity .1s ease-in-out;
     -ms-transition: opacity .1s ease-in-out;

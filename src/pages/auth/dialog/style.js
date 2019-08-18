@@ -65,9 +65,10 @@ export const Reset = styled.span`
     color:white;
     display:block;
     float:right;
-    margin-right:8%;
+    margin:1% 8% 0;
     z-index: 10000;
     position: relative;
+    text-decoration:underline;
 `;
 
 export const SubmitButton = styled.img`

@@ -21,7 +21,7 @@ class Login extends React.Component{
                         <label htmlFor="password">密码</label>
                         <input name="password" placeholder={'请输入密码'} id="password"/>
                     </Input>
-                    <Reset>充值密码</Reset>
+                    <Reset>忘记密码</Reset>
                     <SubmitButton src={confirm}/>
                 </div>
             </LoginDialog>
