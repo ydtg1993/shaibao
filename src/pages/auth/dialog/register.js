@@ -33,7 +33,7 @@ class Register extends React.Component{
                     </Input>
                     <Input>
                         <label htmlFor="invite">邀请码</label>
-                        <input name="invite" placeholder={'请输邀请码'} id="invite"/>
+                        <input name="invite" placeholder={'请输入邀请码'} id="invite"/>
                     </Input>
                     <SubmitButton src={confirm}/>
                 </div>
