@@ -10,7 +10,7 @@ import Toast from '../../component/toast';
 
 class Login extends React.Component{
     tip(){
-        Toast.error('网络异常',1000)
+        Toast.error('网络异常',1500)
     }
 
     render() {

@@ -16,7 +16,7 @@ export const Close = styled.img`
 
 export const Dialog = styled.div`
     position: absolute;
-    top:20%;
+    top:25%;
     left: 0;
     right: 0;
     margin:auto;
