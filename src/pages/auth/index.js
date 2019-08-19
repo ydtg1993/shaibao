@@ -5,6 +5,7 @@ import {withCookies} from 'react-cookie';
 import * as Actions from './store/actions';
 /*component*/
 import Login from './dialog/login';
+import ResetComponent from './dialog/reset';
 import Register from './dialog/register';
 import Mongolian from "../component/mongolian";
 
@@ -24,6 +25,7 @@ class Auth extends React.Component {
                     <RegisterButton onClick={this.props.register}></RegisterButton>
                 </LoginWrapper>
                 <Login show={this.props.showLoginDialog}/>
+                <ResetComponent show={this.props.showResetDialog}/>
                 <Register show={this.props.showRegisterDialog}/>
                 <Mongolian show={this.props.showMongolian} />
             </React.Fragment>
@@ -36,7 +38,8 @@ const mapStateToProps = (state) => {
         userState: state.auth.get('userState'),
         showMongolian: state.auth.get('showMongolian'),
         showLoginDialog:state.auth.get('showLoginDialog'),
-        showRegisterDialog:state.auth.get('showRegisterDialog')
+        showRegisterDialog:state.auth.get('showRegisterDialog'),
+        showResetDialog:state.auth.get('showResetDialog')
     }
 };
 

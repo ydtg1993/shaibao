@@ -22,9 +22,9 @@ class Login extends React.Component{
                     </Input>
                     <Input>
                         <label htmlFor="password">密码</label>
-                        <input name="password" placeholder={'请输入密码'} id="password"/>
+                        <input name="password" type={'password'} placeholder={'请输入密码'} id="password"/>
                     </Input>
-                    <Reset>忘记密码</Reset>
+                    <Reset onClick={this.props.openReset}>忘记密码</Reset>
                     <SubmitButton src={confirm}/>
                 </div>
             </LoginDialog>
@@ -35,8 +35,10 @@ class Login extends React.Component{
 const mapDispatchToProps = (dispatch) => {
     return {
         closeLogin() {
-            const action = Actions.CloseLoginDialog();
-            dispatch(action)
+            dispatch(Actions.CloseLoginDialog())
+        },
+        openReset(){
+            dispatch(Actions.OpenResetDialog())
         }
     }
 };

@@ -26,11 +26,11 @@ class Register extends React.Component{
                     </Input>
                     <Input>
                         <label htmlFor="register-password">密码</label>
-                        <input name="register-password" placeholder={'请输入密码'} id="register-password"/>
+                        <input name="register-password" type={'password'} placeholder={'请输入密码'} id="register-password"/>
                     </Input>
                     <Input>
                         <label htmlFor="register-re-password">确认密码</label>
-                        <input name="register-re-password" placeholder={'请输入密码'} id="register-re-password"/>
+                        <input name="register-re-password" type={'password'} placeholder={'请输入密码'} id="register-re-password"/>
                     </Input>
                     <Input>
                         <label htmlFor="invite">邀请码</label>
