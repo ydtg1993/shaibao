@@ -44,8 +44,7 @@ grid-template-rows: 15% auto;
 `;
 
 export const ResetDialog = styled(Dialog)`
-visibility: visible;
-        opacity: 1;
+grid-template-rows: 18% auto;
 `;
 
 export const Input = styled.div`
