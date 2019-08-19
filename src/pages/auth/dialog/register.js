@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as Actions from "../store/actions";
-import {Close, Input, Bg, RegisterDialog, Reset, SubmitButton} from "./style";
+import {Close, Input, Bg, RegisterDialog, SubmitButton} from "./style";
 import bg from "../../../resource/dengluye/zhucechuangkou.png";
 import close from "../../../resource/dengluye/guanbi.png";
 import confirm from "../../../resource/dengluye/queding.png";
