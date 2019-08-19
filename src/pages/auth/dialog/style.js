@@ -51,6 +51,8 @@ export const Input = styled.div`
     font-size:16px;
     font-weight: 300;
     margin-top:5%;
+    height:26px;
+   
     label{
     vertical-align: middle;
     display: inline-block;
@@ -64,6 +66,19 @@ export const Input = styled.div`
     height:22px;
     border-radius: 2px;
     text-align:center
+    }
+    .verify-input{
+        width:34%;
+        height: 22px;
+    }
+    .verify-button{
+        height:26px;
+        vertical-align: middle;
+        background:#f1eec4;
+        border: none;
+        border-radius: 2px;
+        margin-left:2%;
+        width:27%;
     }
 `;
 

@@ -21,7 +21,8 @@ class Register extends React.Component{
                     </Input>
                     <Input>
                         <label htmlFor="register-verify">验证码</label>
-                        <input name="register-verify" placeholder={'请输验证码'} id="register-verify"/>
+                        <input className={'verify-input'} name="register-verify" placeholder={'请输验证码'} id="register-verify"/>
+                        <button className={'verify-button'}>点击获取</button>
                     </Input>
                     <Input>
                         <label htmlFor="register-password">密码</label>
