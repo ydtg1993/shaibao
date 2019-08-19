@@ -12,7 +12,7 @@ class Register extends React.Component{
             <RegisterDialog className={this.props.show ? 'show':'hidden'}>
                 <div>
                     <Bg src={bg}/>
-                    <Close src={close} onClick={this.props.closeLogin}/>
+                    <Close src={close} onClick={this.props.closeRegister}/>
                 </div>
                 <div>
                     <Input>
@@ -45,7 +45,7 @@ class Register extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        closeLogin() {
+        closeRegister() {
             const action = Actions.CloseRegisterDialog();
             dispatch(action)
         }
