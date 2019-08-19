@@ -9,7 +9,7 @@ import confirm from "../../../resource/dengluye/queding.png";
 class Register extends React.Component{
     render() {
         return (
-            <RegisterDialog className={this.props.show ? 'show':'hidden'}>
+            <RegisterDialog className={this.props.show ? 'show fadeInUp faster animated':'hidden'}>
                 <div>
                     <Bg src={bg}/>
                     <Close src={close} onClick={this.props.closeRegister}/>

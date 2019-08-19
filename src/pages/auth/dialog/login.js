@@ -1,4 +1,5 @@
 import React from 'react';
+import "animate.css";
 import {connect} from 'react-redux';
 import { Bg,Close,LoginDialog,Input,Reset,SubmitButton } from './style';
 import bg from '../../../resource/dengluye/denglu.png';
@@ -9,7 +10,7 @@ import * as Actions from "../store/actions";
 class Login extends React.Component{
     render() {
         return (
-            <LoginDialog className={this.props.show ? 'show':'hidden'}>
+            <LoginDialog className={this.props.show ? 'show fadeInUp faster animated':'hidden'}>
                 <div>
                     <Bg src={bg}/>
                     <Close src={close} onClick={this.props.closeLogin}/>

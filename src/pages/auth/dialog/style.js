@@ -15,17 +15,17 @@ export const Close = styled.img`
 `;
 
 export const Dialog = styled.div`
-    position: absolute; left: 50%; top: 40%;
-    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top:30%;
+    left: 0;
+    right: 0;
+    margin:auto;
     width:85%;
     z-index:1000;
     visibility: hidden;
+    opacity: 0;
     display:grid;
     grid-template-rows: 26% auto;
-    -webkit-transition: all .2s ease;
-    -moz-transition:  all .2s ease;
-    transition:  all .2s ease;
-    opacity: 0;
     &.show{
         visibility: visible;
         opacity: 1;
