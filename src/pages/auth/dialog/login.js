@@ -8,6 +8,7 @@ import close from '../../../resource/dengluye/guanbi.png';
 import confirm from '../../../resource/dengluye/queding.png';
 import * as Actions from "../store/actions";
 import Toast from '../../component/toast';
+import {Redirect} from "react-router";
 
 class Login extends React.Component{
     componentWillReceiveProps(nextProps){
@@ -18,6 +19,11 @@ class Login extends React.Component{
     }
 
     render() {
+        if(this.props.userInfo){
+            return (
+                (<Redirect to={{pathname: "/home"}}/>)
+            )
+        }
         return (
             <LoginDialog className={this.props.show ? 'show fadeInUp faster animated':'hidden'}>
                 <div>

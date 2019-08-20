@@ -22,7 +22,7 @@ class DialComponent extends React.Component{
     render() {
         return (
             <DialWrapper>
-                <Link to='/'><Back src={back}/></Link>
+                <Link to='/home'><Back src={back}/></Link>
                 <Announcement></Announcement>
                 <Tools>
                     <div>

@@ -17,7 +17,7 @@ class Home extends React.Component {
     }
 
     render() {
-        if(!this.props.userToken){
+        if(!this.props.userInfo){
             return (
                 (<Redirect to={{pathname: "/auth"}}/>)
             )
@@ -36,8 +36,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userToken:state.auth.get('userToken'),
-        userInfo:state.game.get('userInfo')
+        userInfo:state.auth.get('userInfo')
     }
 };
 

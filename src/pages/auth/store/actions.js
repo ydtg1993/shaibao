@@ -26,7 +26,7 @@ export const UserLogin = (mobile,password) => {
                        token:data.data.token
                    }
                 });
-                Toast.info('登录成功');
+                Toast.success('登录成功');
             }else {
                 Toast.info(data.message);
             }
