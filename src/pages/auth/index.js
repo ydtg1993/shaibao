@@ -1,7 +1,6 @@
 import React from 'react';
 import {LoginWrapper, LoginButton, RegisterButton} from './style';
 import {connect} from 'react-redux';
-import {withCookies} from 'react-cookie';
 import * as Actions from './store/actions';
 /*component*/
 import Login from './dialog/login';
@@ -12,9 +11,6 @@ import Mongolian from "../component/mongolian";
 class Auth extends React.Component {
     constructor(props) {
         super(props);
-        /*bind function*/
-        const {cookies} = props;
-        cookies.set('token', 'hikki', {path: '/'});
     }
 
     render() {
@@ -35,7 +31,6 @@ class Auth extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userToken: state.auth.get('userToken'),
         showMongolian: state.auth.get('showMongolian'),
         showLoginDialog:state.auth.get('showLoginDialog'),
         showRegisterDialog:state.auth.get('showRegisterDialog'),
@@ -54,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withCookies(Auth))
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

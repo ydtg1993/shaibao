@@ -2,7 +2,6 @@ import React from 'react';
 import {
     HomeWrapper,
 } from './style';
-import {withCookies} from 'react-cookie';
 import {connect} from 'react-redux';
 /*component*/
 import TopComponent from './top';
@@ -48,4 +47,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(withCookies(Home))
+export default connect(mapStateToProps,mapDispatchToProps)(Home)

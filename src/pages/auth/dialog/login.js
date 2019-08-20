@@ -1,6 +1,7 @@
 import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
+import Cookies from 'universal-cookie';
 import { Bg,Close,LoginDialog,Input,Reset,SubmitButton } from './style';
 import bg from '../../../resource/dengluye/denglu.png';
 import close from '../../../resource/dengluye/guanbi.png';
@@ -9,6 +10,13 @@ import * as Actions from "../store/actions";
 import Toast from '../../component/toast';
 
 class Login extends React.Component{
+    componentWillReceiveProps(nextProps){
+        if(nextProps.userInfo){
+            const cookies = new Cookies();
+            cookies.set('userinfo', nextProps.userInfo, { path: '/' });
+        }
+    }
+
     render() {
         return (
             <LoginDialog className={this.props.show ? 'show fadeInUp faster animated':'hidden'}>
@@ -33,21 +41,27 @@ class Login extends React.Component{
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        userInfo: state.auth.get('userInfo'),
+    }
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         login(mobileElem,passwordElem){
             let mobile = mobileElem.value;
             let password = passwordElem.value;
             if(!(/^1[3456789]\d{9}$/.test(mobile))){
-                Toast.error('手机号错误',1500)
+                Toast.error('手机号错误',1500);
                 return false;
             }
             if(!(/^[a-zA-Z\d]+$/.test(password))){
-                Toast.error('密码只能数字或字母',1500)
+                Toast.error('密码只能数字或字母',1500);
                 return false;
             }
             if(password.length < 6 || password.length > 18){
-                Toast.error('密码6-18位',1500)
+                Toast.error('密码6-18位',1500);
                 return false;
             }
             dispatch(Actions.UserLogin());
@@ -61,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

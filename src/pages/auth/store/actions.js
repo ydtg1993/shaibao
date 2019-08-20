@@ -22,9 +22,9 @@ export const UserLogin = (mobile,password) => {
                        id:data.data.serial,
                        username:data.data.name,
                        gold:data.data.gold,
-                       avatar:data.data.avatar
-                   },
-                   token:data.data.token
+                       avatar:data.data.avatar,
+                       token:data.data.token
+                   }
                 });
                 Toast.info('登录成功');
             }else {
