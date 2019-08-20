@@ -1,8 +1,14 @@
-import * as Actions from './actions'
+import * as Actions from './actions';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
-    userState:false,
+    userInfo:{
+        id:'',
+        username:'',
+        avatar:'',
+        gold:'',
+    },
+    userToken:'',
     showMongolian:false,
     showLoginDialog:false,
     showRegisterDialog:false,
@@ -11,9 +17,10 @@ const defaultState = fromJS({
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case Actions.USER_LOGIN:
+        /*open dialog*/
+        case Actions.OPEN_LOGIN_DIALOG:
             return state.set('showMongolian',true).set('showLoginDialog',true);
-        case Actions.USER_REGISTER:
+        case Actions.OPEN_REGISTER_DIALOG:
             return state.set('showMongolian',true).set('showRegisterDialog',true);
         case Actions.CLOSE_LOGIN_DIALOG:
             return state.set('showMongolian',false).set('showLoginDialog',false);
@@ -23,6 +30,12 @@ export default (state = defaultState, action) => {
             return state.set('showLoginDialog',false).set('showResetDialog',true);
         case Actions.CLOSE_RESET_DIALOG:
             return state.set('showMongolian',false).set('showResetDialog',false);
+        /*login*/
+        case Actions.USER_LOGIN:
+            return state.merge({
+                userInfo:action.userInfo,
+                userToken:action.token
+            });
         default:
             return state
     }

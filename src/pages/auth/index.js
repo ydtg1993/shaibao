@@ -35,7 +35,7 @@ class Auth extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userState: state.auth.get('userState'),
+        userToken: state.auth.get('userToken'),
         showMongolian: state.auth.get('showMongolian'),
         showLoginDialog:state.auth.get('showLoginDialog'),
         showRegisterDialog:state.auth.get('showRegisterDialog'),
@@ -46,10 +46,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         login() {
-            dispatch(Actions.UserLogin())
+            dispatch(Actions.OpenLoginDialog())
         },
         register(){
-            dispatch(Actions.UserRegister())
+            dispatch(Actions.OpenRegisterDialog())
         }
     }
 };

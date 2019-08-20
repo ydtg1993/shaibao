@@ -2,6 +2,7 @@ import React from 'react';
 import {
     HomeWrapper,
 } from './style';
+import {withCookies} from 'react-cookie';
 import {connect} from 'react-redux';
 /*component*/
 import TopComponent from './top';
@@ -17,7 +18,7 @@ class Home extends React.Component {
     }
 
     render() {
-        if(!this.props.userState){
+        if(!this.props.userToken){
             return (
                 (<Redirect to={{pathname: "/auth"}}/>)
             )
@@ -36,7 +37,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userState:state.auth.get('userState'),
+        userToken:state.auth.get('userToken'),
         userInfo:state.game.get('userInfo')
     }
 };
@@ -47,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+export default connect(mapStateToProps,mapDispatchToProps)(withCookies(Home))

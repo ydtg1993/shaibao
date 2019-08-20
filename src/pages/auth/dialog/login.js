@@ -9,10 +9,6 @@ import * as Actions from "../store/actions";
 import Toast from '../../component/toast';
 
 class Login extends React.Component{
-    tip(){
-        Toast.error('网络异常',1500)
-    }
-
     render() {
         return (
             <LoginDialog className={this.props.show ? 'show fadeInUp faster animated':'hidden'}>
@@ -23,14 +19,14 @@ class Login extends React.Component{
                 <div>
                     <Input>
                         <label htmlFor="mobile">手机号</label>
-                        <input name="mobile" placeholder={'请输入您的手机号'} id="mobile"/>
+                        <input name="mobile" placeholder={'请输入您的手机号'} ref={(input)=>{this.mobile = input}} id="mobile"/>
                     </Input>
                     <Input>
                         <label htmlFor="password">密码</label>
-                        <input name="password" type={'password'} placeholder={'请输入密码'} id="password"/>
+                        <input name="password" type={'password'} placeholder={'请输入密码'} ref={(input)=>{this.password = input}} id="password"/>
                     </Input>
                     <Reset onClick={this.props.openReset}>忘记密码</Reset>
-                    <SubmitButton onClick={this.tip.bind(this)} src={confirm}/>
+                    <SubmitButton onClick={()=>this.props.login(this.mobile,this.password)} src={confirm}/>
                 </div>
             </LoginDialog>
         );
@@ -39,6 +35,23 @@ class Login extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        login(mobileElem,passwordElem){
+            let mobile = mobileElem.value;
+            let password = passwordElem.value;
+            if(!(/^1[3456789]\d{9}$/.test(mobile))){
+                Toast.error('手机号错误',1500)
+                return false;
+            }
+            if(!(/^[a-zA-Z\d]+$/.test(password))){
+                Toast.error('密码只能数字或字母',1500)
+                return false;
+            }
+            if(password.length < 6 || password.length > 18){
+                Toast.error('密码6-18位',1500)
+                return false;
+            }
+            dispatch(Actions.UserLogin());
+        },
         closeLogin() {
             dispatch(Actions.CloseLoginDialog())
         },
