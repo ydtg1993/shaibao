@@ -24,8 +24,7 @@ export default (state = defaultState, action) => {
             return state.set('showMongolian',false).set('showRegisterDialog',false);
         case Actions.CLOSE_RESET_DIALOG:
             return state.set('showMongolian',false).set('showResetDialog',false);
-        /*login*/
-        case Actions.USER_LOGIN:
+        case Actions.SET_USER_INFO:
             return state.set('userInfo',action.userInfo);
         default:
             return state

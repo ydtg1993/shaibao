@@ -10,22 +10,20 @@ export const CLOSE_REGISTER_DIALOG = 'close_register_dialog';
 export const OPEN_RESET_DIALOG = 'open_reset_dialog';
 export const CLOSE_RESET_DIALOG = 'close_reset_dialog';
 export const NOTICE_EVENT = 'notice_event';
+export const SET_USER_INFO = 'set_user_info';
 
 export const UserLogin = (mobile,password) => {
     return (dispatch)=>{
         axios.get('/api/login.json').then((res)=>{
             let data = res.data;
             if(data.code == 20000){
-                dispatch({
-                   type:USER_LOGIN,
-                   userInfo:{
-                       id:data.data.serial,
-                       username:data.data.name,
-                       gold:data.data.gold,
-                       avatar:data.data.avatar,
-                       token:data.data.token
-                   }
-                });
+                dispatch(SetUserInfo({
+                    id:data.data.serial,
+                    username:data.data.name,
+                    gold:data.data.gold,
+                    avatar:data.data.avatar,
+                    token:data.data.token
+                }));
                 Toast.success('登录成功');
             }else {
                 Toast.info(data.message);
@@ -35,6 +33,11 @@ export const UserLogin = (mobile,password) => {
         });
     }
 };
+
+export const SetUserInfo = (userInfo) => ({
+    type:SET_USER_INFO,
+    userInfo:userInfo
+});
 
 export const UserRegister = () => ({
    type:USER_REGISTER
