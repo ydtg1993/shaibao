@@ -8,7 +8,7 @@ import { CookiesProvider } from 'react-cookie';
 /*router*/
 import Auth from './pages/auth';
 import Home from './pages/home';
-import Game from './pages/game';
+import Game from './pages/game/loadable';
 
 class App extends React.Component {
     render() {

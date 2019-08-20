@@ -10,7 +10,7 @@ import * as Actions from "../store/actions";
 class ResetComponent extends React.Component{
     render() {
         return (
-            <ResetDialog className={this.props.show ? 'show fadeInUp faster animated':''}>
+            <ResetDialog className={this.props.show ? 'show fadeInLeft faster animated':''}>
                 <div>
                     <Bg src={bg}/>
                     <Close src={close} onClick={this.props.closeReset}/>

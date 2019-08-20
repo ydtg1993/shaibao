@@ -2,6 +2,7 @@ import React from 'react';
 import {
     GameWrapper,
 } from './style';
+import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import * as actions from './store/actions';
 /*component*/
@@ -15,6 +16,7 @@ import {USER_INFO} from "./store/actions";
 class Game extends React.Component{
     constructor(props) {
         super(props);
+        console.log(this.props.match.params.room_id);
     }
 
     componentDidMount(){
@@ -56,4 +58,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Game);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Game));
