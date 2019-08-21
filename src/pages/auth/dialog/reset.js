@@ -24,7 +24,7 @@ class ResetComponent extends React.Component{
                     <Input>
                         <label htmlFor="reset-verify">验证码</label>
                         <input className={'verify-input'} name="reset-verify" placeholder={'请输验证码'} ref={(input)=>{this.verify = input}} id="reset-verify"/>
-                        <button className={'verify-button'}>点击获取</button>
+                        <button className={'verify-button'} onClick={()=>this.props.sendVerifyCode(this.props.sendVerify,this.mobile)}>点击获取</button>
                     </Input>
                     <Input>
                         <label htmlFor="reset-password">新密码</label>
@@ -69,6 +69,18 @@ const mapDispatchToProps = (dispatch) => {
                 return false;
             }
             dispatch(Actions.UserReset(mobile,password,verify))
+        },
+        sendVerifyCode(sendVerify,mobileElem){
+            if(sendVerify){
+                Toast.error('验证码已发送',1000);
+                return false;
+            }
+            let mobile = mobileElem.value;
+            if(!(/^1[3456789]\d{9}$/.test(mobile))){
+                Toast.error('手机号错误',1000);
+                return false;
+            }
+            dispatch(Actions.SendVerifyCode(mobile))
         },
         closeReset(){
             dispatch(Actions.CloseResetDialog())

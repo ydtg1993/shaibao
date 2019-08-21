@@ -2,6 +2,7 @@ import * as Actions from './actions';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
+    sendVerify:false,
     userInfo:false,
     showMongolian:false,
     showLoginDialog:false,
@@ -26,6 +27,8 @@ export default (state = defaultState, action) => {
             return state.set('showMongolian',false).set('showResetDialog',false);
         case Actions.SET_USER_INFO:
             return state.set('userInfo',action.userInfo);
+        case Actions.SEND_VERIFY_EVENT:
+            return state.set('sendVerify',true);
         default:
             return state
     }

@@ -1,16 +1,32 @@
 import axios from 'axios';
 import Toast from '../../component/toast';
 
-export const USER_LOGIN = 'user_login';
-export const USER_REGISTER = 'user_register';
 export const OPEN_LOGIN_DIALOG = 'open_login_dialog';
 export const OPEN_REGISTER_DIALOG = 'open_register_dialog';
 export const CLOSE_LOGIN_DIALOG = 'close_login_dialog';
 export const CLOSE_REGISTER_DIALOG = 'close_register_dialog';
 export const OPEN_RESET_DIALOG = 'open_reset_dialog';
 export const CLOSE_RESET_DIALOG = 'close_reset_dialog';
-export const NOTICE_EVENT = 'notice_event';
 export const SET_USER_INFO = 'set_user_info';
+export const SEND_VERIFY_EVENT = 'send_verify_event';
+
+export const SendVerifyCode = (mobile) => {
+    return (dispatch)=>{
+        axios.post('http://10.10.13.153:8000/api/player/client/send_code',{
+            phone: mobile
+        },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
+            let data = res.data;
+            if(data.code == 20000){
+                Toast.success('发送成功',1000);
+                dispatch(SendVerifyEvent());
+            }else {
+                Toast.info(data.message);
+            }
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+};
 
 export const UserRegister = (mobile,password,verify,invite) => {
     return (dispatch)=>{
@@ -117,5 +133,9 @@ export const OpenResetDialog = () => ({
 
 export const CloseResetDialog = () => ({
     type:CLOSE_RESET_DIALOG
+});
+
+export const SendVerifyEvent = () => ({
+    type:SEND_VERIFY_EVENT
 });
 

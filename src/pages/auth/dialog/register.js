@@ -23,7 +23,7 @@ class Register extends React.Component{
                     <Input>
                         <label htmlFor="register-verify">验证码</label>
                         <input className={'verify-input'} name="register-verify" placeholder={'请输验证码'} ref={(input)=>{this.verify = input}} id="register-verify"/>
-                        <button className={'verify-button'}>点击获取</button>
+                        <button className={'verify-button'} onClick={()=>this.props.sendVerifyCode(this.props.sendVerify,this.mobile)}>点击获取</button>
                     </Input>
                     <Input>
                         <label htmlFor="register-password">密码</label>
@@ -43,6 +43,12 @@ class Register extends React.Component{
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        sendVerify: state.auth.get('sendVerify'),
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -74,6 +80,18 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(Actions.UserRegister(mobile,password,verify,invite));
         },
+        sendVerifyCode(sendVerify,mobileElem){
+            if(sendVerify){
+                Toast.error('验证码已发送',1000);
+                return false;
+            }
+            let mobile = mobileElem.value;
+            if(!(/^1[3456789]\d{9}$/.test(mobile))){
+                Toast.error('手机号错误',1000);
+                return false;
+            }
+            dispatch(Actions.SendVerifyCode(mobile))
+        },
         closeRegister() {
             const action = Actions.CloseRegisterDialog();
             dispatch(action)
@@ -81,4 +99,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
