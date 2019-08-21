@@ -12,9 +12,14 @@ export const CLOSE_RESET_DIALOG = 'close_reset_dialog';
 export const NOTICE_EVENT = 'notice_event';
 export const SET_USER_INFO = 'set_user_info';
 
-export const UserLogin = (mobile,password) => {
+export const UserRegister = (mobile,password,verify,invite) => {
     return (dispatch)=>{
-        axios.get('/api/login.json').then((res)=>{
+        axios.post('http://10.10.13.153:8000/api/player/client/registered',{
+            phone: mobile,
+            password: password,
+            code:verify,
+            invite_code:invite
+        },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
             let data = res.data;
             if(data.code == 20000){
                 dispatch(SetUserInfo({
@@ -24,7 +29,58 @@ export const UserLogin = (mobile,password) => {
                     avatar:data.data.avatar,
                     token:data.data.token
                 }));
-                Toast.success('登录成功');
+                Toast.success('注册成功',1000);
+            }else {
+                Toast.info(data.message);
+            }
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+};
+
+export const UserLogin = (mobile,password) => {
+    return (dispatch)=>{
+        axios.post('http://10.10.13.153:8000/api/player/client/login',{
+            phone: mobile,
+            password: password
+        },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
+            let data = res.data;
+            if(data.code == 20000){
+                dispatch(SetUserInfo({
+                    id:data.data.serial,
+                    username:data.data.name,
+                    gold:data.data.gold,
+                    avatar:data.data.avatar,
+                    token:data.data.token
+                }));
+                Toast.success('登录成功',1000);
+            }else {
+                Toast.info(data.message);
+            }
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+};
+
+export const UserReset = (mobile,password,verify) => {
+    return (dispatch)=>{
+        axios.post('http://10.10.13.153:8000/api/player/client/reset_password',{
+            phone: mobile,
+            code:verify,
+            password: password
+        },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
+            let data = res.data;
+            if(data.code == 20000){
+                dispatch(SetUserInfo({
+                    id:data.data.serial,
+                    username:data.data.name,
+                    gold:data.data.gold,
+                    avatar:data.data.avatar,
+                    token:data.data.token
+                }));
+                Toast.success('重置密码成功',1000);
             }else {
                 Toast.info(data.message);
             }
@@ -37,10 +93,6 @@ export const UserLogin = (mobile,password) => {
 export const SetUserInfo = (userInfo) => ({
     type:SET_USER_INFO,
     userInfo:userInfo
-});
-
-export const UserRegister = () => ({
-   type:USER_REGISTER
 });
 
 export const OpenLoginDialog = ()=>({

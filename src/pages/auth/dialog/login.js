@@ -14,7 +14,7 @@ class Login extends React.Component{
     componentWillReceiveProps(nextProps){
         if(nextProps.userInfo){
             const cookies = new Cookies();
-            cookies.set('userinfo', nextProps.userInfo, { path: '/' });
+            cookies.set('userinfo', nextProps.userInfo, { path: '/',expires: new Date(Date.now()+2592000)});
         }
     }
 
@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
                 Toast.error('密码6-18位',1500);
                 return false;
             }
-            dispatch(Actions.UserLogin());
+            dispatch(Actions.UserLogin(mobile,password));
         },
         closeLogin() {
             dispatch(Actions.CloseLoginDialog())
