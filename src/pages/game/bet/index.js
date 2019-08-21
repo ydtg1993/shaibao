@@ -12,10 +12,6 @@ import chip1w from '../../../resource/youxijiemian/bet1w.png';
 
 
 class BetComponent extends React.Component{
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <BetWrapper>

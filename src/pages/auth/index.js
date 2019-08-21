@@ -9,10 +9,6 @@ import Register from './dialog/register';
 import Mongolian from "../component/mongolian";
 
 class Auth extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <React.Fragment>

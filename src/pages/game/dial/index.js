@@ -15,10 +15,6 @@ import rule from '../../../resource/youxijiemian/wanfa.png';
 import crowd from '../../../resource/youxijiemian/zaixian.png';
 
 class DialComponent extends React.Component{
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <DialWrapper>

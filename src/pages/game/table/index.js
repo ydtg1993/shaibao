@@ -36,10 +36,6 @@ import t16 from '../../../resource/youxijiemian/16.png';
 import t17 from '../../../resource/youxijiemian/17.png';
 
 class TableComponent extends React.Component{
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <TableWrapper>

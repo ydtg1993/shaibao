@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch) => {
                 Toast.error('密码6-18位',1000);
                 return false;
             }
-            if(re_password != password){
+            if(re_password !== password){
                 Toast.error('密码不一致',1000);
                 return false;
             }

@@ -13,10 +13,6 @@ import bet from '../../../resource/zhujiemian/3.png';
 import activity from '../../../resource/zhujiemian/4.png';
 
 class NavigationComponent extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
                 <NavigationFloor>

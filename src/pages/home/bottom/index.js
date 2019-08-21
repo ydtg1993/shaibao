@@ -15,10 +15,6 @@ import recommend from '../../../resource/zhujiemian/tuiguang.png';
 import servant from '../../../resource/zhujiemian/kefu.png';
 
 class BottomComponent extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
                 <BottomFloor>

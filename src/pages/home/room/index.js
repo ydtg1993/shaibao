@@ -11,10 +11,6 @@ import room2 from '../../../resource/zhujiemian/room2.png';
 import room3 from '../../../resource/zhujiemian/room3.png';
 
 class RoomComponent extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
                 <RoomFloor>
