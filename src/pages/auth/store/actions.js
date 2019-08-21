@@ -16,7 +16,7 @@ export const SendVerifyCode = (mobile) => {
             phone: mobile
         },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
             let data = res.data;
-            if(data.code == 20000){
+            if(data.code === 20000){
                 Toast.success('发送成功',1000);
                 dispatch(SendVerifyEvent());
             }else {
@@ -37,7 +37,7 @@ export const UserRegister = (mobile,password,verify,invite) => {
             invite_code:invite
         },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
             let data = res.data;
-            if(data.code == 20000){
+            if(data.code === 20000){
                 dispatch(SetUserInfo({
                     id:data.data.serial,
                     username:data.data.name,
@@ -62,7 +62,7 @@ export const UserLogin = (mobile,password) => {
             password: password
         },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
             let data = res.data;
-            if(data.code == 20000){
+            if(data.code === 20000){
                 dispatch(SetUserInfo({
                     id:data.data.serial,
                     username:data.data.name,
@@ -88,7 +88,7 @@ export const UserReset = (mobile,password,verify) => {
             password: password
         },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
             let data = res.data;
-            if(data.code == 20000){
+            if(data.code === 20000){
                 dispatch(SetUserInfo({
                     id:data.data.serial,
                     username:data.data.name,
