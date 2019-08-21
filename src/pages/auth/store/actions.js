@@ -9,6 +9,7 @@ export const OPEN_RESET_DIALOG = 'open_reset_dialog';
 export const CLOSE_RESET_DIALOG = 'close_reset_dialog';
 export const SET_USER_INFO = 'set_user_info';
 export const SEND_VERIFY_EVENT = 'send_verify_event';
+export const RESET_VERIFY_EVENT = 'reset_verify_event';
 
 export const SendVerifyCode = (mobile) => {
     return (dispatch)=>{
@@ -137,5 +138,9 @@ export const CloseResetDialog = () => ({
 
 export const SendVerifyEvent = () => ({
     type:SEND_VERIFY_EVENT
+});
+
+export const ResetVerifyEvent = () =>({
+    type:RESET_VERIFY_EVENT
 });
 

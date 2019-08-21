@@ -29,6 +29,8 @@ export default (state = defaultState, action) => {
             return state.set('userInfo',action.userInfo);
         case Actions.SEND_VERIFY_EVENT:
             return state.set('sendVerify',true);
+        case Actions.RESET_VERIFY_EVENT:
+            return state.set('sendVerify',false);
         default:
             return state
     }

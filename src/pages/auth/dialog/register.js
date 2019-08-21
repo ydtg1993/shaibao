@@ -8,6 +8,13 @@ import confirm from "../../../resource/dengluye/queding.png";
 import Toast from "../../component/toast";
 
 class Register extends React.Component{
+    componentWillReceiveProps(next){
+        if(next.sendVerify){
+            let interval = setInterval(() =>  this.props.resetVerifyEvent(interval), 60000);
+        }
+        return true;
+    }
+
     render() {
         return (
             <RegisterDialog className={this.props.show ? 'show fadeInUp faster animated':'hidden'}>
@@ -82,7 +89,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         sendVerifyCode(sendVerify,mobileElem){
             if(sendVerify){
-                Toast.error('验证码已发送',1000);
+                Toast.error('验证码已发送!',1000);
                 return false;
             }
             let mobile = mobileElem.value;
@@ -90,7 +97,12 @@ const mapDispatchToProps = (dispatch) => {
                 Toast.error('手机号错误',1000);
                 return false;
             }
-            dispatch(Actions.SendVerifyCode(mobile))
+            dispatch(Actions.SendVerifyCode(mobile));
+        },
+        resetVerifyEvent(interval){
+            let action = Actions.ResetVerifyEvent();
+            dispatch(action);
+            clearInterval(interval);
         },
         closeRegister() {
             const action = Actions.CloseRegisterDialog();
