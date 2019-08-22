@@ -11,11 +11,12 @@ export const SET_USER_INFO = 'set_user_info';
 export const SEND_VERIFY_EVENT = 'send_verify_event';
 export const RESET_VERIFY_EVENT = 'reset_verify_event';
 
+let host = 'http://10.10.13.153:8000/';
 let ajaxConfig = {headers: {'Content-Type': 'application/json'},timeout: 1000};
 
 export const SendVerifyCode = (mobile) => {
     return (dispatch)=>{
-        axios.post('http://10.10.13.153:8000/api/player/client/send_code',{
+        axios.post(host+'api/player/client/send_code',{
             phone: mobile
         },ajaxConfig).then((res)=>{
             let data = res.data;
@@ -35,7 +36,7 @@ export const SendVerifyCode = (mobile) => {
 
 export const UserRegister = (mobile,password,verify,invite) => {
     return (dispatch)=>{
-        axios.post('http://10.10.13.153:8000/api/player/client/registered',{
+        axios.post(host+'api/player/client/registered',{
             phone: mobile,
             password: password,
             code:verify,
@@ -63,7 +64,7 @@ export const UserRegister = (mobile,password,verify,invite) => {
 
 export const UserLogin = (mobile,password) => {
     return (dispatch)=>{
-        axios.post('http://10.10.13.153:8000/api/player/client/login',{
+        axios.post(host+'api/player/client/login',{
             phone: mobile,
             password: password
         },ajaxConfig).then((res)=>{console.log(res)
@@ -89,7 +90,7 @@ export const UserLogin = (mobile,password) => {
 
 export const UserReset = (mobile,password,verify) => {
     return (dispatch)=>{
-        axios.post('http://10.10.13.153:8000/api/player/client/reset_password',{
+        axios.post(host+'api/player/client/reset_password',{
             phone: mobile,
             code:verify,
             password: password
