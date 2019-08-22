@@ -31,7 +31,7 @@ class Home extends React.Component {
         }
         return (
             <HomeWrapper>
-                <TopComponent/>
+                <TopComponent userinfo={this.props.userInfo}/>
                 <AnnouncementComponent/>
                 <NavigationComponent/>
                 <RoomComponent/>

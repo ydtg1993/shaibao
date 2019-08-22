@@ -12,7 +12,7 @@ export const SEND_VERIFY_EVENT = 'send_verify_event';
 export const RESET_VERIFY_EVENT = 'reset_verify_event';
 
 let host = 'http://10.10.13.153:8000/';
-let ajaxConfig = {headers: {'Content-Type': 'application/json'},timeout: 1000};
+let ajaxConfig = {headers: {'Content-Type': 'application/json','Authorization':'Token'},timeout: 1000};
 
 export const SendVerifyCode = (mobile) => {
     return (dispatch)=>{
