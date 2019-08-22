@@ -7,7 +7,6 @@ export const NavigationFloor = styled.div`
 export const TabList = styled.div`
     display: grid;
     width：100%;
-    height:100%;
     grid-template-columns:25% 25% 25% 25%;
 `;
 

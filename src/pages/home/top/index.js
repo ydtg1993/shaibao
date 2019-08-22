@@ -15,7 +15,6 @@ import avatar from '../../../resource/zhujiemian/touxiang.png';
 
 class TopComponent extends React.Component {
     render() {
-        console.log(this.props.userinfo);
         return (
             <TopFloor>
                 <UserSection>
