@@ -11,13 +11,16 @@ export const SET_USER_INFO = 'set_user_info';
 export const SEND_VERIFY_EVENT = 'send_verify_event';
 export const RESET_VERIFY_EVENT = 'reset_verify_event';
 
+let ajaxConfig = {headers: {'Content-Type': 'application/json'},timeout: 1000};
+
 export const SendVerifyCode = (mobile) => {
     return (dispatch)=>{
         axios.post('http://10.10.13.153:8000/api/player/client/send_code',{
             phone: mobile
-        },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
+        },ajaxConfig).then((res)=>{
             let data = res.data;
             if(data.code === 20000){
+                console.log(data.data);
                 Toast.success('发送成功',1000);
                 dispatch(SendVerifyEvent());
             }else {
@@ -25,6 +28,7 @@ export const SendVerifyCode = (mobile) => {
             }
         }).catch((error)=>{
             console.log(error);
+            Toast.error('服务器开小差了',1000);
         });
     }
 };
@@ -36,7 +40,7 @@ export const UserRegister = (mobile,password,verify,invite) => {
             password: password,
             code:verify,
             invite_code:invite
-        },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
+        },ajaxConfig).then((res)=>{
             let data = res.data;
             if(data.code === 20000){
                 dispatch(SetUserInfo({
@@ -52,6 +56,7 @@ export const UserRegister = (mobile,password,verify,invite) => {
             }
         }).catch((error)=>{
             console.log(error);
+            Toast.error('服务器开小差了',1000);
         });
     }
 };
@@ -61,7 +66,7 @@ export const UserLogin = (mobile,password) => {
         axios.post('http://10.10.13.153:8000/api/player/client/login',{
             phone: mobile,
             password: password
-        },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
+        },ajaxConfig).then((res)=>{console.log(res)
             let data = res.data;
             if(data.code === 20000){
                 dispatch(SetUserInfo({
@@ -77,6 +82,7 @@ export const UserLogin = (mobile,password) => {
             }
         }).catch((error)=>{
             console.log(error);
+            Toast.error('服务器开小差了',1000);
         });
     }
 };
@@ -87,7 +93,7 @@ export const UserReset = (mobile,password,verify) => {
             phone: mobile,
             code:verify,
             password: password
-        },{headers: {'Content-Type': 'application/json'}}).then((res)=>{
+        },ajaxConfig).then((res)=>{
             let data = res.data;
             if(data.code === 20000){
                 dispatch(SetUserInfo({
@@ -103,6 +109,7 @@ export const UserReset = (mobile,password,verify) => {
             }
         }).catch((error)=>{
             console.log(error);
+            Toast.error('服务器开小差了',1000);
         });
     }
 };
