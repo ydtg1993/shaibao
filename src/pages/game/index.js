@@ -2,7 +2,7 @@ import React from 'react';
 import {
     GameWrapper,
 } from './style';
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import * as actions from './store/actions';
 /*component*/
@@ -14,6 +14,7 @@ import BetComponent from './bet';
 class Game extends React.Component{
     constructor(props) {
         super(props);
+
         console.log(this.props.match.params.room_id);
     }
 
@@ -22,6 +23,11 @@ class Game extends React.Component{
     }
 
     render() {
+        if(!this.props.userInfo){
+            return (
+                (<Redirect to={{pathname: "/home"}}/>)
+            )
+        }
         return (
             <GameWrapper>
                 <DialComponent/>
