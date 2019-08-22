@@ -14,7 +14,7 @@ class Login extends React.Component{
     componentWillReceiveProps(nextProps){
         if(nextProps.userInfo){
             const cookies = new Cookies();
-            cookies.set('userinfo', nextProps.userInfo, { path: '/',expires: new Date(Date.now()+2592000)});
+            cookies.set('userinfo', nextProps.userInfo, { path: '/',expires: new Date(Date.now()+600000000)});
         }
     }
 
