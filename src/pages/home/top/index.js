@@ -8,7 +8,9 @@ import {
     Line,
     UserId,
     MoneySection,
-    MoneyBg
+    MoneyInput,
+    MoneyGold,
+    MoneyCharge
 } from './style';
 import lineBg from '../../../resource/zhujiemian/tou xiang fen ge.png';
 import avatar from '../../../resource/zhujiemian/touxiang.png';
@@ -26,9 +28,9 @@ class TopComponent extends React.Component {
                     </UserInfo>
                 </UserSection>
                 <MoneySection>
-                    <MoneyBg>
-
-                    </MoneyBg>
+                    <MoneyGold/>
+                    <MoneyInput>{this.props.userinfo.gold}</MoneyInput>
+                    <MoneyCharge/>
                 </MoneySection>
                 <div></div>
             </TopFloor>
