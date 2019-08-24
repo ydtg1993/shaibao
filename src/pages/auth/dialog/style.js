@@ -16,11 +16,11 @@ export const Close = styled.img`
 
 export const Dialog = styled.div`
     position: absolute;
-    top:25%;
+    top:20%;
     left: 0;
     right: 0;
     margin:auto;
-    width:85%;
+    width:310px;
     z-index:1000;
     visibility: hidden;
     opacity: 0;
@@ -36,15 +36,15 @@ export const Dialog = styled.div`
 `;
 
 export const LoginDialog = styled(Dialog)`
-
+grid-template-rows: 40px auto;
 `;
 
 export const RegisterDialog = styled(Dialog)`
-grid-template-rows: 15% auto;
+grid-template-rows: 40px auto;
 `;
 
 export const ResetDialog = styled(Dialog)`
-grid-template-rows: 18% auto;
+grid-template-rows: 40px auto;
 `;
 
 export const Input = styled.div`
