@@ -14,7 +14,6 @@ import BetComponent from './bet';
 class Game extends React.Component{
     constructor(props) {
         super(props);
-
         console.log(this.props.match.params.room_id);
     }
 

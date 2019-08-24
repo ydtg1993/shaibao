@@ -16,7 +16,7 @@ let ajaxConfig = {headers: {'Content-Type': 'application/json','Authorization':'
 
 export const SendVerifyCode = (mobile) => {
     return (dispatch)=>{
-        axios.post(host+'api/player/client/send_code',{
+        axios.post(host+'auth/client/send_code',{
             phone: mobile
         },ajaxConfig).then((res)=>{
             let data = res.data;
@@ -36,7 +36,7 @@ export const SendVerifyCode = (mobile) => {
 
 export const UserRegister = (mobile,password,verify,invite) => {
     return (dispatch)=>{
-        axios.post(host+'api/player/client/registered',{
+        axios.post(host+'auth/client/registered',{
             phone: mobile,
             password: password,
             code:verify,
@@ -64,7 +64,7 @@ export const UserRegister = (mobile,password,verify,invite) => {
 
 export const UserLogin = (mobile,password) => {
     return (dispatch)=>{
-        axios.post(host+'api/player/client/login',{
+        axios.post(host+'auth/client/login',{
             phone: mobile,
             password: password
         },ajaxConfig).then((res)=>{console.log(res)
@@ -90,7 +90,7 @@ export const UserLogin = (mobile,password) => {
 
 export const UserReset = (mobile,password,verify) => {
     return (dispatch)=>{
-        axios.post(host+'api/player/client/reset_password',{
+        axios.post(host+'auth/client/reset_password',{
             phone: mobile,
             code:verify,
             password: password
