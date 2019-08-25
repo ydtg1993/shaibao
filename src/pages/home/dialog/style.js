@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import bottom_decoration from '../../../resource/zhujiemian/email/bottom.png';
+import light_line from '../../../resource/zhujiemian/rank/light-line.png';
+import dark_line from '../../../resource/zhujiemian/rank/dark-line.png';
 
 export const Bg = styled.img`
     width:100%;
@@ -16,7 +18,7 @@ export const BottomDecoration = styled.img.attrs({
     bottom:0;
     left: 0;
     right: 0;
-    z-index:1000;
+    z-index:2002;
 `;
 
 export const Close = styled.img`
@@ -56,7 +58,42 @@ export const EmailList = styled.div`
 `;
 
 export const RankDialog = styled(Dialog)`
-grid-template-rows: 40px auto;
+    grid-template-rows: 40px 35px 248px 35px;
+`;
+
+export const RankList = styled.div`
+    position:relative;
+    z-index: 2001;
+    padding: 2px 4px 0px 4px;
+    overflow:scroll;
+`;
+
+export const Rank = styled.div`
+    height:35px;
+    line-height:35px;
+    width:100%;
+    margin-top:2px;
+    background: url('${dark_line}') center no-repeat 
+    background-size:100% 100%;
+    &:first-child{margin-top:0}
+`;
+
+export const RankTitle = styled(Rank)`
+    position:relative;
+    z-index:2000;
+    width:auto;
+    margin-left:4px;
+    margin-right:4px;
+`;
+
+export const MyRank = styled(Rank)`
+    background: url('${light_line}') center no-repeat 
+    background-size:100% 100%;
+    position:relative;
+    z-index:2000;
+    width:auto;
+    margin-left:4px;
+    margin-right:4px;
 `;
 
 export const MongolianWrapper = styled.div`

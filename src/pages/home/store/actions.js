@@ -5,6 +5,7 @@ let host = 'http://10.10.13.153:8000/';
 let ajaxConfig = {headers: {'Content-Type': 'application/json','Authorization':'Token'},timeout: 1000};
 
 export const GET_EMAIL_LIST = 'get_email_list';
+export const GET_RANK_LIST = 'get_rank_list';
 
 export const getEmailList = (id) => {
     return (dispatch)=>{
@@ -27,6 +28,16 @@ export const getEmailList = (id) => {
         dispatch({
             type:GET_EMAIL_LIST,
             list:[{"id":1,"name":'hikki'},{"id":2,"name":"lolo"}]
+        });
+    }
+};
+
+export const getRankList = ()=>{
+    return (dispatch)=>{
+        dispatch({
+            type:GET_RANK_LIST,
+            list:[{"id":1,"name":'hikki'},{"id":2,"name":"lolo"},{"id":2,"name":"lolo"},{"id":2,"name":"lolo"},{"id":2,"name":"lolo"},
+                {"id":1,"name":'hikki'},{"id":2,"name":"lolo"},{"id":2,"name":"lolo"},{"id":2,"name":"lolo"},{"id":2,"name":"lolo"}]
         });
     }
 };

@@ -13,16 +13,18 @@ import rank from '../../../resource/zhujiemian/paihang.png';
 import recommend from '../../../resource/zhujiemian/tuiguang.png';
 import servant from '../../../resource/zhujiemian/kefu.png';
 import EmailComponent from "../dialog/email/index";
+import RankComponent from "../dialog/rank";
 
 class BottomComponent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             emailVisible:false,
+            rankVisible:false,
         }
     }
 
-    openEmail() {
+    OpenEmail() {
         this.setState({
             emailVisible:true,
         });
@@ -34,19 +36,32 @@ class BottomComponent extends React.Component {
         });
     }
 
+    OpenRank(){
+        this.setState({
+            rankVisible:true,
+        });
+    }
+
+    CloseRank(){
+        this.setState({
+            rankVisible:false,
+        });
+    }
+
     render() {
         return (
             <BottomFloor>
                 <BottomTabList>
                     <BottomTab src={exchange}/>
-                    <BottomTab src={email} onClick={this.openEmail.bind(this)}/>
+                    <BottomTab src={email} onClick={this.OpenEmail.bind(this)}/>
                     <BottomTabMain>
-                        <BottomTabMainImg src={rank}/>
+                        <BottomTabMainImg src={rank} onClick={this.OpenRank.bind(this)}/>
                     </BottomTabMain>
                     <BottomTab src={recommend}/>
                     <BottomTab src={servant}/>
                 </BottomTabList>
                 <EmailComponent visible={this.state.emailVisible} CloseEmail={this.CloseEmail.bind(this)}/>
+                <RankComponent visible={this.state.rankVisible} CloseRank={this.CloseRank.bind(this)}/>
             </BottomFloor>
         )
     }
