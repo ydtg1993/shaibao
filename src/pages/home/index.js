@@ -13,7 +13,6 @@ import RoomComponent from './room';
 import BottomComponent from './bottom';
 import {Redirect} from "react-router";
 import Cookies from "universal-cookie";
-import Toast from "../component/toast";
 
 const cookies = new Cookies();
 const userinfo = cookies.get('userinfo');
@@ -38,7 +37,7 @@ class Home extends React.Component {
     }
 
     connection(){
-        const ws = new WebSocket('ws://10.10.13.153:8000/ws/chat/');
+        const ws = new WebSocket('ws://10.10.13.153:8000/ws/chat/hall/');
         this.props.setWebsocket(ws);
         const closeWebsocket = this.props.closeWebsocket;
         ws.onopen = () => {
@@ -82,11 +81,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setUserInfo(userinfo){
-            let action = SetUserInfo(userinfo)
+            let action = SetUserInfo(userinfo);
             dispatch(action);
         },
         setWebsocket(client){
-            let action = SetWebsocket(client)
+            let action = SetWebsocket(client);
             dispatch(action);
         },
         closeWebsocket(){
