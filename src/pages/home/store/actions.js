@@ -27,7 +27,8 @@ export const getEmailList = (id) => {
         });*/
         dispatch({
             type:GET_EMAIL_LIST,
-            list:[{"id":1,"name":'hikki'},{"id":2,"name":"lolo"}]
+            list:[{"id":1,"name":'hikki'},{"id":2,"name":"lolo"},{"id":1,"name":'hikki'},{"id":2,"name":"lolo"},{"id":1,"name":'hikki'},
+                {"id":1,"name":'hikki'},{"id":2,"name":"lolo"},{"id":1,"name":'hikki'},{"id":2,"name":"lolo"},{"id":1,"name":'hikki'}]
         });
     }
 };

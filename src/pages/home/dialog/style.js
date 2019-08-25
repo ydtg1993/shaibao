@@ -1,7 +1,19 @@
-import styled from 'styled-components';
+import styled,{ createGlobalStyle } from 'styled-components';
+import MyFont from '../../../resource/heiguiti.otf';
 import bottom_decoration from '../../../resource/zhujiemian/email/bottom.png';
-import light_line from '../../../resource/zhujiemian/rank/light-line.png';
-import dark_line from '../../../resource/zhujiemian/rank/dark-line.png';
+import rank_light_line from '../../../resource/zhujiemian/rank/light-line.png';
+import rank_dark_line from '../../../resource/zhujiemian/rank/dark-line.png';
+import email_light_line from '../../../resource/zhujiemian/email/bg1.png';
+import email_dark_line from '../../../resource/zhujiemian/email/bg2.png';
+
+export const GlobalStyle = createGlobalStyle`
+body {
+  @font-face {
+     font-family: 'MyFont';
+     src: url('${MyFont}');
+  }
+}
+`;
 
 export const Bg = styled.img`
     width:100%;
@@ -54,7 +66,26 @@ export const EmailDialog = styled(Dialog)`
 `;
 
 export const EmailList = styled.div`
-    
+    position:relative;
+    z-index: 2001;
+    padding: 0 4px 0px 4px;
+    overflow:scroll;
+`;
+
+export const Email = styled.div`
+    height:45px;
+    margin-top:2px;
+    &.readed{
+        background: url('${email_dark_line}') center no-repeat 
+    }
+    &:first-child{margin-top:0}
+    background: url('${email_light_line}') center no-repeat 
+    background-size:100% 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content:center;
+    align-items:center;
 `;
 
 export const RankDialog = styled(Dialog)`
@@ -64,7 +95,7 @@ export const RankDialog = styled(Dialog)`
 export const RankList = styled.div`
     position:relative;
     z-index: 2001;
-    padding: 2px 4px 0px 4px;
+    margin: 2px 4px 2px 4px;
     overflow:scroll;
 `;
 
@@ -73,9 +104,14 @@ export const Rank = styled.div`
     line-height:35px;
     width:100%;
     margin-top:2px;
-    background: url('${dark_line}') center no-repeat 
+    background: url('${rank_dark_line}') center no-repeat 
     background-size:100% 100%;
     &:first-child{margin-top:0}
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    & div{text-align: center;}
+    & span{color:#fff;font-size:14px;font-weight:300}
+    & .rankTag{color:#ffeab5;font-size:16px;font-family: MyFont;}
 `;
 
 export const RankTitle = styled(Rank)`
@@ -84,10 +120,11 @@ export const RankTitle = styled(Rank)`
     width:auto;
     margin-left:4px;
     margin-right:4px;
+    & div{color:#ebfbba;font-weight:300}
 `;
 
 export const MyRank = styled(Rank)`
-    background: url('${light_line}') center no-repeat 
+    background: url('${rank_light_line}') center no-repeat 
     background-size:100% 100%;
     position:relative;
     z-index:2000;

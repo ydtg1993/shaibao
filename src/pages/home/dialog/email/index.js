@@ -1,7 +1,7 @@
 import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
-import {Bg, Close, EmailDialog,MongolianWrapper,BottomDecoration,EmailList} from './../style';
+import {Bg, Close, EmailDialog,MongolianWrapper,BottomDecoration,EmailList,Email} from './../style';
 import bg from '../../../../resource/zhujiemian/email/email_bg.png';
 import close from '../../../../resource/dengluye/guanbi.png';
 import * as Actions from "../../../home/store/actions";
@@ -22,7 +22,10 @@ class EmailComponent extends React.Component {
                     </div>
                     <EmailList>
                         {this.props.emailList.map(function (data,index) {
-                            return <div key={index}>{data.id}</div>
+                            return (
+                                <Email key={index}>
+                                </Email>
+                            )
                         })}
                     </EmailList>
                     <BottomDecoration/>
