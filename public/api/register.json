@@ -1,0 +1,11 @@
+{
+  "code": 20000,
+  "message": "成功",
+  "data": {
+    "name": "000",
+    "token": "xxx",
+    "avatar": "http:",
+    "gold": "123123",
+    "serial": "1234"
+  }
+}
