@@ -11,9 +11,7 @@ export const TabList = styled.div`
 `;
 
 export const NavigationTab = styled.img`
-    width:65%;
+    width:55px;
     position:relative;
     margin:0 auto;
-    top: 50%;
-    transform: translateY(-50%);
 `;

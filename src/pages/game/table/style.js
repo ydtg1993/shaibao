@@ -52,9 +52,19 @@ export const TimeLine = styled.p`
 `;
 
 export const Pan = styled.div`
-    height:68%;
-    background: url('${pan}') center no-repeat 
-    background-size:100% auto;
+    height:95px;
+    position:relative;
+    overflow: hidden;
+`;
+
+export const PanDick = styled.img.attrs({
+    src:`${pan}`
+})`
+     position:absolute;
+     left: 50%;
+     top: -5px;
+     width:100px;
+     margin-left: -50px;
 `;
 
 export const Right = styled.div`
@@ -73,25 +83,78 @@ export const Plate = styled.div`
     height:42%;
     background:#284c80;
     border:2px #2a6792 solid;
-    margin-top:9%
+    margin-top:7%;
+    position:relative;
     &:first-child{margin-top:0;}
 `;
 
 export const SPlate = styled.div`
     background:#284c80;
     border:2px #2a6792 solid;
+    position:relative;
+`;
+
+export const Placeholder = styled.div`
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    position:absolute;
+    z-index:10000;
 `;
 
 export const Text = styled.img`
     width:25px;
     display: block;
     margin:4px auto;
+    position:relative;
+    z-index:1;
 `;
 
 export const SText = styled(Text)`
     width:23px;
+    position:relative;
+    z-index:1;
 `;
 
 export const SSText = styled(SText)`
     width:22px;
+    position:relative;
+    z-index:1;
+`;
+
+export const Tip = styled.div`
+    font-size:12px;
+    text-align: center;
+    color: aliceblue;
+    font-weight: 300;
+    position:relative;
+    z-index:1;
+`;
+
+export const Bets = styled.div`
+    position: absolute;
+`;
+
+export const Dice = styled.img`
+    width:18px;
+    height:18px;
+    position:relative;
+`;
+
+export const Dice1 = styled(Dice)`
+    top:14px;
+    left: 50%;
+    transform: translateX(-50%);
+`;
+
+export const Dice2 = styled(Dice)`
+    top: 36px;
+    left: 27%;
+    transform: translateX(-50%);
+`;
+
+export const Dice3 = styled(Dice)`
+    top: 32px;
+    left: 36%;
+    transform: translateX(-50%);
 `;

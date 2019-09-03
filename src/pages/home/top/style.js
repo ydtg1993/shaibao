@@ -23,8 +23,8 @@ export const UserSection = styled.div`
 
 export const Avatar = styled.img`
     display:inline-block;
-    height: 83%;
-    width:auto;
+    height: 30px;
+    width:30px;
 `;
 
 export const UserInfo = styled.div`
@@ -32,7 +32,6 @@ export const UserInfo = styled.div`
     height: 83%;
     margin-left:2%;
     display:inline-block;
-   
 `;
 
 export const Username = styled.div`
@@ -40,6 +39,8 @@ export const Username = styled.div`
     font-size: 12px;
     padding-left: 6px;
     font-weight: 300;
+    height: 12px;
+    line-height: 12px;
 `;
 
 export const Line = styled.img`
@@ -52,6 +53,8 @@ export const UserId = styled.div`
     font-size: 12px;
     padding-left: 6px;
     font-weight: 300;
+    height: 12px;
+    line-height: 12px;
 `;
 
 export const MoneySection = styled.div`

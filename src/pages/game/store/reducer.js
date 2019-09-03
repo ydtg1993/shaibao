@@ -3,6 +3,9 @@ import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
     websocket:false,
+    chip:false,
+    hallInfo:false,
+    priorResult:[1,1,1]
 });
 
 export default (state = defaultState, action) => {
@@ -11,6 +14,10 @@ export default (state = defaultState, action) => {
             return state.set('websocket',action.value);
         case Actions.CLOSE_WEBSOCKET_CONNECTION:
             return state.set('websocket',false);
+        case Actions.SET_BET_CHIP:
+            return state.set('chip',action.value);
+        case Actions.ENTER_HALL:
+            return state.set('hallInfo',action.data);
         default:
             return state
     }

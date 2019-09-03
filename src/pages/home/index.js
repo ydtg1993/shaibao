@@ -30,14 +30,8 @@ class Home extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        if(!nextProps.websocket) {
-            this.connection();
-        }
-    }
-
-    connection(){
-        const ws = new WebSocket('ws://10.10.13.153:8000/ws/chat/hall/');
+    connection(token){
+        const ws = new WebSocket('ws://10.10.13.153:8000/ws/three/'+token);
         this.props.setWebsocket(ws);
         const closeWebsocket = this.props.closeWebsocket;
         ws.onopen = () => {
@@ -58,6 +52,9 @@ class Home extends React.Component {
     render() {
         if(!userinfo && !this.props.userInfo){
             return (<Redirect to={{pathname: "/auth"}}/>)
+        }
+        if(!this.props.websocket && this.props.userInfo) {
+            this.connection(this.props.userInfo.token);
         }
         return (
             <HomeWrapper>

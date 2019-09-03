@@ -19,6 +19,7 @@ class App extends React.Component {
                         <Route exact path="/game/:room_id" component={Game}/>
                     </React.Fragment>
                 </Router>
+                <div id="VerticalScreen">为了更好的用户体验请使用竖屏模式</div>
             </Provider>
         )
     }

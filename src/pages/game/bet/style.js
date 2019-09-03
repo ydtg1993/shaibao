@@ -5,12 +5,14 @@ export const BetWrapper = styled.div`
     background: url('${bg}') center no-repeat 
     background-size:100% 100%;
     display: grid;
-    padding:3% 5% 3%;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 `;
 
 export const Chip = styled.img`
-    height:100%;
+    height:32px;;
     display:block;
-    margin:0 auto;
+    margin:12px auto;
+    &.choice{    
+    box-shadow: 0 0 10px #efff00;
+    border-radius: 100%;}
 `;

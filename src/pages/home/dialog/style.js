@@ -1,10 +1,19 @@
 import styled,{ createGlobalStyle } from 'styled-components';
 import MyFont from '../../../resource/heiguiti.otf';
+import email_light_line from '../../../resource/zhujiemian/email/bg1.png';
+import email_dark_line from '../../../resource/zhujiemian/email/bg2.png';
+import envelope_opened from '../../../resource/zhujiemian/email/opened.png';
+import envelope_closed from '../../../resource/zhujiemian/email/mail.png';
+import envelope_readed from '../../../resource/zhujiemian/email/readed.png';
+import envelope_read from '../../../resource/zhujiemian/email/click.png';
 import bottom_decoration from '../../../resource/zhujiemian/email/bottom.png';
 import rank_light_line from '../../../resource/zhujiemian/rank/light-line.png';
 import rank_dark_line from '../../../resource/zhujiemian/rank/dark-line.png';
-import email_light_line from '../../../resource/zhujiemian/email/bg1.png';
-import email_dark_line from '../../../resource/zhujiemian/email/bg2.png';
+import rank_money_tag from '../../../resource/zhujiemian/rank/yuan.png';
+import rank_tag_1 from '../../../resource/zhujiemian/rank/rank1.png';
+import rank_tag_2 from '../../../resource/zhujiemian/rank/rank2.png';
+import rank_tag_3 from '../../../resource/zhujiemian/rank/rank3.png';
+import rank_tag from '../../../resource/zhujiemian/rank/star.png';
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -65,6 +74,17 @@ export const EmailDialog = styled(Dialog)`
     grid-template-rows: 40px 318px;
 `;
 
+export const EmailDialogInfo = styled(Dialog)`
+    grid-template-rows: 40px 258px 60px;
+`;
+
+export const EmailDialogInfoContent = styled.div`
+    overflow-y: scroll;
+    position:relative;
+    z-index:2001;
+    padding:2px;
+`;
+
 export const EmailList = styled.div`
     position:relative;
     z-index: 2001;
@@ -75,17 +95,50 @@ export const EmailList = styled.div`
 export const Email = styled.div`
     height:45px;
     margin-top:2px;
-    &.readed{
-        background: url('${email_dark_line}') center no-repeat 
+    &.read{
+        background: url('${email_light_line}') center no-repeat 
     }
     &:first-child{margin-top:0}
-    background: url('${email_light_line}') center no-repeat 
+    background: url('${email_dark_line}') center no-repeat 
     background-size:100% 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content:center;
-    align-items:center;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 30px auto 30%;
+    font-weight: 300;
+    & .type{font-size: 14px;color: #faf201;letter-spacing: -1px;}
+    & .title{color:#fff;font-size: 14px;}
+    & .time{color:#fff;font-size: 10px;margin-left:6px;font-weight: 100;margin-top:2px;}
+`;
+
+export const Envelope = styled.img`
+    width:20px;
+    vertical-align:middle;
+    display: block;
+    margin-left:10px;
+`;
+
+export const EnvelopeOpened = styled(Envelope).attrs({
+    src:`${envelope_opened}`
+})``;
+
+export const EnvelopeClosed = styled(Envelope).attrs({
+    src:`${envelope_closed}`
+})``;
+
+export const EmailReaded = styled.img.attrs({
+    src:`${envelope_readed}`
+})`
+    width: 30px;
+    float: right;
+    margin-right: 10px;
+`;
+
+export const EmailRead = styled.img.attrs({
+    src:`${envelope_read}`
+})`
+    width: 80%;
+    float: right;
+    margin-right: 10px;
 `;
 
 export const RankDialog = styled(Dialog)`
@@ -108,10 +161,41 @@ export const Rank = styled.div`
     background-size:100% 100%;
     &:first-child{margin-top:0}
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 25% 1fr 1fr;
     & div{text-align: center;}
     & span{color:#fff;font-size:14px;font-weight:300}
     & .rankTag{color:#ffeab5;font-size:16px;font-family: MyFont;}
+    & .moneyTitle{color:#ffeab5;font-size:12px;font-family: MyFont;}
+`;
+
+export const RankTag = styled.img`
+    width:30px;
+    vertical-align: sub;
+`;
+
+export const RankTagN = styled.div`
+    background: url('${rank_tag}') center no-repeat 
+    background-size:100%;
+    width:25px;
+    margin: 0 auto;
+    color:#ffeab5;font-size:12px;font-family: MyFont;
+`;
+
+export const RankTabg1 = styled(RankTag).attrs({
+    src:`${rank_tag_1}`
+})``;
+export const RankTabg2 = styled(RankTag).attrs({
+    src:`${rank_tag_2}`
+})``;
+export const RankTabg3 = styled(RankTag).attrs({
+    src:`${rank_tag_3}`
+})``;
+
+export const RankMoneyTag = styled.img.attrs({
+    src:`${rank_money_tag}`
+})`
+    width:15px;
+    vertical-align: middle;
 `;
 
 export const RankTitle = styled(Rank)`
@@ -157,4 +241,13 @@ export const MongolianWrapper = styled.div`
     &.hidden {
          opacity: 0;
     }
+`;
+
+export const SubmitButton = styled.img`
+    margin-top:8px;
+    width:35%;
+    z-index: 10000;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
 `;

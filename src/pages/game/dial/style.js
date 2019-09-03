@@ -10,7 +10,7 @@ export const Back = styled.img`
     position:absolute;
     top: 0px;
     left:0;
-    width:65px;
+    width:60px;
 `;
 
 export const Announcement = styled.div`
@@ -29,8 +29,8 @@ export const Tools = styled.div`
 `;
 
 export const Record = styled.img`
-    margin-top:40px;
-    width:24px;
+    margin-top:35px;
+    width:22px;
 `;
 
 export const Tab = styled.img`

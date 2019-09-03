@@ -12,5 +12,5 @@ export const HomeWrapper = styled.div`
     z-index: 0;  
     overflow:hidden;
     display: grid;
-    grid-template-rows: 7% 7% 11% auto 8%;
+    grid-template-rows: 7% 7% 10% 68% 8%;
 `;

@@ -9,5 +9,5 @@ export const GameWrapper = styled.div`
     z-index: 0;  
     overflow:hidden;
     display: grid;
-    grid-template-rows: 42% auto 5% 9%;
+    grid-template-rows: 38% auto 5% 55px;
 `;

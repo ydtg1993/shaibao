@@ -14,7 +14,8 @@ export const BottomTabList = styled.div`
 `;
 
 export const BottomTab = styled.img`
-    width:32%;
+    width: 20px;
+    height:30px;
     position:relative;
     margin:0 auto;
     top: 60%;
