@@ -1,22 +1,22 @@
 import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
-import {Bg, Close, Input, ResetDialog, SubmitButton} from './style';
-import bg from '../../../resource/dengluye/chongzhimima.png';
-import close from '../../../resource/dengluye/guanbi.png';
-import confirm from '../../../resource/dengluye/queding.png';
+import {DialogTop,ResetTitle,DialogContent,Close, Input, ResetDialog, SubmitButton} from './style';
+import {MongolianWrapper} from "../style";
 import * as Actions from "../store/actions";
 import Toast from "../../component/toast";
 
 class ResetComponent extends React.Component{
     render() {
+        const {visible} = this.props;
         return (
-            <ResetDialog className={this.props.show ? 'show fadeInLeft faster animated':''}>
-                <div>
-                    <Bg src={bg}/>
-                    <Close src={close} onClick={this.props.closeReset}/>
-                </div>
-                <div>
+            <React.Fragment>
+            <ResetDialog className={visible ? 'show fadeInLeft faster animated':''}>
+                <DialogTop>
+                    <ResetTitle/>
+                    <Close onClick={this.props.CloseResetDialog}/>
+                </DialogTop>
+                <DialogContent>
                     <Input>
                         <label htmlFor="reset-mobile">手机号</label>
                         <input name="reset-mobile" placeholder={'请输入您的手机号'} ref={(input)=>{this.mobile = input}} id="reset-mobile"/>
@@ -34,9 +34,11 @@ class ResetComponent extends React.Component{
                         <label htmlFor="reset-new-password">确认密码</label>
                         <input name="reset-new-password" type={'password'} placeholder={'请输入新密码'} ref={(input)=>{this.re_password = input}} id="reset-new-password"/>
                     </Input>
-                    <SubmitButton src={confirm} onClick={()=>this.props.reset(this.mobile,this.password,this.re_password,this.verify)}/>
-                </div>
+                    <SubmitButton onClick={()=>this.props.reset(this.mobile,this.password,this.re_password,this.verify)}/>
+                </DialogContent>
             </ResetDialog>
+                <MongolianWrapper className={visible ? 'show fadeIn faster animated' : ''}/>
+            </React.Fragment>
         );
     }
 }
@@ -81,9 +83,6 @@ const mapDispatchToProps = (dispatch) => {
                 return false;
             }
             dispatch(Actions.SendVerifyCode(mobile))
-        },
-        closeReset(){
-            dispatch(Actions.CloseResetDialog())
         }
     }
 };

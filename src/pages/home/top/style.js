@@ -8,7 +8,7 @@ export const TopFloor = styled.div`
     background: url('${tou_bg}') no-repeat;  
     background-size: 100% 100%;
     display:grid;
-    grid-template-columns: 1fr 1fr 15%;
+    grid-template-columns: auto 160px 15%;
     grid-auto-rows: 100%;
 `;
 
@@ -23,13 +23,15 @@ export const UserSection = styled.div`
 
 export const Avatar = styled.img`
     display:inline-block;
-    height: 30px;
-    width:30px;
+    margin-left:5px;
+    height: 31px;
+    width:31px;
+    vertical-align: top;
 `;
 
 export const UserInfo = styled.div`
     width: 70%;
-    height: 83%;
+    height: 30px;
     margin-left:2%;
     display:inline-block;
 `;
@@ -68,15 +70,15 @@ export const MoneySection = styled.div`
 `;
 
 export const MoneyInput = styled.div`
-    width: 85%;
+    width: 100%;
     outline-style: none;
     text-align: right;
-    padding-right: 1.8em;
-    line-height: 1.6em;
-    height: 1.6em;
+    padding-right: 25px;
+    line-height: 25px;
+    height: 25px;
     border-radius: 1em;
     background-image:url('${mn_bg}');
-    background-size:cover;
+    background-size:contain;
     color: #e8ef78;
     font-weight: 200;
 `;
@@ -84,17 +86,21 @@ export const MoneyInput = styled.div`
 export const MoneyGold = styled.img.attrs({
     src: `${gold}`
 })`
-   height: 1.6em;
+   width:40px 
+   height: 25px;
    position: absolute;
    left: 0;
+   z-index: 5;
 `;
 
 export const MoneyCharge = styled.img.attrs({
     src: `${charge}`
 })`
-   height: 1.6em;
+   width:25px 
+   height: 25px;
    position: absolute;
    right: 0;
+   z-index: 5;
 `;
 
 

@@ -3,8 +3,8 @@ import {
     HomeWrapper,
 } from './style';
 import {connect} from 'react-redux';
-import { SetUserInfo } from '../auth/store/actions';
-import { SetWebsocket,CloseWebsocket } from '../game/store/actions';
+import {SetPlayerPosition,POSITION_HOME} from '../auth/store/actions';
+import * as actions from './store/actions';
 /*component*/
 import TopComponent from './top';
 import NavigationComponent from './navigation';
@@ -12,49 +12,31 @@ import AnnouncementComponent from './announcement';
 import RoomComponent from './room';
 import BottomComponent from './bottom';
 import {Redirect} from "react-router";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
-const userinfo = cookies.get('userinfo');
 
 class Home extends React.Component {
     constructor(props){
         super(props);
-        if(userinfo && !this.props.userInfo) {
-            this.props.setUserInfo(userinfo);
-            this.state = {userinfo:userinfo};
-        }else if(this.props.userInfo){
-            this.state = {userinfo:this.props.userInfo};
-        }else {
-            this.state = {userinfo:false};
-        }
+        this.props.setPlayerPosition();
     }
 
-    connection(token){
-        const ws = new WebSocket('ws://10.10.13.153:8000/ws/three/'+token);
-        this.props.setWebsocket(ws);
-        const closeWebsocket = this.props.closeWebsocket;
-        ws.onopen = () => {
-            console.log('connected');
-        };
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if(this.props.userInfo.token !== nextProps.userInfo.token){
+            return true;
+        }
+        return false;
+    }
 
-        ws.onmessage = evt => {
-            const message = JSON.parse(evt.data);
-            console.log(message)
-        };
-
-        ws.onerror = e => {
-            console.log('error');
-            closeWebsocket()
-        };
+    componentDidMount() {
+        if(!this.props.requestLock) {
+            this.props.setRequestLock(true);
+            this.props.getAnnouncementList();
+            this.props.getSignInList();
+        }
     }
 
     render() {
-        if(!userinfo && !this.props.userInfo){
+        if(!this.props.userInfo){
             return (<Redirect to={{pathname: "/auth"}}/>)
-        }
-        if(!this.props.websocket && this.props.userInfo) {
-            this.connection(this.props.userInfo.token);
         }
         return (
             <HomeWrapper>
@@ -62,7 +44,7 @@ class Home extends React.Component {
                 <AnnouncementComponent/>
                 <NavigationComponent/>
                 <RoomComponent/>
-                <BottomComponent/>
+                <BottomComponent userinfo={this.props.userInfo}/>
             </HomeWrapper>
         )
     }
@@ -70,24 +52,26 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        requestLock:state.home.get('requestLock'),
         userInfo:state.auth.get('userInfo'),
-        websocket: state.game.get('websocket')
+        myGold:state.auth.get('gold'),
+        announcementList:state.home.get('announcementList')
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setUserInfo(userinfo){
-            let action = SetUserInfo(userinfo);
-            dispatch(action);
+        setRequestLock(bool){
+            dispatch(actions.SetRequestLock(bool));
         },
-        setWebsocket(client){
-            let action = SetWebsocket(client);
-            dispatch(action);
+        getAnnouncementList(){
+            dispatch(actions.GetAnnouncementList());
         },
-        closeWebsocket(){
-            let action = CloseWebsocket();
-            dispatch(action);
+        setPlayerPosition(){
+            dispatch(SetPlayerPosition(POSITION_HOME));
+        },
+        getSignInList(){
+            dispatch(actions.GetSignInList());
         }
     }
 };

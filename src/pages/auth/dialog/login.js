@@ -1,36 +1,48 @@
 import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
-import Cookies from 'universal-cookie';
-import { Bg,Close,LoginDialog,Input,Reset,SubmitButton } from './style';
-import bg from '../../../resource/dengluye/denglu.png';
-import close from '../../../resource/dengluye/guanbi.png';
-import confirm from '../../../resource/dengluye/queding.png';
+import { DialogTop,LoginTitle,DialogContent,Close,LoginDialog,Input,Reset,SubmitButton} from './style';
+import {MongolianWrapper} from "../style";
 import * as Actions from "../store/actions";
 import Toast from '../../component/toast';
 import {Redirect} from "react-router";
+import Cookies from 'universal-cookie';
+import {connection} from "../../../websocket";
+import ResetComponent from "./reset";
 
 class Login extends React.Component{
-    componentWillReceiveProps(nextProps){
-        if(nextProps.userInfo){
-            const cookies = new Cookies();
-            cookies.set('userinfo', nextProps.userInfo, { path: '/',expires: new Date(Date.now()+600000000)});
+    constructor(props){
+        super(props);
+        const cookies = new Cookies();
+        const userinfo = cookies.get('userinfo');
+        if(!this.props.userInfo && userinfo){
+            this.props.setUserInfo(userinfo);
+            const that = this;
+            Promise.resolve().then(function () {
+                that.props.getPlayerInfo(userinfo.token);
+            });
         }
     }
 
     render() {
+        const {visible} = this.props;
+        const that = this;
         if(this.props.userInfo){
+            /*Promise.resolve().then(function () {
+                connection(that.props.userInfo.token);
+            });*/
             return (
                 (<Redirect to={{pathname: "/home"}}/>)
             )
         }
         return (
-            <LoginDialog className={this.props.show ? 'show fadeInUp faster animated':'hidden'}>
-                <div>
-                    <Bg src={bg}/>
-                    <Close src={close} onClick={this.props.closeLogin}/>
-                </div>
-                <div>
+            <React.Fragment>
+            <LoginDialog className={visible ? 'show fadeInUp faster animated':'hidden'}>
+                <DialogTop>
+                    <LoginTitle/>
+                    <Close onClick={this.props.CloseLoginDialog}/>
+                </DialogTop>
+                <DialogContent>
                     <Input>
                         <label htmlFor="mobile">手机号</label>
                         <input name="mobile" placeholder={'请输入您的手机号'} ref={(input)=>{this.mobile = input}} id="mobile"/>
@@ -39,10 +51,12 @@ class Login extends React.Component{
                         <label htmlFor="password">密码</label>
                         <input name="password" type={'password'} placeholder={'请输入密码'} ref={(input)=>{this.password = input}} id="password"/>
                     </Input>
-                    <Reset onClick={this.props.openReset}>忘记密码</Reset>
-                    <SubmitButton onClick={()=>this.props.login(this.mobile,this.password)} src={confirm}/>
-                </div>
+                    <Reset onClick={this.props.OpenResetDialog}>忘记密码</Reset>
+                    <SubmitButton onClick={()=>this.props.login(this.mobile,this.password)}/>
+                </DialogContent>
             </LoginDialog>
+                <MongolianWrapper className={visible ? 'show fadeIn faster animated' : ''}/>
+            </React.Fragment>
         );
     }
 }
@@ -72,11 +86,12 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(Actions.UserLogin(mobile,password));
         },
-        closeLogin() {
-            dispatch(Actions.CloseLoginDialog())
+        setUserInfo(userinfo){
+            let action = Actions.SetUserInfo(userinfo);
+            dispatch(action);
         },
-        openReset(){
-            dispatch(Actions.OpenResetDialog())
+        getPlayerInfo(token){
+            dispatch(Actions.GetPlayerInfo(token));
         }
     }
 };

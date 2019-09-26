@@ -18,7 +18,20 @@ export const Announcement = styled.div`
     width:100%;
     height:20px;
     line-height:20px;
-    padding-left:100px;
+    padding-left:70px;
+`;
+
+export const AnnouncementBox = styled.div`
+    overflow: hidden;
+`;
+
+export const Text = styled.span`
+    display: inline-block;
+    color:#f5f5f5;
+    font-weight: 300;
+    font-size:13px;
+    position:relative;
+    top: -3px;
 `;
 
 export const Tools = styled.div`
@@ -31,6 +44,9 @@ export const Tools = styled.div`
 export const Record = styled.img`
     margin-top:35px;
     width:22px;
+     &.hidden {
+         display: none;
+    }
 `;
 
 export const Tab = styled.img`

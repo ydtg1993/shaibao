@@ -1,48 +1,70 @@
 import React from 'react';
 import {LoginWrapper, LoginButton, RegisterButton} from './style';
-import {connect} from 'react-redux';
-import * as Actions from './store/actions';
 /*component*/
 import Login from './dialog/login';
 import ResetComponent from './dialog/reset';
 import Register from './dialog/register';
-import Mongolian from "../component/mongolian";
 
 class Auth extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            loginVisible:false,
+            registerVisible:false,
+            resetVisible:false
+        };
+    }
+
+    OpenLoginDialog(){
+        this.setState({
+            loginVisible:true
+        });
+    }
+
+    CloseLoginDialog(){
+        this.setState({
+            loginVisible:false
+        });
+    }
+
+    OpenRegisterDialog(){
+        this.setState({
+            registerVisible:true
+        });
+    }
+
+    CloseRegisterDialog(){
+        this.setState({
+            registerVisible:false
+        });
+    }
+
+    OpenResetDialog(){
+        this.setState({
+            loginVisible:false,
+            resetVisible:true
+        });
+    }
+
+    CloseResetDialog(){
+        this.setState({
+            resetVisible:false
+        });
+    }
+
     render() {
         return (
             <React.Fragment>
                 <LoginWrapper>
-                    <LoginButton onClick={this.props.login}></LoginButton>
-                    <RegisterButton onClick={this.props.register}></RegisterButton>
+                    <LoginButton onClick={this.OpenLoginDialog.bind(this)}></LoginButton>
+                    <RegisterButton onClick={this.OpenRegisterDialog.bind(this)}></RegisterButton>
                 </LoginWrapper>
-                <Login show={this.props.showLoginDialog}/>
-                <ResetComponent show={this.props.showResetDialog}/>
-                <Register show={this.props.showRegisterDialog}/>
-                <Mongolian show={this.props.showMongolian} />
+                <Login visible={this.state.loginVisible} CloseLoginDialog={this.CloseLoginDialog.bind(this)} OpenResetDialog={this.OpenResetDialog.bind(this)}/>
+                <Register visible={this.state.registerVisible} CloseRegisterDialog={this.CloseRegisterDialog.bind(this)}/>
+                <ResetComponent visible={this.state.resetVisible} CloseResetDialog={this.CloseResetDialog.bind(this)}/>
             </React.Fragment>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        showMongolian: state.auth.get('showMongolian'),
-        showLoginDialog:state.auth.get('showLoginDialog'),
-        showRegisterDialog:state.auth.get('showRegisterDialog'),
-        showResetDialog:state.auth.get('showResetDialog')
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        login() {
-            dispatch(Actions.OpenLoginDialog())
-        },
-        register(){
-            dispatch(Actions.OpenRegisterDialog())
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Auth)
+export default Auth

@@ -10,88 +10,40 @@ import DialComponent from './dial';
 import TableComponent from './table';
 import MoneyComponent from './money';
 import BetComponent from './bet';
-import Cookies from "universal-cookie";
 import LotteryComponent from "./lottery";
-import {SetWebsocket} from "./store/actions";
-import {CloseWebsocket} from "./store/actions";
-import {SetUserInfo} from "../auth/store/actions";
-
-const cookies = new Cookies();
-const userinfo = cookies.get('userinfo');
+import {POSITION_ROOM_FAST,POSITION_ROOM_ONE,POSITION_ROOM_FIVE} from "../auth/store/actions";
+import {MongolianWrapper} from "./lottery/style";
 
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        if(userinfo && !this.props.userInfo) {
-            this.props.setUserInfo(userinfo);
-            this.state = {userinfo:userinfo};
-        }else if(this.props.userInfo){
-            this.state = {userinfo:this.props.userInfo};
-        }else {
-            this.state = {userinfo:false};
-        }
-        let room = 'Fast';
-        switch (this.props.match.params.room_id) {
+        let room = POSITION_ROOM_FAST;
+        switch (parseInt(this.props.match.params.room_id)) {
             case 2:
-                room = 'OneMinute';
+                room = POSITION_ROOM_ONE;
                 break;
             case 3:
-                room = 'FivesMinute';
+                room = POSITION_ROOM_FIVE;
                 break;
         }
+        this.props.initStage();
         this.props.enterHall(room);
-
-        this.state = {
-            lottery:false
-        };
-    }
-
-    connection(token){
-        const ws = new WebSocket('ws://10.10.13.153:8000/ws/three/'+token);
-        this.props.setWebsocket(ws);
-        const closeWebsocket = this.props.closeWebsocket;
-        ws.onopen = () => {
-            console.log('connected');
-        };
-
-        ws.onmessage = evt => {
-            console.log(evt)
-            const message = JSON.parse(evt.data);
-            console.log(message)
-        };
-
-        ws.onerror = e => {
-            console.log(e);
-            closeWebsocket()
-        };
-    }
-
-    componentDidMount() {
-        const that = this;
-        /*const interval = setInterval(function () {
-            that.setState({
-                lottery:true
-            });
-            clearInterval(interval);
-        },3000);*/
     }
 
     render() {
-        if (!userinfo && !this.props.userInfo) {
+        if (!this.props.userInfo) {
             return (<Redirect to={{pathname: "/auth"}}/>)
-        }
-        if(!this.props.websocket && this.props.userInfo) {
-            this.connection(this.props.userInfo.token);
         }
         return (
             <React.Fragment>
                 <GameWrapper>
                     <DialComponent/>
-                    <TableComponent/>
+                    <TableComponent stage={this.props.stage}/>
                     <MoneyComponent/>
                     <BetComponent/>
                 </GameWrapper>
-                <LotteryComponent start={this.state.lottery}/>
+                <LotteryComponent stage={this.props.stage}/>
+                <MongolianWrapper className={this.props.stage !== actions.START_STAGE && this.props.stage !== actions.BET_STAGE ? 'show' : 'hidden'}></MongolianWrapper>
             </React.Fragment>
         )
     }
@@ -100,7 +52,7 @@ class Game extends React.Component {
 const mapStateToProps = (state) => {
     return {
         userInfo: state.auth.get('userInfo'),
-        websocket: state.game.get('websocket')
+        stage:state.game.get('stage')
     }
 };
 
@@ -109,17 +61,8 @@ const mapDispatchToProps = (dispatch) => {
         enterHall(room){
             dispatch(actions.EnterHall(room));
         },
-        setUserInfo(userinfo){
-            let action = SetUserInfo(userinfo);
-            dispatch(action);
-        },
-        setWebsocket(client){
-            let action = SetWebsocket(client);
-            dispatch(action);
-        },
-        closeWebsocket(){
-            let action = CloseWebsocket();
-            dispatch(action);
+        initStage(){
+            dispatch(actions.InitStage());
         }
     }
 };

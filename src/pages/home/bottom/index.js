@@ -14,17 +14,20 @@ import recommend from '../../../resource/zhujiemian/tuiguang.png';
 import servant from '../../../resource/zhujiemian/kefu.png';
 import EmailComponent from "../dialog/email/index";
 import RankComponent from "../dialog/rank";
+import {connect} from "react-redux";
+import * as Actions from "../store/actions";
 
 class BottomComponent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             emailVisible:false,
-            rankVisible:false,
+            rankVisible:false
         }
     }
 
     OpenEmail() {
+        this.props.getEmailList();
         this.setState({
             emailVisible:true,
         });
@@ -37,6 +40,7 @@ class BottomComponent extends React.Component {
     }
 
     OpenRank(){
+        this.props.getRankList();
         this.setState({
             rankVisible:true,
         });
@@ -60,11 +64,22 @@ class BottomComponent extends React.Component {
                     <BottomTab src={recommend}/>
                     <BottomTab src={servant}/>
                 </BottomTabList>
-                <EmailComponent visible={this.state.emailVisible} CloseEmail={this.CloseEmail.bind(this)}/>
-                <RankComponent visible={this.state.rankVisible} CloseRank={this.CloseRank.bind(this)}/>
+                <EmailComponent userinfo={this.props.userinfo} visible={this.state.emailVisible} CloseEmail={this.CloseEmail.bind(this)}/>
+                <RankComponent userinfo={this.props.userinfo} visible={this.state.rankVisible} CloseRank={this.CloseRank.bind(this)}/>
             </BottomFloor>
         )
     }
 }
 
-export default BottomComponent
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getEmailList() {
+            dispatch(Actions.GetEmailList(1))
+        },
+        getRankList() {
+            dispatch(Actions.GetRankList(1))
+        }
+    }
+};
+
+export default connect(null, mapDispatchToProps)(BottomComponent)

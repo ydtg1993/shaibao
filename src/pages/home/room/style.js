@@ -18,6 +18,5 @@ export const Room = styled.img`
     display:block;
     width:100%;
     margin-top:5px;
-    &:first-child{margin-top:0}
 `;
 

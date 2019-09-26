@@ -1,74 +1,137 @@
 import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
-import {Bg, Close, EmailDialog,MongolianWrapper,BottomDecoration,EmailList,Email,Envelope,EnvelopeOpened,EnvelopeClosed,EmailReaded,EmailRead} from './../style';
+import {
+    EmailDialog,
+    ListTitle,
+    EmailList,
+    Email,
+    EnvelopeCoin,
+    EnvelopeOpened,
+    EnvelopeClosed,
+    EmailReaded,
+    EmailRead,
+    EnvelopeCoinReaded
+} from './style';
+import {Close} from "../style";
+import {DialogTop,MongolianWrapper, BottomDecoration} from "../style";
 import EmailInfoComponent from './info';
-import bg from '../../../../resource/zhujiemian/email/email_bg.png';
-import close from '../../../../resource/dengluye/guanbi.png';
 import * as Actions from "../../../home/store/actions";
 
 class EmailComponent extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            emailInfoVisible:false
+            page:1,
+            isLoadingMore: false,
+            emailInfoVisible: false
+        };
+        this.emailList = React.createRef();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const that =this;
+        this.emailList.current && this.emailList.current.addEventListener('scroll', function () {
+            var afterScrollTop = this.scrollTop;
+            if(afterScrollTop < this.beforeScrollTop){
+                this.beforeScrollTop = this.scrollTop;
+                return;
+            }
+            this.beforeScrollTop = this.scrollTop;
+
+            if(this.scrollHeight - 20 <= this.clientHeight + this.scrollTop) {
+                if(that.state.isLoadingMore){
+                    return;
+                }
+                let page = that.state.page + 1;
+                that.setState({
+                    isLoadingMore: true,
+                    page:page
+                });
+                that.props.getEmailList(page);
+            }
+        });
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (this.props.emailList.length !== nextProps.emailList.length) {
+            this.setState({
+                isLoadingMore: false
+            });
+            return true;
+        } else if (this.props.visible !== nextProps.visible) {
+            return true;
+        } else if(this.state.emailInfoVisible !== nextState.emailInfoVisible){
+            return true;
         }
+        return false;
     }
 
-    componentWillMount() {
-        this.props.getEmailList();
-    }
-
-    OpenEmailInfo(email_id){
-        this.props.ReadEmail(email_id,this.props.userInfo.id);
+    OpenEmailInfo(email_id) {
+        this.props.readEmail(email_id);
         this.setState({
-            emailInfoVisible:true
+            emailInfoVisible: true
         });
     }
 
-    CloseEmailInfo(){
+    CloseEmailInfo() {
         this.setState({
-            emailInfoVisible:false
+            emailInfoVisible: false
         });
+    }
+
+    CloseEmailList(){
+        this.setState({
+            page:1,
+            isLoadingMore: false
+        });
+        this.props.CloseEmail();
     }
 
     render() {
-        const {visible} = this.props;
-        const OpenEmailInfo = this.OpenEmailInfo;
+        const {visible, emailList} = this.props;
         const that = this;
         return visible && (
             <React.Fragment>
                 <EmailDialog className={visible ? 'show fadeInUp faster animated' : ''}>
-                    <div>
-                        <Bg src={bg}/>
-                        <Close src={close} onClick={this.props.CloseEmail}/>
-                    </div>
-                    <EmailList>
-                        {this.props.emailList.map(function (data,index) {
+                    <DialogTop>
+                        <ListTitle/>
+                        <Close onClick={this.CloseEmailList.bind(this)}/>
+                    </DialogTop>
+                    <EmailList ref={this.emailList}>
+                        {emailList && emailList.map(function (data) {
                             return (
-                                <Email key={data.id} className={data.read ? 'read':''}>
-                                    {data.read ? (
-                                        <React.Fragment>
-                                        <div><EnvelopeClosed/></div>
-                                        <div>
-                                            <div><span className='type'>【{data.type}】</span><span className='title'>{data.title}</span></div>
-                                            <div className='time'>{data.create_at}</div>
-                                        </div>
-                                        <div>
-                                            <EmailRead onClick={OpenEmailInfo.bind(that,data.id)}/>
-                                        </div>
-                                        </React.Fragment>):
-                                        (
-                                        <React.Fragment>
-                                            <div><EnvelopeOpened/></div>
-                                            <div>
-                                                <div><span className='type'>【{data.type}】</span><span className='title'>{data.title}</span></div>
-                                                <div className='time'>{data.create_at}</div>
-                                            </div>
-                                            <div>
-                                                <EmailReaded onClick={OpenEmailInfo.bind(that,data.id)}/>
-                                            </div>
-                                        </React.Fragment>)}
+                                <Email key={data.id} className={data.is_read ? 'read' : ''} id={`email_id_${data.id}`}>
+                                    {
+                                        !data.is_read ? (
+                                                <React.Fragment>
+                                                    <div>{data.exist_annex ? (<EnvelopeCoin/>) : (<EnvelopeClosed/>)}</div>
+                                                    <div>
+                                                        <div><span className='type'>【{data.tag}】</span><span
+                                                            className='title'>{data.title}</span></div>
+                                                        <div className='time'>{data.create_at}</div>
+                                                    </div>
+                                                    <div>
+                                                        <EmailRead onClick={that.OpenEmailInfo.bind(that, data.id)}/>
+                                                    </div>
+                                                </React.Fragment>) :
+                                            (
+                                                <React.Fragment>
+                                                    <div>{data.exist_annex ? (<EnvelopeCoin/>) : (
+                                                        <EnvelopeOpened/>)}</div>
+                                                    <div>
+                                                        <div><span className='type'>【{data.tag}】</span><span
+                                                            className='title'>{data.title}</span></div>
+                                                        <div className='time'>{data.create_at}</div>
+                                                    </div>
+                                                    <div>
+                                                        {data.exist_annex ? (<EnvelopeCoinReaded
+                                                            onClick={that.OpenEmailInfo.bind(that, data.id)}/>) : (
+                                                            <EmailReaded
+                                                                onClick={that.OpenEmailInfo.bind(that, data.id)}/>)}
+                                                    </div>
+                                                </React.Fragment>)
+                                    }
                                 </Email>
                             )
                         })}
@@ -84,19 +147,18 @@ class EmailComponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userInfo:state.auth.get('userInfo'),
-        emailList:state.home.get('emailList')
+        emailList: state.home.get('emailList')
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getEmailList() {
-            dispatch(Actions.getEmailList(1))
+        readEmail(email_id) {
+            dispatch(Actions.ReadEmail(email_id))
         },
-        ReadEmail(email_id,user_id){
-            dispatch(Actions.ReadEmail(email_id,user_id))
-        }
+        getEmailList(page) {
+            dispatch(Actions.GetEmailList(page))
+        },
     }
 };
 

@@ -1,14 +1,32 @@
 import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
-import {GlobalStyle,Bg, Close, RankDialog,MongolianWrapper,BottomDecoration,RankList,Rank,MyRank,RankTitle,RankMoneyTag,RankTabg1,RankTabg2,RankTabg3,RankTagN} from './../style';
-import bg from '../../../../resource/zhujiemian/rank/rank_bg.png';
-import close from '../../../../resource/dengluye/guanbi.png';
-import * as Actions from "../../../home/store/actions";
+import {
+    GlobalStyle,
+    RankDialog,
+    Title,
+    DialogContent2,
+    RankList,
+    Rank,
+    MyRank,
+    RankTitle,
+    RankMoneyTag,
+    RankTabg1,
+    RankTabg2,
+    RankTabg3,
+    RankTagN
+} from './style';
+import { DialogTop,MongolianWrapper, BottomDecoration, Close} from "../style";
 
 class RankComponent extends React.Component {
-    componentWillMount() {
-        this.props.getRankList();
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (this.props.visible !== nextProps.visible) {
+            return true;
+        }
+        if (!this.props.rankList && nextProps.rankList) {
+            return true;
+        }
+        return false;
     }
 
     selectTag(rank) {
@@ -27,42 +45,45 @@ class RankComponent extends React.Component {
     }
 
     render() {
-        const {visible} = this.props;
+        const {visible, rankList} = this.props;
         const selectTag = this.selectTag;
         return visible && (
             <React.Fragment>
                 <GlobalStyle/>
                 <RankDialog className={visible ? 'show fadeInUp faster animated' : ''}>
-                    <div>
-                        <Bg src={bg}/>
-                        <Close src={close} onClick={this.props.CloseRank}/>
-                    </div>
-                    <div>
-                        <RankTitle>
-                            <div>排行</div>
-                            <div>昵称</div>
-                            <div>今日盈利</div>
-                        </RankTitle>
-                    </div>
-                    <RankList>
-                        {this.props.rankList.ls.map(function (data,index) {
-                            return (
-                                <Rank key={data.ranking}>
-                                    <div>{selectTag(data.ranking)}</div>
-                                    <div><span>{data.name}</span></div>
-                                    <div><RankMoneyTag/><span className='moneyTitle'>{data.profit}</span></div>
-                                </Rank>
-                            )
-                        })}
-                    </RankList>
-                    <div>
-                        <MyRank>
-                            <div>{selectTag(this.props.rankList.own.ranking)}</div>
-                            <div><span>{this.props.rankList.own.name}</span></div>
-                            <div><RankMoneyTag/><span className='moneyTitle'>{this.props.rankList.own.profit}</span></div>
-                        </MyRank>
-                    </div>
-                    <BottomDecoration/>
+                    <DialogTop>
+                        <Title/>
+                        <Close onClick={this.props.CloseRank}/>
+                    </DialogTop>
+                    <DialogContent2>
+                        <div>
+                            <RankTitle>
+                                <div>排行</div>
+                                <div>昵称</div>
+                                <div>今日盈利</div>
+                            </RankTitle>
+                        </div>
+                        <RankList>
+                            {rankList.ls && rankList.ls.map(function (data) {
+                                return (
+                                    <Rank key={data.ranking}>
+                                        <div>{selectTag(data.ranking)}</div>
+                                        <div><span>{data.name}</span></div>
+                                        <div><RankMoneyTag/><span className='moneyTitle'>{data.profit}</span></div>
+                                    </Rank>
+                                )
+                            })}
+                        </RankList>
+                        <div>
+                            <MyRank>
+                                <div>{selectTag(rankList.own ? rankList.own.ranking : -1)}</div>
+                                <div><span>{this.props.userinfo.username}</span></div>
+                                <div><RankMoneyTag/><span
+                                    className='moneyTitle'>{rankList.own ? rankList.own.profit : 0}</span></div>
+                            </MyRank>
+                        </div>
+                        <BottomDecoration/>
+                    </DialogContent2>
                 </RankDialog>
                 <MongolianWrapper className={visible ? 'show' : 'hidden'}></MongolianWrapper>
             </React.Fragment>
@@ -72,16 +93,8 @@ class RankComponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        rankList:state.home.get('rankList'),
+        rankList: state.home.get('rankList'),
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getRankList() {
-            dispatch(Actions.getRankList())
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RankComponent)
+export default connect(mapStateToProps, null)(RankComponent)

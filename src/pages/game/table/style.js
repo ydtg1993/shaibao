@@ -37,7 +37,10 @@ export const Title = styled.p`
     margin:0;
     font-size: 13px;
     font-weight:200;
-    letter-spacing:1px
+    letter-spacing:1px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 `;
 
 export const TimeLine = styled.p`
@@ -99,7 +102,7 @@ export const Placeholder = styled.div`
     height:100%;
     overflow:hidden;
     position:absolute;
-    z-index:10000;
+    z-index:1900;
 `;
 
 export const Text = styled.img`
@@ -112,12 +115,6 @@ export const Text = styled.img`
 
 export const SText = styled(Text)`
     width:23px;
-    position:relative;
-    z-index:1;
-`;
-
-export const SSText = styled(SText)`
-    width:22px;
     position:relative;
     z-index:1;
 `;

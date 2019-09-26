@@ -15,9 +15,9 @@ class RoomComponent extends React.Component {
         return (
                 <RoomFloor>
                     <RoomList>
-                        <Link to="/game/1"><Room src={room1}></Room></Link>
-                        <Room src={room2}></Room>
-                        <Room src={room3}></Room>
+                        <Link to="/game/1"><Room src={room1} style={{marginTop:'0'}}></Room></Link>
+                        <Link to="/game/2"><Room src={room2}></Room></Link>
+                        <Link to="/game/3"><Room src={room3}></Room></Link>
                     </RoomList>
                 </RoomFloor>
         )
