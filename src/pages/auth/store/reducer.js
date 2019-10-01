@@ -5,6 +5,7 @@ const defaultState = fromJS({
     sendVerify:false,
     userInfo:false,
     gold:false,
+    cardInfo:false,
     playerPosition:false,
 });
 
@@ -22,6 +23,8 @@ export default (state = defaultState, action) => {
             return state.set('gold',action.gold);
         case Actions.SET_PLAYER_POSITION:
             return state.set('playerPosition',action.position);
+        case Actions.SET_BANK_CARD_INFO:
+            return state.set('cardInfo',action.data);
         default:
             return state
     }

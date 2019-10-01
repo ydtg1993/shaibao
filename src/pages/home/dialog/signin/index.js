@@ -2,7 +2,7 @@ import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
 import {SignInDialog,DialogContent,Title,Content,Box,Award,Day,Complete} from './style';
-import {DialogTop,BottomDecoration,Close,MongolianWrapper} from "../style";
+import {DialogTop,BottomDecoration,Close} from "../style";
 import box1 from '../../../../resource/zhujiemian/signin/coin.png';
 import box2 from '../../../../resource/zhujiemian/signin/box1.png';
 import box3 from '../../../../resource/zhujiemian/signin/box2.png';
@@ -43,7 +43,7 @@ class SignInComponent extends React.Component {
         var {visible,signInList} = this.props;
         signInList = signInList ? JSON.parse(signInList):signInList;
         const that = this;
-        return (<React.Fragment>
+        return visible && (<React.Fragment>
             <SignInDialog className={visible ? 'show fadeInUp faster animated' : ''}>
                 <DialogTop>
                     <Title/>
@@ -66,7 +66,6 @@ class SignInComponent extends React.Component {
                     <BottomDecoration/>
                 </DialogContent>
             </SignInDialog>
-            <MongolianWrapper className={visible ? 'show fadeIn faster animated' : ''}/>
         </React.Fragment>);
     }
 }

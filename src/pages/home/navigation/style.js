@@ -12,6 +12,7 @@ export const TabList = styled.div`
 
 export const NavigationTab = styled.img`
     width:55px;
+    height:52px;
     position:relative;
     margin:0 auto;
 `;

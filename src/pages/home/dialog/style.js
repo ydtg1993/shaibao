@@ -3,6 +3,8 @@ import bottom_decoration from "../../../resource/dialog/bottom.png";
 import close from '../../../resource/dialog/guanbi.png';
 import border from "../../../resource/dialog/border.png";
 import top from "../../../resource/dialog/top.png";
+import input_bg from '../../../resource/dialog/input_bg.png';
+import small_input_bg from '../../../resource/dialog/small_input_bg.png';
 
 export const Dialog = styled.div`
     position: absolute;
@@ -83,4 +85,46 @@ export const BottomDecoration = styled.img.attrs({
     left: 0;
     right: 0;
     z-index:2002;
+`;
+
+export const Button = styled.div`
+    background: url('${input_bg}') no-repeat;  
+    font-style: oblique;
+    width: 83px;
+    height: 35px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-family: LangFont;
+    background-size: contain;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+`;
+
+export const SmallButton = styled.div`
+    height: 15px;
+    display: inline-block;
+    line-height: 15px;
+    position:relative;
+    span{
+        font-style: oblique;
+        font-family: LangFont;
+        position:relative;
+        display: block;
+        text-align: center;
+        z-index:1;
+        color: #040404;
+        font-size: 10px;
+    }
+`;
+
+export const SmallInputBg = styled.img.attrs({
+    src:`${small_input_bg}`
+})`
+    position:absolute;
+    height: 100%;  
+    width: 100%;  
+    left:0;
+    top: 0px;  
+    bottom: 0px; 
 `;

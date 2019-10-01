@@ -14,7 +14,7 @@ import {
     EnvelopeCoinReaded
 } from './style';
 import {Close} from "../style";
-import {DialogTop,MongolianWrapper, BottomDecoration} from "../style";
+import {DialogTop, BottomDecoration} from "../style";
 import EmailInfoComponent from './info';
 import * as Actions from "../../../home/store/actions";
 
@@ -138,7 +138,6 @@ class EmailComponent extends React.Component {
                     </EmailList>
                     <BottomDecoration/>
                 </EmailDialog>
-                <MongolianWrapper className={visible ? 'show' : 'hidden'}></MongolianWrapper>
                 <EmailInfoComponent visible={this.state.emailInfoVisible} CloseEmailInfo={this.CloseEmailInfo.bind(this)}/>
             </React.Fragment>
         );

@@ -1,5 +1,5 @@
 import styled,{ createGlobalStyle } from 'styled-components';
-import {Dialog} from "../style";
+import {Dialog,Button} from "../style";
 import MyFont from '../../../../resource/heiguiti.otf';
 import email_light_line from '../../../../resource/zhujiemian/email/bg1.png';
 import email_dark_line from '../../../../resource/zhujiemian/email/bg2.png';
@@ -140,12 +140,6 @@ export const EmailRead = styled.img.attrs({
     margin-right: 10px;
 `;
 
-export const SubmitButton = styled.img`
-    margin-top:8px;
-    width:109px;
-    height:54px;
-    z-index: 10000;
-    position: relative;
-    left:50%;
-    transform: translateX(-50%);
+export const SubmitButton = styled(Button)`
+    margin:13px auto 0;
 `;

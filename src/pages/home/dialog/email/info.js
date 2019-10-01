@@ -13,8 +13,6 @@ import {
     EmailDialogInfoBottom
 } from './style';
 import {DialogTop, Close} from "../style";
-import confirm from "../../../../resource/zhujiemian/email/delete.png";
-import receive from '../../../../resource/zhujiemian/email/receive.png';
 
 class EmailInfoComponent extends React.Component {
     deleteMail(mail_id) {
@@ -47,9 +45,9 @@ class EmailInfoComponent extends React.Component {
                     </EmailDialogInfoContent>
                     <EmailDialogInfoBottom>
                         {emailInfo.exist_annex ? (
-                            <SubmitButton onClick={this.receiveCoin.bind(this, emailInfo.id)} src={receive}/>
+                            <SubmitButton onClick={this.receiveCoin.bind(this, emailInfo.id)}>领 取</SubmitButton>
                         ) : (
-                            <SubmitButton onClick={this.deleteMail.bind(this, emailInfo.id)} src={confirm}/>
+                            <SubmitButton onClick={this.deleteMail.bind(this, emailInfo.id)}>删 除</SubmitButton>
                         )
                         }
                     </EmailDialogInfoBottom>

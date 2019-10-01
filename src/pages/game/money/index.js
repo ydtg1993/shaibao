@@ -2,12 +2,12 @@ import React from 'react';
 import {
     MoneyWrapper,
     MoneySection,
-    MoneyGold,
-    MoneyInput,
-    MoneyCharge
+    MoneyDigital2,
+    MoneyInput2
 } from './style';
 import anime from 'animejs';
 import {connect} from "react-redux";
+import {MoneyCharge, MoneyGold} from "../../home/style";
 
 class MoneyComponent extends React.Component{
     constructor(props){
@@ -29,8 +29,9 @@ class MoneyComponent extends React.Component{
             <MoneyWrapper>
                 <MoneySection>
                     <MoneyGold/>
-                    <MoneyInput id='MoneyBox' ref={this.money}>{parseInt(this.props.myGold)}</MoneyInput>
                     <MoneyCharge/>
+                    <MoneyDigital2 id='MoneyBox' ref={this.money}>{parseInt(this.props.myGold)}</MoneyDigital2>
+                    <MoneyInput2/>
                 </MoneySection>
             </MoneyWrapper>
         )

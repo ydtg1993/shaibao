@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import bg from '../../resource/dengluye/bg.jpg';
 import login from '../../resource/dengluye/zhanghaodenglu.png';
 import register from '../../resource/dengluye/zhuce.png';
+
 export const LoginWrapper = styled.div`
     height: 100%;  
     width: 100%;  

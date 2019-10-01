@@ -1,9 +1,11 @@
 import React from 'react';
 import {
     HomeWrapper,
+    GlobalStyle
 } from './style';
+import "animate.css";
 import {connect} from 'react-redux';
-import {SetPlayerPosition,POSITION_HOME} from '../auth/store/actions';
+import {SetPlayerPosition, POSITION_HOME} from '../auth/store/actions';
 import * as actions from './store/actions';
 /*component*/
 import TopComponent from './top';
@@ -14,20 +16,20 @@ import BottomComponent from './bottom';
 import {Redirect} from "react-router";
 
 class Home extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.props.setPlayerPosition();
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if(this.props.userInfo.token !== nextProps.userInfo.token){
+        if (this.props.userInfo.token !== nextProps.userInfo.token) {
             return true;
         }
         return false;
     }
 
     componentDidMount() {
-        if(!this.props.requestLock) {
+        if (!this.props.requestLock) {
             this.props.setRequestLock(true);
             this.props.getAnnouncementList();
             this.props.getSignInList();
@@ -35,45 +37,48 @@ class Home extends React.Component {
     }
 
     render() {
-        if(!this.props.userInfo){
+        if (!this.props.userInfo) {
             return (<Redirect to={{pathname: "/auth"}}/>)
         }
         return (
-            <HomeWrapper>
-                <TopComponent userinfo={this.props.userInfo}/>
-                <AnnouncementComponent/>
-                <NavigationComponent/>
-                <RoomComponent/>
-                <BottomComponent userinfo={this.props.userInfo}/>
-            </HomeWrapper>
+            <React.Fragment>
+                <GlobalStyle/>
+                <HomeWrapper>
+                    <TopComponent userinfo={this.props.userInfo}/>
+                    <AnnouncementComponent/>
+                    <NavigationComponent/>
+                    <RoomComponent/>
+                    <BottomComponent userinfo={this.props.userInfo}/>
+                </HomeWrapper>
+            </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        requestLock:state.home.get('requestLock'),
-        userInfo:state.auth.get('userInfo'),
-        myGold:state.auth.get('gold'),
-        announcementList:state.home.get('announcementList')
+        requestLock: state.home.get('requestLock'),
+        userInfo: state.auth.get('userInfo'),
+        myGold: state.auth.get('gold'),
+        announcementList: state.home.get('announcementList')
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setRequestLock(bool){
+        setRequestLock(bool) {
             dispatch(actions.SetRequestLock(bool));
         },
-        getAnnouncementList(){
+        getAnnouncementList() {
             dispatch(actions.GetAnnouncementList());
         },
-        setPlayerPosition(){
+        setPlayerPosition() {
             dispatch(SetPlayerPosition(POSITION_HOME));
         },
-        getSignInList(){
+        getSignInList() {
             dispatch(actions.GetSignInList());
         }
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

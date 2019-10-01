@@ -1,4 +1,4 @@
-import styled,{ createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import {Dialog,DialogContent} from "../style";
 import rank_light_line from '../../../../resource/zhujiemian/rank/light-line.png';
 import rank_dark_line from '../../../../resource/zhujiemian/rank/dark-line.png';
@@ -7,17 +7,7 @@ import rank_tag_1 from '../../../../resource/zhujiemian/rank/rank1.png';
 import rank_tag_2 from '../../../../resource/zhujiemian/rank/rank2.png';
 import rank_tag_3 from '../../../../resource/zhujiemian/rank/rank3.png';
 import rank_tag from '../../../../resource/zhujiemian/rank/star.png';
-import MyFont from "../../../../resource/heiguiti.otf";
 import title from "../../../../resource/zhujiemian/rank/title.png";
-
-export const GlobalStyle = createGlobalStyle`
-body {
-  @font-face {
-     font-family: 'MyFont';
-     src: url('${MyFont}');
-  }
-}
-`;
 
 export const RankDialog = styled(Dialog)`
     grid-template-rows: 37px 330px;

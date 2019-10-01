@@ -4,7 +4,7 @@ import {Congratulations,CongratulationsTitle,CongratulationsDiscript,CoinTag,Con
 
 class CongratulationsComponent extends Component {
     render() {
-        return (<Congratulations className='show fadeIn animated'>
+        return (<Congratulations className='show zoomIn faster animated'>
             <CongratulationsTitle/>
             <CongratulationsDiscript>
                 <CoinTag/>

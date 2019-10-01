@@ -12,7 +12,7 @@ import {WinNoticeEvent} from "./pages/game/store/actions";
 import Toast from "./pages/component/toast";
 
 export function connection(token){
-    const ws = new WebSocket('ws://192.168.50.181:8000/ws/three/'+token);
+    const ws = new WebSocket('ws://192.168.50.181:9090/ws/three/'+token);
     store.dispatch(SetWebsocket(ws));
 
     ws.onopen = () => {
@@ -36,7 +36,10 @@ export function connection(token){
             store.dispatch(ClearUserInfo());
         }else {
             store.dispatch(CloseWebsocket());
-            connect(token);
+            var interval = setInterval(function () {
+                connect(token);
+                clearInterval(interval);
+            },3000);
         }
     };
 }

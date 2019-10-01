@@ -22,7 +22,7 @@ import {
     SmallResult,
     BetResult
 } from './style';
-import { DialogTop,BottomDecoration, Close, MongolianWrapper} from "../style";
+import { DialogTop,BottomDecoration, Close} from "../style";
 import {connect} from "react-redux";
 import * as Actions from "../../../home/store/actions";
 
@@ -193,16 +193,15 @@ class BetRecordComponent extends React.Component {
         const {visible, betRecordList} = this.props;
         const that = this;
         return visible && (
-            <React.Fragment>
                 <BetRecordDialog className={visible ? 'show fadeInUp faster animated' : ''}>
                     <DialogTop>
                         <MTitle/>
                         <Close onClick={this.CloseBetRecord.bind(this)}/>
                     </DialogTop>
                     <RecordNav>
-                        <div><Tab className={this.state.record_all ? 'focus' : ''} style={{marginLeft: '2px'}}
+                        <div><Tab className={this.state.record_all ? 'focus' : ''}
                                   onClick={this.watchAll.bind(this)}>全部记录</Tab></div>
-                        <div><Tab className={!this.state.record_all ? 'focus' : ''} style={{marginRight: '2px'}}
+                        <div><Tab className={!this.state.record_all ? 'focus' : ''}
                                   onClick={this.watchReward.bind(this)}>中奖记录</Tab></div>
                     </RecordNav>
                     <RecordList ref={this.betList}>
@@ -228,8 +227,6 @@ class BetRecordComponent extends React.Component {
                     </RecordList>
                     <BottomDecoration/>
                 </BetRecordDialog>
-                <MongolianWrapper className={visible ? 'show' : 'hidden'}></MongolianWrapper>
-            </React.Fragment>
         );
     }
 }

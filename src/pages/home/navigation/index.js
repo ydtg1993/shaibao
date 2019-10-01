@@ -26,18 +26,24 @@ class NavigationComponent extends React.Component {
     }
 
     OpenSignIn(){
+        let MongolianScreen = document.getElementById('MongolianScreen');
+        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
         this.setState({
             signInVisible:true,
         })
     }
 
     CloseSignIn(){
+        let MongolianScreen = document.getElementById('MongolianScreen');
+        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
         this.setState({
             signInVisible:false
         })
     }
 
     OpenBetRecord(){
+        let MongolianScreen = document.getElementById('MongolianScreen');
+        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
         this.props.getBetRecords(1,[]);
         this.setState({
             betRecordVisible:true,
@@ -45,12 +51,16 @@ class NavigationComponent extends React.Component {
     }
 
     CloseBetRecord(){
+        let MongolianScreen = document.getElementById('MongolianScreen');
+        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
         this.setState({
             betRecordVisible:false,
         })
     }
 
     OpenActivity(){
+        let MongolianScreen = document.getElementById('MongolianScreen');
+        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
         this.props.getActivityList();
         this.setState({
             activityVisible:true,
@@ -58,6 +68,8 @@ class NavigationComponent extends React.Component {
     }
 
     CloseActivity(){
+        let MongolianScreen = document.getElementById('MongolianScreen');
+        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
         this.setState({
             activityVisible:false,
         });

@@ -11,6 +11,7 @@ export const RESET_VERIFY_EVENT = 'reset_verify_event';
 
 export const SET_PLAYER_POSITION = 'set_player_position';
 export const PLAYER_GOLD_CHANGE = 'player_gold_change';
+export const SET_BANK_CARD_INFO = 'set_bank_card_info';
 
 export const POSITION_AUTH = 'Auth';
 export const POSITION_HOME = 'Hall';
@@ -37,6 +38,7 @@ export const GetPlayerInfo = (token)=>{
                         gold:data.data.gold,
                         avatar:data.data.avatar,
                         token:data.data.token,
+                        mobile:data.data.phone,
                         expires:info.expires
                     };
                     dispatch(SetUserInfo(userinfo));
@@ -88,6 +90,7 @@ export const UserRegister = (mobile,password,verify,invite) => {
                     gold:data.data.gold,
                     avatar:data.data.avatar,
                     token:data.data.token,
+                    mobile:data.data.phone,
                     expires:expires
                 };
                 dispatch(SetUserInfo(userinfo));
@@ -119,6 +122,7 @@ export const UserLogin = (mobile,password) => {
                     gold:data.data.gold,
                     avatar:data.data.avatar,
                     token:data.data.token,
+                    mobile:data.data.phone,
                     expires:expires
                 };
                 dispatch(SetUserInfo(userinfo));
@@ -150,12 +154,32 @@ export const UserReset = (mobile,password,verify) => {
                     gold:parseFloat(data.data.gold),
                     avatar:data.data.avatar,
                     token:data.data.token,
+                    mobile:data.data.phone,
                     expires:expires
                 };
                 dispatch(SetUserInfo(userinfo));
                 Toast.success('重置密码成功',1000);
                 const cookies = new Cookies();
                 cookies.set('userinfo', userinfo, { path: '/',expires: expires});
+            }else {
+                Toast.info(data.message);
+            }
+        }).catch((error)=>{
+            Toast.error('服务器开小差了',1000);
+        });
+    }
+};
+
+export const GetBankCardInfo = (token) => {
+    return (dispatch)=>{
+        let ajaxConfig = {headers: {'Content-Type': 'application/json','Authorization':'Token '+token},timeout: 3000};
+        axios.post(Host+'three/player/card/info',{},ajaxConfig).then((res)=>{
+            let data = res.data;
+            if(data.code === 20000){
+                dispatch({
+                    type:SET_BANK_CARD_INFO,
+                    data:data.data
+                })
             }else {
                 Toast.info(data.message);
             }

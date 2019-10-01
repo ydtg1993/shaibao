@@ -9,7 +9,9 @@ const defaultState = fromJS({
     emailInfo:false,
     betRecordList:false,
     activityList:false,
-    signInList:false
+    signInList:false,
+    bankList:false,
+    exchangeRecordList:false,
 });
 
 export default (state = defaultState, action) => {
@@ -36,6 +38,13 @@ export default (state = defaultState, action) => {
             return state.set('activityList',action.list);
         case Actions.GET_SIGNIN_LIST:
             return state.set('signInList',JSON.stringify(action.list));
+        case Actions.GET_BANK_LIST:
+            return state.set('bankList',action.list);
+        case Actions.GET_EXCHANGE_RECORD_LIST:
+            return state.set('exchangeRecordList',action.list);
+        case Actions.ADD_EXCHANGE_RECORD_LIST:
+            let recordList = state.get('exchangeRecordList').concat(action.list);
+            return state.set('exchangeRecordList',recordList);
         default:
             return state
     }

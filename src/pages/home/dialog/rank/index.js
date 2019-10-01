@@ -2,7 +2,6 @@ import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
 import {
-    GlobalStyle,
     RankDialog,
     Title,
     DialogContent2,
@@ -16,7 +15,7 @@ import {
     RankTabg3,
     RankTagN
 } from './style';
-import { DialogTop,MongolianWrapper, BottomDecoration, Close} from "../style";
+import { DialogTop, BottomDecoration, Close} from "../style";
 
 class RankComponent extends React.Component {
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -49,7 +48,6 @@ class RankComponent extends React.Component {
         const selectTag = this.selectTag;
         return visible && (
             <React.Fragment>
-                <GlobalStyle/>
                 <RankDialog className={visible ? 'show fadeInUp faster animated' : ''}>
                     <DialogTop>
                         <Title/>
@@ -85,7 +83,6 @@ class RankComponent extends React.Component {
                         <BottomDecoration/>
                     </DialogContent2>
                 </RankDialog>
-                <MongolianWrapper className={visible ? 'show' : 'hidden'}></MongolianWrapper>
             </React.Fragment>
         );
     }

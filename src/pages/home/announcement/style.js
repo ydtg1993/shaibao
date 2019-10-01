@@ -10,8 +10,8 @@ export const AnnouncementFloor = styled.div`
 export const Announcement = styled.div`
     display:inline-block;
     position:relative;
-    width: 80%;
-    padding-left: 50px;
+    width: 280px;
+    padding-left: 40px;
     height:22px;
     line-height: 22px;
     top: 50%;
@@ -25,8 +25,9 @@ export const Announcement = styled.div`
 `;
 
 export const Text = styled.span`
-    display: inline-block;
     color:#f5f5f5;
     font-weight: 300;
     position:relative;
+    white-space: nowrap; 
+    display: inline-block;
 `;

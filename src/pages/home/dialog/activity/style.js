@@ -21,16 +21,16 @@ export const ActivityContent = styled.div`
     position: relative;
     z-index: 2001;
     overflow: hidden;
-    background-color:#1f263a;
 `;
 
 export const Menu = styled.div`
     margin-bottom: 1px;
     overflow-y: scroll;
+    background-color:#1f263a;
 `;
 
 export const Unit = styled.div`
-    background-color:#0f2a50;
+    background-color:#1f263a;
     text-align: center;
     height: 40px;
     line-height: 40px;
@@ -48,18 +48,6 @@ export const Unit = styled.div`
     }
 `;
 
-export const MenuBg = styled.div`
-    background-color:#0f2a50;
-    position:fixed;
-    width:80px;
-    position: absolute;
-    width: 80px;
-    height: calc(100% - 1px);
-    top: 0;
-    left: 2px;
-    z-index: 1;
-`;
-
 export const Text = styled.span`
     font-size:13px;
     width:62px;
@@ -73,7 +61,7 @@ export const Text = styled.span`
 export const Content = styled.div`
     margin-bottom: 1px;
     overflow-y: scroll;
-    background-color: #1f263a;
+    background-image: radial-gradient(ellipse 100% 50% at bottom center,#1a3361,#202840);
 `;
 
 export const ContentText = styled.div`

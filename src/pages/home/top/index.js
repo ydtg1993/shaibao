@@ -7,11 +7,14 @@ import {
     Username,
     Line,
     UserId,
+    MoneyInput2,
+    MoneyDigital2,
+} from './style';
+import {
     MoneySection,
-    MoneyInput,
     MoneyGold,
     MoneyCharge
-} from './style';
+} from '../style';
 import lineBg from '../../../resource/zhujiemian/tou xiang fen ge.png';
 import avatar from '../../../resource/zhujiemian/touxiang.png';
 import {connect} from "react-redux";
@@ -35,12 +38,16 @@ class TopComponent extends React.Component {
     }
 
     OpenUserInfoDialog() {
+        let MongolianScreen = document.getElementById('MongolianScreen');
+        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
         this.setState({
             userInfoVisible:true
         });
     }
 
     CloseUserInfoDialog(){
+        let MongolianScreen = document.getElementById('MongolianScreen');
+        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
         this.setState({
             userInfoVisible:false
         });
@@ -63,8 +70,9 @@ class TopComponent extends React.Component {
                     </UserSection>
                     <MoneySection>
                         <MoneyGold/>
-                        <MoneyInput ref={this.money}>{parseInt(this.props.gold)}</MoneyInput>
                         <MoneyCharge/>
+                        <MoneyDigital2 ref={this.money}>{parseInt(this.props.gold)}</MoneyDigital2>
+                        <MoneyInput2/>
                     </MoneySection>
                     <div></div>
                 </TopFloor>

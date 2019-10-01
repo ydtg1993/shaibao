@@ -26,6 +26,24 @@ code {
   text-align: center;
 }
 
+#MongolianScreen{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index:1999;
+  background-color:rgba(0, 0, 0, 0.6);
+}
+
+.CloseMongolian{
+  display: none;
+}
+
+.ShowMongolian{
+  display: block;
+}
+
 @media screen and (min-width:640px) {
   #VerticalScreen{
     display: block;

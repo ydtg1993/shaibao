@@ -108,7 +108,8 @@ export const Input = styled.div`
     color: white;
     height:22px;
     border-radius: 2px;
-    text-align:center
+    text-align:center;
+    outline: none;
     }
     .verify-input{
         width:34%;

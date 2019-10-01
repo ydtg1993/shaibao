@@ -2,7 +2,7 @@ import axios from 'axios';
 import Toast from "../../component/toast";
 import Cookies from "universal-cookie";
 import {Host} from "../../../index";
-import {ClearUserInfo, PlayerGoldChange} from "../../auth/store/actions";
+import {ClearUserInfo, PlayerGoldChange, SET_BANK_CARD_INFO} from "../../auth/store/actions";
 import ReactDOM from "react-dom";
 import CongratulationsComponent from "../dialog/signin/congratulations";
 import React from "react";
@@ -25,6 +25,9 @@ export const GET_BET_RECORD_LIST = 'get_bet_record_list';
 export const ADD_BET_RECORD_LIST = 'add_bet_record_list';
 export const GET_ACTIVITY_LIST = 'get_activity_list';
 export const GET_SIGNIN_LIST = 'get_signin_list';
+export const GET_BANK_LIST = 'get_bank_list';
+export const GET_EXCHANGE_RECORD_LIST = 'get_exchange_record_list';
+export const ADD_EXCHANGE_RECORD_LIST = 'add_exchange_record_list';
 
 export const PlayerSignIn = (day) => {
     return (dispatch) => {
@@ -85,15 +88,15 @@ export const GetAnnouncementList = () => {
     }
 };
 
-export const GetEmailList = (page) => {
+export const GetEmailList = (current_page) => {
     return (dispatch) => {
         axios.post(Host + 'three/mail/mail/list', {
-            current_page: page,
+            current_page,
             page_size: 15
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
             if (data.code === 20000) {
-                if (page > 1) {
+                if (current_page > 1) {
                     dispatch({
                         type: ADD_EMAIL_LIST,
                         list: data.data.ls
@@ -191,14 +194,13 @@ export const ReceiveCoin = (mail_id) => {
     }
 };
 
-export const GetRankList = (page) => {
+export const GetRankList = (current_page) => {
     return (dispatch) => {
         axios.post(Host + 'three/player/player/leader_board', {
-            current_page: page,
+            current_page,
             page_size: 30
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
-
             if (data.code === 20000) {
                 dispatch({
                     type: GET_RANK_LIST,
@@ -217,16 +219,16 @@ export const GetRankList = (page) => {
     }
 };
 
-export const GetBetRecord = (page, type) => {
+export const GetBetRecord = (current_page, type) => {
     return (dispatch) => {
         axios.post(Host + 'three/player/bet/bet_record', {
-            current_page: page,
+            current_page,
             types: type,
             page_size: 30
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
             if (data.code === 20000) {
-                if (page > 1) {
+                if (current_page > 1) {
                     dispatch({
                         type: ADD_BET_RECORD_LIST,
                         list: data.data
@@ -281,6 +283,111 @@ export const GetSignInList = () => {
                     type: GET_SIGNIN_LIST,
                     list: data.data
                 });
+            } else if (data.code === 40001) {
+                Toast.info(data.message);
+                dispatch(ClearUserInfo());
+            } else {
+                Toast.info(data.message);
+            }
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+};
+
+export const GegBankList = () => {
+    return (dispatch) => {
+        axios.post(Host + 'three/setting/bank/search', {}, ajaxHeaders()).then((res) => {
+            let data = res.data;
+            if (data.code === 20000) {
+                dispatch({
+                    type: GET_BANK_LIST,
+                    list: data.data
+                });
+            } else if (data.code === 40001) {
+                Toast.info(data.message);
+                dispatch(ClearUserInfo());
+            } else {
+                Toast.info(data.message);
+            }
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+};
+
+export const BindBankCard = (name,number,bank_id,bank_branch) => {
+    return (dispatch) => {
+        axios.post(Host + 'three/player/card/add', {
+            name,number,bank_id,bank_branch
+        }, ajaxHeaders()).then((res) => {
+            let data = res.data;
+            if (data.code === 20000) {
+                Toast.success('绑定成功');
+                dispatch({
+                    type: SET_BANK_CARD_INFO,
+                    data: {
+                        name,
+                        number,
+                        bank_id,
+                        bank_branch
+                    }
+                });
+            } else if (data.code === 40001) {
+                Toast.info(data.message);
+                dispatch(ClearUserInfo());
+            } else {
+                Toast.info(data.message);
+            }
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+};
+
+export const GetExchangeMoneyList = (current_page)=>{
+    return (dispatch) => {
+        axios.post(Host + 'three/player/withdraw/search', {
+            current_page,page_size:10
+        }, ajaxHeaders()).then((res) => {
+            let data = res.data;
+            console.log(data)
+            if (data.code === 20000) {
+                if(current_page > 1){
+                    dispatch({
+                        type:ADD_EXCHANGE_RECORD_LIST,
+                        list:data.data.ls
+                    });
+                    return;
+                }
+                dispatch({
+                    type:GET_EXCHANGE_RECORD_LIST,
+                    list:data.data.ls
+                });
+            } else if (data.code === 40001) {
+                Toast.info(data.message);
+                dispatch(ClearUserInfo());
+            } else {
+                Toast.info(data.message);
+            }
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+};
+
+export const ExchangeMoney = (value)=>{
+    return (dispatch) => {
+        axios.post(Host + 'three/player/withdraw/add', {
+            value
+        }, ajaxHeaders()).then((res) => {
+            let data = res.data;
+            if (data.code === 20000) {
+                Toast.success('兑换申请成功');
             } else if (data.code === 40001) {
                 Toast.info(data.message);
                 dispatch(ClearUserInfo());

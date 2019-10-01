@@ -8,7 +8,6 @@ import Toast from '../../component/toast';
 import {Redirect} from "react-router";
 import Cookies from 'universal-cookie';
 import {connection} from "../../../websocket";
-import ResetComponent from "./reset";
 
 class Login extends React.Component{
     constructor(props){
