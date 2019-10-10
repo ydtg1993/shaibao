@@ -1,5 +1,4 @@
 import React from 'react';
-import "animate.css";
 import {connect} from 'react-redux';
 import {
     UserInfoDialog,
@@ -23,11 +22,11 @@ import {
 } from './style';
 import {DialogTop, BottomDecoration, Close, SmallInputBg} from "../style";
 import {MoneyCharge, MoneyGold} from "../../style";
-import avatar from "../../../../resource/zhujiemian/touxiang.png";
 import {ClearUserInfo, GetBankCardInfo} from "../../../auth/store/actions";
 import {GegBankList} from '../../store/actions';
 import BindCardComponent from "../bindCard";
-
+import {CloseMongolia, OpenMongolia} from "../../../../index";
+import {img_home_default_avatar} from '../../../../resource';
 
 class UserInfoComponent extends React.Component {
     constructor(props) {
@@ -51,36 +50,40 @@ class UserInfoComponent extends React.Component {
 
     OpenBindCardDialog(){
         this.props.CloseUserInfoDialog();
+        OpenMongolia();
         if(!this.props.bankList){
             this.props.getBankList();
         }
         this.setState({
             bindCardVisible:true,
         });
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
     }
 
     CloseBindCardDialog(){
         this.setState({
             bindCardVisible:false
         });
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
+        CloseMongolia();
+    }
+
+    OpenCharge(){
+        this.props.CloseUserInfoDialog();
+        OpenMongolia();
+        this.props.OpenCharge();
     }
 
     render() {
         const {cardInfo} = this.props;
         const {visible} = this.state;
         return (<React.Fragment>
-            <UserInfoDialog className={visible ? 'show fadeInUp faster animated' : ''}>
+            <UserInfoDialog className={visible ? 'show fadeInUp faster animated' : 'hidden'}>
                 <DialogTop>
                     <Title/>
                     <Close onClick={this.props.CloseUserInfoDialog}/>
                 </DialogTop>
                 <DialogInfoContent>
                     <AvatarSec>
-                        <Avatar src={this.props.userinfo.avatar !== '' ? this.props.userinfo.avatar : avatar}/>
+                        <Avatar src={this.props.userinfo.avatar !== '' ? this.props.userinfo.avatar : img_home_default_avatar}/>
                     </AvatarSec>
                     <ContentSec>
                         <NameInput>{this.props.userinfo.username}</NameInput>
@@ -88,7 +91,7 @@ class UserInfoComponent extends React.Component {
                             <MoneyGold/>
                             <MoneyDigital2>{parseInt(this.props.gold)}</MoneyDigital2>
                             <MoneyInput2/>
-                            <MoneyCharge/>
+                            <MoneyCharge onClick={this.OpenCharge.bind(this)}/>
                         </MoneySection>
                         <AccountInput>
                             <STitle>账号ID</STitle>

@@ -1,22 +1,21 @@
 import React from 'react';
 import {
-    BottomTab,
+    BottomTab1,
+    BottomTab2,
+    BottomTab3,
+    BottomTab4,
     BottomFloor,
     BottomTabList,
     BottomTabMain,
     BottomTabMainImg
 } from './style';
-/*img resource*/
-import exchange from '../../../resource/zhujiemian/duihuan.png';
-import email from '../../../resource/zhujiemian/youjian.png';
-import rank from '../../../resource/zhujiemian/paihang.png';
-import recommend from '../../../resource/zhujiemian/tuiguang.png';
-import servant from '../../../resource/zhujiemian/kefu.png';
 import EmailComponent from "../dialog/email/index";
 import RankComponent from "../dialog/rank";
 import {connect} from "react-redux";
 import * as Actions from "../store/actions";
 import ExchangeComponent from "../dialog/exchange";
+import {CloseMongolia, OpenMongolia} from "../../../index";
+import {GetBankCardInfo} from "../../auth/store/actions";
 
 class BottomComponent extends React.Component {
     constructor(props){
@@ -29,24 +28,22 @@ class BottomComponent extends React.Component {
     }
 
     OpenExchange(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
+        OpenMongolia();
+        this.props.getBankCardInfo(this.props.userinfo.token);
         this.setState({
             exchangeVisible:true
         });
     }
 
     CloseExchange(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
+        CloseMongolia();
         this.setState({
             exchangeVisible:false
         });
     }
 
     OpenEmail() {
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
+        OpenMongolia();
         this.props.getEmailList();
         this.setState({
             emailVisible:true,
@@ -54,16 +51,14 @@ class BottomComponent extends React.Component {
     }
 
     CloseEmail(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
+        CloseMongolia();
         this.setState({
             emailVisible:false,
         });
     }
 
     OpenRank(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
+        OpenMongolia();
         this.props.getRankList();
         this.setState({
             rankVisible:true,
@@ -71,8 +66,7 @@ class BottomComponent extends React.Component {
     }
 
     CloseRank(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
+        CloseMongolia();
         this.setState({
             rankVisible:false,
         });
@@ -82,13 +76,13 @@ class BottomComponent extends React.Component {
         return (
             <BottomFloor>
                 <BottomTabList>
-                    <BottomTab src={exchange} onClick={this.OpenExchange.bind(this)}/>
-                    <BottomTab src={email} onClick={this.OpenEmail.bind(this)}/>
+                    <BottomTab1 onClick={this.OpenExchange.bind(this)}/>
+                    <BottomTab2 onClick={this.OpenEmail.bind(this)}/>
                     <BottomTabMain>
-                        <BottomTabMainImg src={rank} onClick={this.OpenRank.bind(this)}/>
+                        <BottomTabMainImg onClick={this.OpenRank.bind(this)}/>
                     </BottomTabMain>
-                    <BottomTab src={recommend}/>
-                    <BottomTab src={servant}/>
+                    <BottomTab3/>
+                    <BottomTab4/>
                 </BottomTabList>
                 <ExchangeComponent userinfo={this.props.userinfo} visible={this.state.exchangeVisible} CloseExchange={this.CloseExchange.bind(this)}/>
                 <EmailComponent visible={this.state.emailVisible} CloseEmail={this.CloseEmail.bind(this)}/>
@@ -100,6 +94,9 @@ class BottomComponent extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getBankCardInfo(token) {
+            dispatch(GetBankCardInfo(token));
+        },
         getEmailList() {
             dispatch(Actions.GetEmailList(1))
         },

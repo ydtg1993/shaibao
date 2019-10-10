@@ -1,5 +1,4 @@
 import React from 'react';
-import "animate.css";
 import {
     BetRecordDialog,
     Title,
@@ -7,9 +6,9 @@ import {
     RecordNav,
     Tab,
     Record,
-    Hall_tag_1,
-    Hall_tag_2,
-    Hall_tag_3,
+    HallTag1,
+    HallTag2,
+    HallTag3,
     Text,
     MTitle,
     Small1,
@@ -100,13 +99,13 @@ class BetRecordComponent extends React.Component {
     switchHallTag(hall) {
         switch (hall) {
             case 'Fast':
-                return <Hall_tag_1/>;
+                return <HallTag1 />;
             case 'OneMinute':
-                return <Hall_tag_2/>;
+                return <HallTag2 />;
             case 'FivesMinute':
-                return <Hall_tag_3/>;
+                return <HallTag3 />;
             default:
-                return <Hall_tag_1/>;
+                return <HallTag1 />;
         }
     }
 
@@ -124,6 +123,8 @@ class BetRecordComponent extends React.Component {
                 return <Small5 key={key}/>;
             case 6:
                 return <Small6 key={key}/>;
+            default:
+                break;
         }
     }
 
@@ -141,10 +142,10 @@ class BetRecordComponent extends React.Component {
                         <Result className='win'>中 ({bonus}元)</Result>
                     </React.Fragment>
                 );
-                return;
             case -1:
                 return <Result>未中奖</Result>;
-                return;
+            default:
+                break;
         }
     }
 
@@ -186,14 +187,16 @@ class BetRecordComponent extends React.Component {
                 return `16 (${amount})元`;
             case 'SUM_SEVENTEEN':
                 return `17 (${amount})元`;
+            default:
+                break;
         }
     }
 
     render() {
         const {visible, betRecordList} = this.props;
         const that = this;
-        return visible && (
-                <BetRecordDialog className={visible ? 'show fadeInUp faster animated' : ''}>
+        return (
+                <BetRecordDialog className={visible ? 'show fadeInUp faster animated' : 'hidden'}>
                     <DialogTop>
                         <MTitle/>
                         <Close onClick={this.CloseBetRecord.bind(this)}/>

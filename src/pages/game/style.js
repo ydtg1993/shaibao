@@ -5,8 +5,7 @@ export const GameWrapper = styled.div`
     width: 100%;  
     position: absolute;  
     top: 0px;  
-    bottom: 0px;  
-    z-index: 0;  
+    bottom: 0px;    
     overflow:hidden;
     display: grid;
     grid-template-rows: 38% auto 5% 55px;

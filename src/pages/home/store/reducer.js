@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
     requestLock:false,
+    chargeInfo:false,
     announcementList:false,
     emailList:false,
     rankList:false,
@@ -12,12 +13,15 @@ const defaultState = fromJS({
     signInList:false,
     bankList:false,
     exchangeRecordList:false,
+    chargeOrderList:false
 });
 
 export default (state = defaultState, action) => {
     switch (action.type) {
         case Actions.SET_REQUEST_LOCK:
             return state.set('requestLock',action.bool);
+        case Actions.GET_CHARGE_INFO:
+            return state.set('chargeInfo',action.data);
         case Actions.GET_ANNOUNCEMENT_LIST:
             return state.set('announcementList',action.list);
         case Actions.GET_EMAIL_LIST:
@@ -45,6 +49,12 @@ export default (state = defaultState, action) => {
         case Actions.ADD_EXCHANGE_RECORD_LIST:
             let recordList = state.get('exchangeRecordList').concat(action.list);
             return state.set('exchangeRecordList',recordList);
+        case Actions.GET_CHARGE_ORDER_LIST:
+            console.log(action.list);
+            return state.set('chargeOrderList',action.list);
+        case Actions.ADD_CHARGE_ORDER_LIST:
+            let chargeOrderList = state.get('chargeOrderList').concat(action.list);
+            return state.set('chargeOrderList',chargeOrderList);
         default:
             return state
     }

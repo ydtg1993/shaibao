@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import bg from '../../../resource/youxijiemian/section2.png';
-import period from '../../../resource/youxijiemian/period.png';
-import pan from '../../../resource/youxijiemian/pan.png';
+import {
+    img_game_section2,
+    img_game_period_bg,
+    img_game_period_dice_base,
+} from '../../../resource'
 
 export const TableWrapper = styled.div`
-    background: url('${bg}') center no-repeat 
+    background: url('${img_game_section2}') center no-repeat 
     background-size:100% 101%;
     display:grid;
     grid-template-rows: 48% auto;
@@ -27,7 +29,7 @@ export const Middle = styled.div`
 
 export const Period = styled.div`
     padding:2px
-    background: url('${period}') center no-repeat 
+    background: url('${img_game_period_bg}') center no-repeat 
     background-size:100% 100%;
 `;
 
@@ -61,7 +63,7 @@ export const Pan = styled.div`
 `;
 
 export const PanDick = styled.img.attrs({
-    src:`${pan}`
+    src:`${img_game_period_dice_base}`
 })`
      position:absolute;
      left: 50%;

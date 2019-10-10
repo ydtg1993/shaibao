@@ -1,5 +1,4 @@
 import React from 'react';
-import "animate.css";
 import {connect} from "react-redux";
 import {ActivityDialog, Title, ActivityContent, Menu, Content, Unit, Text, ContentText, ContentImg} from './style';
 import {DialogTop, BottomDecoration, Close} from "../style";
@@ -42,8 +41,8 @@ class ActivityComponent extends React.Component {
         const {focus} = this.state;
         const {visible, activityList} = this.props;
         const that = this;
-        return visible && (
-            <ActivityDialog className={visible ? 'show fadeInUp faster animated' : ''}>
+        return (
+            <ActivityDialog className={visible ? 'show fadeInUp faster animated' : 'hidden'}>
                 <DialogTop>
                     <Title/>
                     <Close onClick={this.props.CloseActivity}/>

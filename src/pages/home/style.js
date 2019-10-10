@@ -1,10 +1,7 @@
 import styled,{createGlobalStyle} from 'styled-components';
-import bg from '../../resource/zhujiemian/bg.jpg';
-import MyFont from "../../resource/heiguiti.otf";
-import LangFont from "../../resource/langqing.otf";
-import mn_bg from "../../resource/zhujiemian/money_input_bg.png";
-import gold from "../../resource/zhujiemian/jinbi.png";
-import charge from "../../resource/zhujiemian/chongzhi.png";
+import MyFont from "../../resource/font/heiguiti.otf";
+import LangFont from "../../resource/font/langqing.otf";
+import {img_home_bg,img_money_input_bg,img_money_charge,img_money_gold_tag} from '../../resource';
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -26,11 +23,11 @@ export const HomeWrapper = styled.div`
     position: absolute;  
     top: 0px;  
     bottom: 0px;  
-    background: url('${bg}') no-repeat;  
+    background: url('${img_home_bg}') no-repeat;  
     background-size: 100%, 100%;
     overflow:hidden;
     display: grid;
-    grid-template-rows: 7% 7% 8% 70% 8%;
+    grid-template-rows: 7% 7% 10% 68% 8%;
 `;
 
 export const MoneySection = styled.div`
@@ -58,7 +55,7 @@ export const MoneyDigital = styled.span`
 `;
 
 export const MoneyInput = styled.img.attrs({
-    src:`${mn_bg}`
+    src:`${img_money_input_bg}`
 })`
     left: 10px;
     height: 25px;
@@ -66,7 +63,7 @@ export const MoneyInput = styled.img.attrs({
 `;
 
 export const MoneyGold = styled.img.attrs({
-    src: `${gold}`
+    src: `${img_money_gold_tag}`
 })`
    width: 36px;
    height: 24px;
@@ -76,7 +73,7 @@ export const MoneyGold = styled.img.attrs({
 `;
 
 export const MoneyCharge = styled.img.attrs({
-    src: `${charge}`
+    src: `${img_money_charge}`
 })`
    width:25px 
    height: 25px;

@@ -1,19 +1,15 @@
 import React from 'react';
-import "animate.css";
 import {connect} from 'react-redux';
-import {RecordDialog,Close,RecordTitle,RecordList,Record,TextBlock} from './../style';
-import close from '../../../../resource/youxijiemian/record/guanbi.png';
-import title from '../../../../resource/youxijiemian/record/title.png';
+import {RecordDialog,Close,RecordTitle,RecordList,Record,TextBlock,Title} from './style';
 
 class RecordComponent extends React.Component {
     render() {
         const {visible,recordList} = this.props;
-        return visible && (
-            <React.Fragment>
-                <RecordDialog className={visible ? 'show fadeInLeft faster animated' : ''}>
+        return (
+                <RecordDialog className={visible ? 'show fadeInLeft faster animated' : 'hidden'}>
                     <div>
-                        <Close src={close} onClick={this.props.CloseRecordDialog}/>
-                        <RecordTitle><img src={title}/></RecordTitle>
+                        <Close onClick={this.props.CloseRecordDialog}/>
+                        <RecordTitle><Title/></RecordTitle>
                     </div>
                     <RecordList>
                         {recordList && recordList.map(function (data,index) {
@@ -29,7 +25,6 @@ class RecordComponent extends React.Component {
                         })}
                     </RecordList>
                 </RecordDialog>
-            </React.Fragment>
         );
     }
 }

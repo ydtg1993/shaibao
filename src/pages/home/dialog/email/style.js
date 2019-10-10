@@ -1,16 +1,18 @@
 import styled,{ createGlobalStyle } from 'styled-components';
 import {Dialog,Button} from "../style";
-import MyFont from '../../../../resource/heiguiti.otf';
-import email_light_line from '../../../../resource/zhujiemian/email/bg1.png';
-import email_dark_line from '../../../../resource/zhujiemian/email/bg2.png';
-import envelope_opened from '../../../../resource/zhujiemian/email/opened.png';
-import envelope_closed from '../../../../resource/zhujiemian/email/mail.png';
-import envelope_readed from '../../../../resource/zhujiemian/email/readed.png';
-import envelope_read from '../../../../resource/zhujiemian/email/click.png';
-import envelope_coin from '../../../../resource/zhujiemian/email/coin.png';
-import envelope_coin_readed from '../../../../resource/zhujiemian/email/unaccalimed.png';
-import list_title from '../../../../resource/zhujiemian/email/list_title.png';
-import info_title from '../../../../resource/zhujiemian/email/info_title.png';
+import MyFont from '../../../../resource/font/heiguiti.otf';
+import {
+    img_home_email_list_title,
+    img_home_email_info_title,
+    img_home_email_bg1,
+    img_home_email_bg2,
+    img_home_email_click,
+    img_home_email_coin,
+    img_home_email_tag_mail,
+    img_home_email_tag_opened,
+    img_home_email_tag_readed,
+    img_home_email_tag_unaccalimed,
+} from '../../../../resource';
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -23,30 +25,32 @@ body {
 
 export const EmailDialog = styled(Dialog)`
     grid-template-rows: 37px 330px;
+    margin:-183px auto 0;
 `;
 
 export const ListTitle = styled.div`
     width: 56px;
     height: 32px;
     margin: 2px auto 0;
-    background: url('${list_title}') center no-repeat;
+    background: url('${img_home_email_list_title}') center no-repeat;
     background-size:100% 100%;
 `;
 
 export const EmailDialogInfo = styled(Dialog)`
     grid-template-rows: 37px 269px 60px;
+    margin:-183px auto 0;
 `;
 
 export const InfoTitle = styled.div`
     width: 90px;
     height: 32px;
     margin: 2px auto 0;
-    background: url('${info_title}') center no-repeat;
+    background: url('${img_home_email_info_title}') center no-repeat;
     background-size:100% 100%;
 `;
 
 export const EmailDialogInfoContent = styled.div`
-    overflow-y: scroll;
+    overflow-y: auto;
     position:relative;
     z-index:2001;
     padding:2px;
@@ -73,17 +77,17 @@ export const EmailList = styled.div`
     position:relative;
     z-index: 2001;
     padding: 0 4px 0px 4px;
-    overflow-y:scroll;
+    overflow-y:auto;
 `;
 
 export const Email = styled.div`
     height:45px;
     margin-top:2px;
     &.read{
-        background: url('${email_light_line}') center no-repeat 
+        background: url('${img_home_email_bg1}') center no-repeat 
     }
     &:first-child{margin-top:0}
-    background: url('${email_dark_line}') center no-repeat 
+    background: url('${img_home_email_bg2}') center no-repeat 
     background-size:100% 100%;
     display: grid;
     align-items: center;
@@ -105,19 +109,19 @@ export const Envelope = styled.img`
 `;
 
 export const EnvelopeCoin = styled(Envelope).attrs({
-    src:`${envelope_coin}`
+    src:`${img_home_email_coin}`
 })``;
 
 export const EnvelopeOpened = styled(Envelope).attrs({
-    src:`${envelope_opened}`
+    src:`${img_home_email_tag_opened}`
 })``;
 
 export const EnvelopeClosed = styled(Envelope).attrs({
-    src:`${envelope_closed}`
+    src:`${img_home_email_tag_mail}`
 })``;
 
 export const EmailReaded = styled.img.attrs({
-    src:`${envelope_readed}`
+    src:`${img_home_email_tag_readed}`
 })`
     width: 30px;
     float: right;
@@ -125,7 +129,7 @@ export const EmailReaded = styled.img.attrs({
 `;
 
 export const EnvelopeCoinReaded = styled.img.attrs({
-    src:`${envelope_coin_readed}`
+    src:`${img_home_email_tag_unaccalimed}`
 })`
     width: 35px;
     float: right;
@@ -133,7 +137,7 @@ export const EnvelopeCoinReaded = styled.img.attrs({
 `;
 
 export const EmailRead = styled.img.attrs({
-    src:`${envelope_read}`
+    src:`${img_home_email_click}`
 })`
     width: 80%;
     float: right;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import Toast from '../../component/toast';
-import {Host} from "../../../index";
+import {CloseMongolia, Host} from "../../../index";
 import store from "../../../store";
 
 export const SET_USER_INFO = 'set_user_info';
@@ -195,7 +195,8 @@ export const ClearUserInfo = ()=>{
         cookies.remove('userinfo', { path: '/' });
         dispatch({
             type:CLEAR_USER_INFO
-        })
+        });
+        CloseMongolia();
     }
 };
 

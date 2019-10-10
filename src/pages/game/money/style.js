@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import bg from '../../../resource/youxijiemian/section3.png';
 import {MoneyDigital, MoneyInput} from "../../home/style";
+import {img_game_section3} from '../../../resource';
 
 export const MoneyWrapper = styled.div`
-    background: url('${bg}') center no-repeat 
+    background: url('${img_game_section3}') center no-repeat 
     background-size:100% 101%;
 `;
 

@@ -1,34 +1,37 @@
 import React from 'react';
-import "animate.css";
 import {connect} from 'react-redux';
-import {SignInDialog,DialogContent,Title,Content,Box,Award,Day,Complete} from './style';
+import {SignInDialog,DialogContent,Title,Content,Box,Award,AwardBg,AwardContent,Day,Complete,Light} from './style';
 import {DialogTop,BottomDecoration,Close} from "../style";
-import box1 from '../../../../resource/zhujiemian/signin/coin.png';
-import box2 from '../../../../resource/zhujiemian/signin/box1.png';
-import box3 from '../../../../resource/zhujiemian/signin/box2.png';
-import box4 from '../../../../resource/zhujiemian/signin/box3.png';
-import box5 from '../../../../resource/zhujiemian/signin/box4.png';
-import box6 from '../../../../resource/zhujiemian/signin/box5.png';
-import box7 from '../../../../resource/zhujiemian/signin/box6.png';
 import * as actions from "../../store/actions";
+import {
+    img_home_signin_box1,
+    img_home_signin_box2,
+    img_home_signin_box3,
+    img_home_signin_box4,
+    img_home_signin_box5,
+    img_home_signin_box6,
+    img_home_signin_coin,
+} from '../../../../resource';
 
 class SignInComponent extends React.Component {
     selectBox(index){
         switch(parseInt(index)){
             case 1:
-                return <Box src={box1}/>;
+                return <Box src={img_home_signin_coin}/>;
             case 2:
-                return <Box src={box2}/>;
+                return <Box src={img_home_signin_box1}/>;
             case 3:
-                return <Box src={box3}/>;
+                return <Box src={img_home_signin_box2}/>;
             case 4:
-                return <Box src={box4}/>;
+                return <Box src={img_home_signin_box3}/>;
             case 5:
-                return <Box src={box5}/>;
+                return <Box src={img_home_signin_box4}/>;
             case 6:
-                return <Box src={box6}/>;
+                return <Box src={img_home_signin_box5}/>;
             case 7:
-                return <Box src={box7}/>;
+                return <Box src={img_home_signin_box6}/>;
+            default:
+                break;
         }
     }
 
@@ -43,8 +46,8 @@ class SignInComponent extends React.Component {
         var {visible,signInList} = this.props;
         signInList = signInList ? JSON.parse(signInList):signInList;
         const that = this;
-        return visible && (<React.Fragment>
-            <SignInDialog className={visible ? 'show fadeInUp faster animated' : ''}>
+        return (
+            <SignInDialog className={visible ? 'show fadeInUp faster animated' : 'hidden'}>
                 <DialogTop>
                     <Title/>
                     <Close onClick={this.props.CloseSignIn}/>
@@ -55,9 +58,12 @@ class SignInComponent extends React.Component {
                             return (
                                 <div key={day}>
                                     <Award onClick={that.sign.bind(that,signInList[day].allow,day)}>
+                                        <AwardContent>
                                         <Day>第{day}天</Day>
                                         {that.selectBox(day)}
+                                        </AwardContent>
                                         {signInList[day].is_sign ? <Complete/>:''}
+                                        <AwardBg/>
                                     </Award>
                                 </div>
                             );
@@ -65,8 +71,9 @@ class SignInComponent extends React.Component {
                     </Content>
                     <BottomDecoration/>
                 </DialogContent>
+                <Light id='signInLight'/>
             </SignInDialog>
-        </React.Fragment>);
+        );
     }
 }
 

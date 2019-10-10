@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as Actions from "../store/actions";
 import {DialogTop, RegisterTitle, DialogContent, Close, Input, RegisterDialog, SubmitButton} from "./style";
 import Toast from "../../component/toast";
-import {MongolianWrapper} from "../style";
+import {CloseMongolia} from "../../../index";
 
 class Register extends React.Component {
     componentWillReceiveProps(next) {
@@ -15,7 +15,6 @@ class Register extends React.Component {
     render() {
         const {visible} = this.props;
         return (
-            <React.Fragment>
                 <RegisterDialog className={visible ? 'show fadeInUp faster animated' : 'hidden'}>
                     <DialogTop>
                         <RegisterTitle/>
@@ -60,8 +59,6 @@ class Register extends React.Component {
                             onClick={() => this.props.register(this.mobile, this.password, this.re_password, this.verify, this.invite)}/>
                     </DialogContent>
                 </RegisterDialog>
-                <MongolianWrapper className={visible ? 'show fadeIn faster animated' : ''}/>
-            </React.Fragment>
         );
     }
 }
@@ -101,6 +98,7 @@ const mapDispatchToProps = (dispatch) => {
                 return false;
             }
             dispatch(Actions.UserRegister(mobile, password, verify, invite));
+            CloseMongolia();
         },
         sendVerifyCode(sendVerify, mobileElem) {
             if (sendVerify) {

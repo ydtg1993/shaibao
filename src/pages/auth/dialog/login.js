@@ -1,13 +1,19 @@
 import React from 'react';
-import "animate.css";
+import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import { DialogTop,LoginTitle,DialogContent,Close,LoginDialog,Input,Reset,SubmitButton} from './style';
-import {MongolianWrapper} from "../style";
 import * as Actions from "../store/actions";
 import Toast from '../../component/toast';
 import {Redirect} from "react-router";
 import Cookies from 'universal-cookie';
 import {connection} from "../../../websocket";
+import {CloseMongolia} from "../../../index";
+import {POSITION_ROOM_FAST} from "../store/actions";
+import {POSITION_ROOM_ONE} from "../store/actions";
+import {POSITION_ROOM_FIVE} from "../store/actions"
+
+/*preloading image*/
+import {img_game_cup_base,img_game_cup_cover,img_congratulate_hikaru} from '../../../resource';
 
 class Login extends React.Component{
     constructor(props){
@@ -23,19 +29,38 @@ class Login extends React.Component{
         }
     }
 
+    componentDidMount() {
+        const imgs = [
+            img_game_cup_base,img_game_cup_cover,img_congratulate_hikaru
+        ];
+        let len = imgs.length;
+        for (let i = 0; i < len; i++) {
+            let imgObj = new Image(); // 创建图片对象
+            imgObj.src = imgs[i];
+            imgObj.addEventListener('load', function () {
+            }, false);
+        }
+    }
+
     render() {
         const {visible} = this.props;
         const that = this;
         if(this.props.userInfo){
-            /*Promise.resolve().then(function () {
+            Promise.resolve().then(function () {
                 connection(that.props.userInfo.token);
-            });*/
-            return (
-                (<Redirect to={{pathname: "/home"}}/>)
-            )
+            });
+            switch (this.props.playerPosition) {
+                case POSITION_ROOM_FAST:
+                    return (<Redirect to={{pathname: "/game/1"}}/>);
+                case POSITION_ROOM_ONE:
+                    return (<Redirect to={{pathname: "/game/2"}}/>);
+                case POSITION_ROOM_FIVE:
+                    return (<Redirect to={{pathname: "/game/3"}}/>);
+                default:
+                    return (<Redirect to={{pathname: "/home"}}/>);
+            }
         }
         return (
-            <React.Fragment>
             <LoginDialog className={visible ? 'show fadeInUp faster animated':'hidden'}>
                 <DialogTop>
                     <LoginTitle/>
@@ -54,8 +79,6 @@ class Login extends React.Component{
                     <SubmitButton onClick={()=>this.props.login(this.mobile,this.password)}/>
                 </DialogContent>
             </LoginDialog>
-                <MongolianWrapper className={visible ? 'show fadeIn faster animated' : ''}/>
-            </React.Fragment>
         );
     }
 }
@@ -63,6 +86,7 @@ class Login extends React.Component{
 const mapStateToProps = (state) => {
     return {
         userInfo: state.auth.get('userInfo'),
+        playerPosition:state.auth.get('playerPosition')
     }
 };
 
@@ -84,6 +108,7 @@ const mapDispatchToProps = (dispatch) => {
                 return false;
             }
             dispatch(Actions.UserLogin(mobile,password));
+            CloseMongolia();
         },
         setUserInfo(userinfo){
             let action = Actions.SetUserInfo(userinfo);
@@ -95,4 +120,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))

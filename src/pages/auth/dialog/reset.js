@@ -1,16 +1,14 @@
 import React from 'react';
-import "animate.css";
 import {connect} from 'react-redux';
 import {DialogTop,ResetTitle,DialogContent,Close, Input, ResetDialog, SubmitButton} from './style';
-import {MongolianWrapper} from "../style";
 import * as Actions from "../store/actions";
 import Toast from "../../component/toast";
+import {CloseMongolia} from "../../../index";
 
 class ResetComponent extends React.Component{
     render() {
         const {visible} = this.props;
         return (
-            <React.Fragment>
             <ResetDialog className={visible ? 'show fadeInLeft faster animated':''}>
                 <DialogTop>
                     <ResetTitle/>
@@ -37,8 +35,6 @@ class ResetComponent extends React.Component{
                     <SubmitButton onClick={()=>this.props.reset(this.mobile,this.password,this.re_password,this.verify)}/>
                 </DialogContent>
             </ResetDialog>
-                <MongolianWrapper className={visible ? 'show fadeIn faster animated' : ''}/>
-            </React.Fragment>
         );
     }
 }
@@ -70,7 +66,8 @@ const mapDispatchToProps = (dispatch) => {
                 Toast.error('验证码错误',1000);
                 return false;
             }
-            dispatch(Actions.UserReset(mobile,password,verify))
+            dispatch(Actions.UserReset(mobile,password,verify));
+            CloseMongolia();
         },
         sendVerifyCode(sendVerify,mobileElem){
             if(sendVerify){

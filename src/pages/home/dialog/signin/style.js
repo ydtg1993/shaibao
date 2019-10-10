@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 import {Dialog} from '../style';
-import title from "../../../../resource/zhujiemian/signin/title.png";
-import box_bg from '../../../../resource/zhujiemian/signin/box_bg.png';
-import complete from '../../../../resource/zhujiemian/signin/complete.png';
-import hikaru from '../../../../resource/zhujiemian/signin/hikaru.png';
-import congratulate_title from '../../../../resource/zhujiemian/signin/congratulate.png';
-import coin from '../../../../resource/zhujiemian/signin/coin_tag.png';
+import {
+    img_home_signin_title,
+    img_home_signin_compelete,
+    img_home_signin_box_bg,
+} from '../../../../resource';
 
 export const SignInDialog = styled(Dialog)`
     grid-template-rows: 37px 210px;
+    margin:-123px auto 0;
 `;
 
 export const Title = styled.div`
     width: 90px;
     height: 32px;
     margin: 2px auto 0;
-    background: url('${title}') center no-repeat;
+    background: url('${img_home_signin_title}') center no-repeat;
     background-size:100% 100%;
 `;
 
@@ -26,7 +26,7 @@ export const DialogContent = styled.div`
 export const Content = styled.div`
     margin-top: 20px;
     display:grid;
-    height:170px;
+    height:174px;
     grid-template-rows: 50% 50%;
     grid-template-columns: 1fr 1fr 1fr 1fr
 `;
@@ -35,79 +35,57 @@ export const Award = styled.div`
     width:72px;
     height:80px;
     margin:0 auto;
-    padding-top:3px;
-    background: url('${box_bg}') center no-repeat;
-    background-size:100%;
-    text-shadow: 0 2px 2px rgb(0, 0, 0);
     position:relative;
 `;
 
-export const Day = styled.p`
+export const AwardBg = styled.img.attrs({
+    src:`${img_home_signin_box_bg}`
+})`
+    text-shadow: 0 2px 2px rgb(0, 0, 0);
+    position:absolute;
+    height:100%;
+    width:100%;
+    top: 0;
+    left:0;
+`;
+
+export const AwardContent = styled.div`
+    position:relative;
+    z-index:1;
+`;
+
+export const Day = styled.div`
     text-align: center;
     margin: 0;
     padding:0;
     font-weight:bold;
     color: #f1f1f1;
     font-size: 14px;
+    height: 22px;
+    line-height: 22px;
+    text-shadow: black 0.1em 0.1em 0.2em;
 `;
 
 export const Box = styled.img`
     width: 36px;
     height: 28px;
-    margin: 8px auto 0;
+    margin: 6px auto 0;
     display:block;
 `;
 
 export const Complete = styled.img.attrs({
-    src:`${complete}`
+    src:`${img_home_signin_compelete}`
 })`
+    height:100%;
+    width:100%;
     top: 0;
-    width:72px;
-    height:80px;
+    left:0;
     position: absolute;
+    z-index: 1;
 `;
 
-export const Congratulations = styled.div`
-    background: url('${hikaru}') center no-repeat;
-    background-size: 100% 100%;
-    width: 350px;
-    height: 250px;
+export const Light = styled.div`
     position: absolute;
-    z-index: 2000;
-    margin: 0 auto;
-    top: 20%;
-    left: 0;
-    right: 0;
-`;
-
-export const CongratulationsTitle = styled.img.attrs({
-    src:`${congratulate_title}`
-})`
-    width: 260px;
-    height: 82px;
-    margin: 30px auto 0;
-    display: block;
-`;
-
-export const CongratulationsDiscript = styled.div`
-    width: 260px;
-    height: 30px;
-    margin: 10px auto 0;
-    text-align: center;
-`;
-
-export const CoinTag = styled.img.attrs({
-    src:`${coin}`
-})`
-    width: 32px;
-    height: 26px;
-    vertical-align: bottom;
-`;
-
-export const CongratulationsText = styled.span`
-    color: #f7ff7b;
-    font-size: 26px;
-    display: inline-block;
-    line-height: 26px;
-    text-shadow: 0 2px 2px rgb(0,0,0);
+    top: -45px;
+    left: -15px;
 `;

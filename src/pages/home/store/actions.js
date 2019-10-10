@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 import {Host} from "../../../index";
 import {ClearUserInfo, PlayerGoldChange, SET_BANK_CARD_INFO} from "../../auth/store/actions";
 import ReactDOM from "react-dom";
-import CongratulationsComponent from "../dialog/signin/congratulations";
+import Congratulation from "../../component/congratulation";
 import React from "react";
 import store from "../../../store";
 
@@ -28,6 +28,83 @@ export const GET_SIGNIN_LIST = 'get_signin_list';
 export const GET_BANK_LIST = 'get_bank_list';
 export const GET_EXCHANGE_RECORD_LIST = 'get_exchange_record_list';
 export const ADD_EXCHANGE_RECORD_LIST = 'add_exchange_record_list';
+export const GET_CHARGE_INFO = 'get_charge_info';
+export const GET_CHARGE_ORDER_LIST = 'get_charge_order_list';
+export const ADD_CHARGE_ORDER_LIST = 'add_charge_order_list';
+
+export const GetChargeInfo = () => {
+    return (dispatch) => {
+        axios.post(Host + 'three/finance/pay/pay_method', {}, ajaxHeaders()).then((res) => {
+            let data = res.data;
+            if (data.code === 20000) {
+                dispatch({
+                    type: GET_CHARGE_INFO,
+                    data:data.data
+                });
+            } else if (data.code === 40001) {
+                Toast.info(data.message);
+                dispatch(ClearUserInfo());
+            } else {
+                Toast.info(data.message);
+            }
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+};
+
+export const CommitChargeOrder = (pay_type,account_id,player_name,pay_money)=>{
+    return (dispatch) => {
+        axios.post(Host + 'three/finance/pay/to_pay', {
+            pay_type,account_id,player_name,pay_money
+        }, ajaxHeaders()).then((res) => {
+            let data = res.data;
+            if (data.code === 20000) {
+                Toast.success('订单提交成功');
+            } else if (data.code === 40001) {
+                Toast.info(data.message);
+                dispatch(ClearUserInfo());
+            } else {
+                Toast.info(data.message);
+            }
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+};
+
+export const GetChargeOrderList = (current_page)=>{
+    return (dispatch) => {
+        axios.post(Host + 'three/finance/pay/record', {
+            current_page,page_size:15
+        }, ajaxHeaders()).then((res) => {
+            let data = res.data;
+            if (data.code === 20000) {
+                if(current_page>1){
+                    dispatch({
+                        type: ADD_CHARGE_ORDER_LIST,
+                        list:data.data.ls
+                    });
+                    return
+                }
+                dispatch({
+                    type: GET_CHARGE_ORDER_LIST,
+                    list:data.data.ls
+                });
+            } else if (data.code === 40001) {
+                Toast.info(data.message);
+                dispatch(ClearUserInfo());
+            } else {
+                Toast.info(data.message);
+            }
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+};
 
 export const PlayerSignIn = (day) => {
     return (dispatch) => {
@@ -45,11 +122,14 @@ export const PlayerSignIn = (day) => {
                 });
 
                 const div = document.createElement('div');
-                document.body.appendChild(div);
-                ReactDOM.render(<CongratulationsComponent coin={data.data.value}/>, div);
-                setInterval(function () {
-                    ReactDOM.unmountComponentAtNode(div);
-                }, 2000);
+                let dom = document.getElementById('signInLight');
+                if(dom) {
+                    dom.appendChild(div);
+                    ReactDOM.render(<Congratulation coin={data.data.value}/>, div);
+                    setInterval(function () {
+                        ReactDOM.unmountComponentAtNode(div);
+                    }, 3200);
+                }
 
                 let gold = store.getState().auth.get('gold') + parseFloat(data.data.value);
                 dispatch(PlayerGoldChange(gold));
@@ -298,7 +378,7 @@ export const GetSignInList = () => {
 
 export const GegBankList = () => {
     return (dispatch) => {
-        axios.post(Host + 'three/setting/bank/search', {}, ajaxHeaders()).then((res) => {
+        axios.post(Host + 'three/finance/bank/search', {}, ajaxHeaders()).then((res) => {
             let data = res.data;
             if (data.code === 20000) {
                 dispatch({
@@ -350,11 +430,10 @@ export const BindBankCard = (name,number,bank_id,bank_branch) => {
 
 export const GetExchangeMoneyList = (current_page)=>{
     return (dispatch) => {
-        axios.post(Host + 'three/player/withdraw/search', {
+        axios.post(Host + 'three/finance/withdraw/search', {
             current_page,page_size:10
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
-            console.log(data)
             if (data.code === 20000) {
                 if(current_page > 1){
                     dispatch({
@@ -382,7 +461,7 @@ export const GetExchangeMoneyList = (current_page)=>{
 
 export const ExchangeMoney = (value)=>{
     return (dispatch) => {
-        axios.post(Host + 'three/player/withdraw/add', {
+        axios.post(Host + 'three/finance/withdraw/add', {
             value
         }, ajaxHeaders()).then((res) => {
             let data = res.data;

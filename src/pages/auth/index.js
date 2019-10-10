@@ -4,6 +4,7 @@ import {LoginWrapper, LoginButton, RegisterButton} from './style';
 import Login from './dialog/login';
 import ResetComponent from './dialog/reset';
 import Register from './dialog/register';
+import {CloseMongolia, OpenMongolia} from "../../index";
 
 class Auth extends React.Component {
     constructor(props){
@@ -16,30 +17,35 @@ class Auth extends React.Component {
     }
 
     OpenLoginDialog(){
+        OpenMongolia();
         this.setState({
             loginVisible:true
         });
     }
 
     CloseLoginDialog(){
+        CloseMongolia();
         this.setState({
             loginVisible:false
         });
     }
 
     OpenRegisterDialog(){
+        OpenMongolia();
         this.setState({
             registerVisible:true
         });
     }
 
     CloseRegisterDialog(){
+        CloseMongolia();
         this.setState({
             registerVisible:false
         });
     }
 
     OpenResetDialog(){
+        OpenMongolia();
         this.setState({
             loginVisible:false,
             resetVisible:true
@@ -47,6 +53,7 @@ class Auth extends React.Component {
     }
 
     CloseResetDialog(){
+        CloseMongolia();
         this.setState({
             resetVisible:false
         });

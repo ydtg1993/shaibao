@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import {Dialog} from "../style";
-import focus from '../../../../resource/zhujiemian/activity/focus.png';
-import title from '../../../../resource/zhujiemian/activity/title.png';
+import {img_home_activity_title,img_home_activity_tag} from '../../../../resource';
 
 export const ActivityDialog = styled(Dialog)`
     grid-template-rows: 37px 276px;
+    margin:-156px auto 0;
 `;
 
 export const Title = styled.div`
     width: 90px;
     height: 32px;
     margin: 2px auto 0;
-    background: url('${title}') center no-repeat;
+    background: url('${img_home_activity_title}') center no-repeat;
     background-size:100% 100%;
 `;
 
@@ -25,7 +25,7 @@ export const ActivityContent = styled.div`
 
 export const Menu = styled.div`
     margin-bottom: 1px;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color:#1f263a;
 `;
 
@@ -43,7 +43,7 @@ export const Unit = styled.div`
     &.focus{
     color:white;
     margin: 0;
-    background: url('${focus}') center no-repeat 
+    background: url('${img_home_activity_tag}') center no-repeat 
     background-size:100% 100%;
     }
 `;
@@ -60,7 +60,7 @@ export const Text = styled.span`
 
 export const Content = styled.div`
     margin-bottom: 1px;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-image: radial-gradient(ellipse 100% 50% at bottom center,#1a3361,#202840);
 `;
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import "animate.css";
 import {connect} from 'react-redux';
 import {
     EmailDialog,
@@ -91,9 +90,9 @@ class EmailComponent extends React.Component {
     render() {
         const {visible, emailList} = this.props;
         const that = this;
-        return visible && (
+        return (
             <React.Fragment>
-                <EmailDialog className={visible ? 'show fadeInUp faster animated' : ''}>
+                <EmailDialog className={visible ? 'show fadeInUp faster animated' : 'hidden'}>
                     <DialogTop>
                         <ListTitle/>
                         <Close onClick={this.CloseEmailList.bind(this)}/>

@@ -1,49 +1,61 @@
 import React from 'react';
 import {
     NavigationFloor,
-    NavigationTab,
+    NavigationTab1,
+    NavigationTab2,
+    NavigationTab3,
+    NavigationTab4,
     TabList,
 } from './style';
-/*img resource*/
-import lucky from '../../../resource/zhujiemian/1.png';
-import signIn from '../../../resource/zhujiemian/2.png';
-import bet from '../../../resource/zhujiemian/3.png';
-import activity from '../../../resource/zhujiemian/4.png';
 import BetRecordComponent from "../dialog/betRecord";
 import {connect} from "react-redux";
 import * as Actions from "../store/actions";
 import ActivityComponent from "../dialog/activity";
 import SignInComponent from "../dialog/signin";
+import {CloseMongolia, OpenMongolia} from "../../../index";
+import PigComponent from "../dialog/pig";
 
 class NavigationComponent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            pigVisible:false,
             betRecordVisible:false,
             activityVisible:false,
             signInVisible:false
         }
     }
 
+    OpenPig(){
+        OpenMongolia();
+        this.setState({
+            pigVisible:true,
+        })
+    }
+
+    ClosePig(){
+        CloseMongolia();
+        this.setState({
+            pigVisible:false,
+        })
+    }
+
     OpenSignIn(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
+        OpenMongolia();
         this.setState({
             signInVisible:true,
         })
     }
 
     CloseSignIn(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
+        CloseMongolia();
         this.setState({
             signInVisible:false
         })
     }
 
     OpenBetRecord(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
+        OpenMongolia();
         this.props.getBetRecords(1,[]);
         this.setState({
             betRecordVisible:true,
@@ -51,16 +63,14 @@ class NavigationComponent extends React.Component {
     }
 
     CloseBetRecord(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
+        CloseMongolia();
         this.setState({
             betRecordVisible:false,
         })
     }
 
     OpenActivity(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/CloseMongolian/,'ShowMongolian');
+        OpenMongolia();
         this.props.getActivityList();
         this.setState({
             activityVisible:true,
@@ -68,8 +78,7 @@ class NavigationComponent extends React.Component {
     }
 
     CloseActivity(){
-        let MongolianScreen = document.getElementById('MongolianScreen');
-        MongolianScreen.className = MongolianScreen.className.replace(/ShowMongolian/,'CloseMongolian');
+        CloseMongolia();
         this.setState({
             activityVisible:false,
         });
@@ -80,12 +89,13 @@ class NavigationComponent extends React.Component {
             <React.Fragment>
                 <NavigationFloor>
                     <TabList>
-                        <NavigationTab src={lucky}/>
-                        <NavigationTab src={signIn} onClick={this.OpenSignIn.bind(this)}/>
-                        <NavigationTab src={bet} onClick={this.OpenBetRecord.bind(this)}/>
-                        <NavigationTab src={activity} onClick={this.OpenActivity.bind(this)}/>
+                        <NavigationTab1 onClick={this.OpenPig.bind(this)}/>
+                        <NavigationTab2 onClick={this.OpenSignIn.bind(this)}/>
+                        <NavigationTab3 onClick={this.OpenBetRecord.bind(this)}/>
+                        <NavigationTab4 onClick={this.OpenActivity.bind(this)}/>
                     </TabList>
                 </NavigationFloor>
+                <PigComponent visible={this.state.pigVisible} ClosePig={this.ClosePig.bind(this)}/>
                 <SignInComponent visible={this.state.signInVisible} CloseSignIn={this.CloseSignIn.bind(this)}/>
                 <BetRecordComponent visible={this.state.betRecordVisible} CloseBetRecord={this.CloseBetRecord.bind(this)}/>
                 <ActivityComponent visible={this.state.activityVisible} CloseActivity={this.CloseActivity.bind(this)}/>

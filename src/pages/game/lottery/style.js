@@ -1,42 +1,18 @@
 import styled from 'styled-components';
-import chassis from '../../../resource/youxijiemian/shaidi.png';
-import cover from '../../../resource/youxijiemian/shaigai.png';
-
-export const MongolianWrapper = styled.div`
-    height: 100%;  
-    width: 100%;  
-    position: absolute;  
-    top: 0;  
-    bottom: 0; 
-    z-index:10000;
-    opacity: 0;
-    visibility: hidden;
-    background-color:rgba(0, 0, 0, 0.1); 
-    -webkit-transition: opacity .1s ease-in-out;
-    -moz-transition: opacity .1s ease-in-out;
-    -ms-transition: opacity .1s ease-in-out;
-    -o-transition: opacity .1s ease-in-out;
-    transition: opacity .1s ease-in-out;
-        
-    &.show {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    &.hidden {
-         opacity: 0;
-    }
-`;
+import {
+    img_game_cup_cover,
+    img_game_cup_base
+} from '../../../resource';
 
 export const ShaiBao = styled.div`
     width:100%;
     height:100%;
     position: absolute;
-    z-index:10000; 
+    z-index:9999; 
 `;
 
 export const Cover = styled.img.attrs({
-    src:`${cover}`
+    src:`${img_game_cup_cover}`
 })`
     margin-top: 226px;
     width:160px;
@@ -54,7 +30,7 @@ export const Cover = styled.img.attrs({
 `;
 
 export const Chassis = styled.div`
-    background: url('${chassis}') center no-repeat 
+    background: url('${img_game_cup_base}') center no-repeat 
     background-size:100% auto;
     height:130px;
     left: 50%;

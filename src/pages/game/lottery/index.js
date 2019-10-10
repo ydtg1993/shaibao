@@ -2,14 +2,16 @@ import React from 'react';
 import "animate.css";
 import {connect} from 'react-redux';
 import * as actions from '../store/actions';
-import { Chassis, Cover, ShaiBao, Dice1, Dice2, Dice3 } from './style';
+import {Chassis, Cover, ShaiBao, Dice1, Dice2, Dice3} from './style';
 import anime from "animejs";
-import s1 from "../../../resource/youxijiemian/s1.png";
-import s2 from "../../../resource/youxijiemian/s2.png";
-import s3 from "../../../resource/youxijiemian/s3.png";
-import s4 from "../../../resource/youxijiemian/s4.png";
-import s5 from "../../../resource/youxijiemian/s5.png";
-import s6 from "../../../resource/youxijiemian/s6.png";
+import {
+    img_game_dice1,
+    img_game_dice2,
+    img_game_dice3,
+    img_game_dice4,
+    img_game_dice5,
+    img_game_dice6
+} from '../../../resource';
 
 class LotteryComponent extends React.Component {
     constructor(props) {
@@ -26,17 +28,17 @@ class LotteryComponent extends React.Component {
     selectDice(dice) {
         switch (dice) {
             case 1:
-                return `${s1}`;
+                return `${img_game_dice1}`;
             case 2:
-                return `${s2}`;
+                return `${img_game_dice2}`;
             case 3:
-                return `${s3}`;
+                return `${img_game_dice3}`;
             case 4:
-                return `${s4}`;
+                return `${img_game_dice4}`;
             case 5:
-                return `${s5}`;
+                return `${img_game_dice5}`;
             case 6:
-                return `${s6}`;
+                return `${img_game_dice6}`;
             default:
                 return '';
         }
@@ -57,9 +59,9 @@ class LotteryComponent extends React.Component {
                 this.animation_lottery.pause();
                 this.LotteryPublishAnime(nextProps.priorResult);
             }
-        } else if(nextProps.stage === actions.SETTLE_STAGE){
+        } else if (nextProps.stage === actions.SETTLE_STAGE) {
             this.LotteryOverAnime();
-        }else if (nextProps.stage === actions.OVER_STAGE) {
+        } else if (nextProps.stage === actions.OVER_STAGE) {
             return true;
         }
         return false;
@@ -124,7 +126,7 @@ class LotteryComponent extends React.Component {
             easing: "easeOutSine",
             offset: "0",
             complete: function () {
-                if(that.cover.current) {
+                if (that.cover.current) {
                     let classname = that.cover.current.className;
                     classname = classname.replace(/fadeIn/, "fadeOutUp");
                     that.cover.current.className = classname;
@@ -140,8 +142,8 @@ class LotteryComponent extends React.Component {
         });
     }
 
-    LotteryOverAnime(){
-        if(this.chassis.current) {
+    LotteryOverAnime() {
+        if (this.chassis.current) {
             let classname = this.chassis.current.className;
             classname = classname.replace(/fadeIn/, "fadeOutUp");
             this.chassis.current.className = classname;
@@ -152,24 +154,22 @@ class LotteryComponent extends React.Component {
         const that = this;
         const {stage} = this.props;
         return stage === actions.LOTTERY_STAGE && (
-            <React.Fragment>
-                <ShaiBao ref={this.shaibao}>
-                    <Cover className={stage === actions.LOTTERY_STAGE ? 'show fadeIn animated' : ''} ref={this.cover}/>
-                    <Chassis className={stage === actions.LOTTERY_STAGE ? 'show fadeIn animated' : ''} ref={this.chassis}>
-                        {
-                            that.props.priorResult.map(function (data, index) {
-                                if (index === 0) {
-                                    return <Dice1 src={that.selectDice(data)} ref={that.dice1} key={index}/>
-                                } else if (index === 1) {
-                                    return <Dice2 src={that.selectDice(data)} ref={that.dice2} key={index}/>
-                                } else {
-                                    return <Dice3 src={that.selectDice(data)} ref={that.dice3} key={index}/>
-                                }
-                            })
-                        }
-                    </Chassis>
-                </ShaiBao>
-            </React.Fragment>
+            <ShaiBao ref={this.shaibao}>
+                <Cover className={stage === actions.LOTTERY_STAGE ? 'show fadeIn animated' : ''} ref={this.cover}/>
+                <Chassis className={stage === actions.LOTTERY_STAGE ? 'show fadeIn animated' : ''} ref={this.chassis}>
+                    {
+                        that.props.priorResult.map(function (data, index) {
+                            if (index === 0) {
+                                return <Dice1 src={that.selectDice(data)} ref={that.dice1} key={index}/>
+                            } else if (index === 1) {
+                                return <Dice2 src={that.selectDice(data)} ref={that.dice2} key={index}/>
+                            } else {
+                                return <Dice3 src={that.selectDice(data)} ref={that.dice3} key={index}/>
+                            }
+                        })
+                    }
+                </Chassis>
+            </ShaiBao>
         );
     }
 }
@@ -181,10 +181,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LotteryComponent)
+export default connect(mapStateToProps,null)(LotteryComponent)

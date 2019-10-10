@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #282c34;
+  font-weight: 300;
 }
 
 code {
@@ -33,7 +34,17 @@ code {
   top: 0;
   bottom: 0;
   z-index:1999;
-  background-color:rgba(0, 0, 0, 0.6);
+  background-color:rgba(0, 0, 0, 0.5);
+}
+
+#GameMongolianScreen{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index:1999;
+  background-color:rgba(0, 0, 0, 0.2);
 }
 
 .CloseMongolian{

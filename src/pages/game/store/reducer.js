@@ -2,8 +2,9 @@ import * as Actions from './actions';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
+    requestLock:false,
     websocket:false,
-    chip:false,
+    chip:1,
     hallInfo:false,
     sequence:'0000',
     priorResult:[1,1,1],
@@ -60,8 +61,8 @@ export default (state = defaultState, action) => {
             return state.set('stage',Actions.WIN_STAGE).set('win_event_data',{win_gold:action.win_gold,positions:action.positions});
         case Actions.GAME_OVER_NOTICE_EVENT:
             return state.set('stage',Actions.OVER_STAGE);
-        case Actions.INIT_STAGE_EVENT:
-            return state.set('stage',Actions.START_STAGE);
+        case Actions.SET_ENTER_HALL_REQUEST_LOCK:
+            return state.set('requestLock',action.bool);
         default:
             return state
     }

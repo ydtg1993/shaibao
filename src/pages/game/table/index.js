@@ -24,33 +24,35 @@ import {
 import anime from 'animejs';
 import * as actions from '../store/actions';
 import {connect} from 'react-redux';
-import da from '../../../resource/youxijiemian/da.png';
-import xiao from '../../../resource/youxijiemian/xiao.png';
-import dan from '../../../resource/youxijiemian/dan.png';
-import shuang from '../../../resource/youxijiemian/shuang.png';
-import t4 from '../../../resource/youxijiemian/4.png';
-import t5 from '../../../resource/youxijiemian/5.png';
-import t6 from '../../../resource/youxijiemian/6.png';
-import t7 from '../../../resource/youxijiemian/7.png';
-import t8 from '../../../resource/youxijiemian/8.png';
-import t9 from '../../../resource/youxijiemian/9.png';
-import t10 from '../../../resource/youxijiemian/10.png';
-import t11 from '../../../resource/youxijiemian/11.png';
-import t12 from '../../../resource/youxijiemian/12.png';
-import t13 from '../../../resource/youxijiemian/13.png';
-import t14 from '../../../resource/youxijiemian/14.png';
-import t15 from '../../../resource/youxijiemian/15.png';
-import t16 from '../../../resource/youxijiemian/16.png';
-import t17 from '../../../resource/youxijiemian/17.png';
-import s1 from '../../../resource/youxijiemian/s1.png';
-import s2 from '../../../resource/youxijiemian/s2.png';
-import s3 from '../../../resource/youxijiemian/s3.png';
-import s4 from '../../../resource/youxijiemian/s4.png';
-import s5 from '../../../resource/youxijiemian/s5.png';
-import s6 from '../../../resource/youxijiemian/s6.png';
 import Toast from "../../component/toast";
 import {PlayerGoldChange} from "../../auth/store/actions";
 import TimeLineComponent from "./timeLine";
+import {
+    img_game_s4,
+    img_game_s5,
+    img_game_s6,
+    img_game_s7,
+    img_game_s8,
+    img_game_s9,
+    img_game_s10,
+    img_game_s11,
+    img_game_s12,
+    img_game_s13,
+    img_game_s14,
+    img_game_s15,
+    img_game_s16,
+    img_game_s17,
+    img_game_s_big,
+    img_game_s_little,
+    img_game_s_single,
+    img_game_s_double,
+    img_game_dice1,
+    img_game_dice2,
+    img_game_dice3,
+    img_game_dice4,
+    img_game_dice5,
+    img_game_dice6,
+} from '../../../resource';
 
 class TableComponent extends React.Component {
     constructor(props) {
@@ -69,7 +71,8 @@ class TableComponent extends React.Component {
             });
             const that = this;
             nextProps.priorPosition.map(function (data) {
-                that.plateAnime.add({targets: that['plate' + data].current, background: 'rgba(41, 152, 80, 0.56)'}, 0)
+                that.plateAnime.add({targets: that['plate' + data].current, background: 'rgba(41, 152, 80, 0.56)'}, 0);
+                return true;
             })
         }else if(nextProps.stage === actions.WIN_STAGE){
             let moneyBoxDom = document.getElementById('MoneyBox');
@@ -96,6 +99,7 @@ class TableComponent extends React.Component {
                         easing: "easeInOutCirc"
                     })
                 }
+                return true;
             });
         } else if (nextProps.stage === actions.OVER_STAGE || nextProps.stage === actions.START_STAGE) {
             /*clear bets*/
@@ -202,50 +206,54 @@ class TableComponent extends React.Component {
     selectDice(dice) {
         switch (dice) {
             case 1:
-                return `${s1}`;
+                return `${img_game_dice1}`;
             case 2:
-                return `${s2}`;
+                return `${img_game_dice2}`;
             case 3:
-                return `${s3}`;
+                return `${img_game_dice3}`;
             case 4:
-                return `${s4}`;
+                return `${img_game_dice4}`;
             case 5:
-                return `${s5}`;
+                return `${img_game_dice5}`;
             case 6:
-                return `${s6}`;
+                return `${img_game_dice6}`;
+            default:
+                break;
         }
     }
 
     selectDownPosition(position) {
         switch (parseInt(position)) {
             case 5:
-                return `${t4}`;
+                return `${img_game_s4}`;
             case 6:
-                return `${t5}`;
+                return `${img_game_s5}`;
             case 7:
-                return `${t6}`;
+                return `${img_game_s6}`;
             case 8:
-                return `${t7}`;
+                return `${img_game_s7}`;
             case 9:
-                return `${t8}`;
+                return `${img_game_s8}`;
             case 10:
-                return `${t9}`;
+                return `${img_game_s9}`;
             case 11:
-                return `${t10}`;
+                return `${img_game_s10}`;
             case 12:
-                return `${t11}`;
+                return `${img_game_s11}`;
             case 13:
-                return `${t12}`;
+                return `${img_game_s12}`;
             case 14:
-                return `${t13}`;
+                return `${img_game_s13}`;
             case 15:
-                return `${t14}`;
+                return `${img_game_s14}`;
             case 16:
-                return `${t15}`;
+                return `${img_game_s15}`;
             case 17:
-                return `${t16}`;
+                return `${img_game_s16}`;
             case 18:
-                return `${t17}`;
+                return `${img_game_s17}`;
+            default:
+                break;
         }
     }
 
@@ -262,11 +270,11 @@ class TableComponent extends React.Component {
                         <Left>
                             <Plate ref={this.plate1}>
                                 <Placeholder onClick={this.Bet.bind(this, 1)}/>
-                                <Text src={da}/><Tip>1:{bet_option ? bet_option['1']['odds'] : '???'}</Tip>
+                                <Text src={img_game_s_big}/><Tip>1:{bet_option ? bet_option['1']['odds'] : '???'}</Tip>
                             </Plate>
                             <Plate ref={this.plate2}>
                                 <Placeholder onClick={this.Bet.bind(this, 2)}/>
-                                <Text src={xiao}/><Tip>1:{bet_option ? bet_option['2']['odds'] : '???'}</Tip>
+                                <Text src={img_game_s_little}/><Tip>1:{bet_option ? bet_option['2']['odds'] : '???'}</Tip>
                             </Plate>
                         </Left>
                         <Middle>
@@ -292,11 +300,11 @@ class TableComponent extends React.Component {
                         <Right>
                             <Plate ref={this.plate3}>
                                 <Placeholder onClick={this.Bet.bind(this, 3)}/>
-                                <Text src={dan}/><Tip>1:{bet_option ? bet_option['3']['odds'] : '???'}</Tip>
+                                <Text src={img_game_s_single}/><Tip>1:{bet_option ? bet_option['3']['odds'] : '???'}</Tip>
                             </Plate>
                             <Plate ref={this.plate4}>
                                 <Placeholder onClick={this.Bet.bind(this, 4)}/>
-                                <Text src={shuang}/><Tip>1:{bet_option ? bet_option['4']['odds'] : '???'}</Tip>
+                                <Text src={img_game_s_double}/><Tip>1:{bet_option ? bet_option['4']['odds'] : '???'}</Tip>
                             </Plate>
                         </Right>
                     </Up>

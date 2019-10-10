@@ -29,7 +29,7 @@ class MoneyComponent extends React.Component{
             <MoneyWrapper>
                 <MoneySection>
                     <MoneyGold/>
-                    <MoneyCharge/>
+                    <MoneyCharge onClick={this.props.OpenCharge}/>
                     <MoneyDigital2 id='MoneyBox' ref={this.money}>{parseInt(this.props.myGold)}</MoneyDigital2>
                     <MoneyInput2/>
                 </MoneySection>

@@ -1,5 +1,4 @@
 import React from 'react';
-import "animate.css";
 import {connect} from 'react-redux';
 import {
     RankDialog,

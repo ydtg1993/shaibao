@@ -1,18 +1,11 @@
 import styled from 'styled-components';
-import close from "../../../resource/dialog/guanbi.png";
-import top from "../../../resource/dialog/top.png";
-import confirm from '../../../resource/dengluye/queding.png';
-import border from "../../../resource/dialog/border.png";
-import register_title from '../../../resource/dengluye/register_title.png';
-import login_title from '../../../resource/dengluye/login_title.png';
-import reset_title from '../../../resource/dengluye/reset_title.png';
+import * as IMG from '../../../resource/';
 
 export const Dialog = styled.div`
     position: absolute;
-    top:20%;
     left: 0;
     right: 0;
-    margin:auto;
+    top:50%;
     width:320px;
     z-index:2000;
     visibility: hidden;
@@ -26,13 +19,13 @@ export const Dialog = styled.div`
         opacity: 0;
     }
     border: 2px solid;
-    -webkit-border-image:url(${border}) 2;
-    -o-border-image:url(${border}) 2;
-    border-image: url(${border}) 2; 
+    -webkit-border-image:url(${IMG.img_dialog_border}) 2;
+    -o-border-image:url(${IMG.img_dialog_border}) 2;
+    border-image: url(${IMG.img_dialog_border}) 2; 
 `;
 
 export const DialogTop = styled.div`
-    background: url('${top}') center no-repeat 
+    background: url('${IMG.img_dialog_top}') center no-repeat 
     background-size:100% 100%;
 `;
 
@@ -40,7 +33,7 @@ export const RegisterTitle = styled.div`
     width: 90px;
     height: 32px;
     margin: 2px auto 0;
-    background: url('${register_title}') center no-repeat;
+    background: url('${IMG.img_auth_register_title}') center no-repeat;
     background-size:100% 100%;
 `;
 
@@ -48,7 +41,7 @@ export const LoginTitle = styled.div`
     width: 60px;
     height: 32px;
     margin: 2px auto 0;
-    background: url('${login_title}') center no-repeat;
+    background: url('${IMG.img_auth_login_title}') center no-repeat;
     background-size:100% 100%;
 `;
 
@@ -56,7 +49,7 @@ export const ResetTitle = styled.div`
     width: 90px;
     height: 32px;
     margin: 2px auto 0;
-    background: url('${reset_title}') center no-repeat;
+    background: url('${IMG.img_auth_reset_title}') center no-repeat;
     background-size:100% 100%;
 `;
 
@@ -65,7 +58,7 @@ export const DialogContent = styled.div`
 `;
 
 export const Close = styled.img.attrs({
-    src:`${close}`
+    src:`${IMG.img_dialog_close}`
 })`
     width:65px;
     position:absolute;
@@ -75,15 +68,18 @@ export const Close = styled.img.attrs({
 `;
 
 export const LoginDialog = styled(Dialog)`
-grid-template-rows: 37px auto;
+    grid-template-rows: 37px 156px;
+    margin:-96px auto 0;
 `;
 
 export const RegisterDialog = styled(Dialog)`
-grid-template-rows: 37px auto;
+    grid-template-rows: 37px 282px;
+    margin:-159px auto 0;
 `;
 
 export const ResetDialog = styled(Dialog)`
-grid-template-rows: 37px auto;
+    grid-template-rows: 37px 240px;
+    margin:-138px auto 0;
 `;
 
 export const Input = styled.div`
@@ -139,7 +135,7 @@ export const Reset = styled.span`
 `;
 
 export const SubmitButton = styled.img.attrs({
-    src:`${confirm}`
+    src:`${IMG.img_auth_commit_button}`
 })`
     margin-top:4%;
     width:35%;

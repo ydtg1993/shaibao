@@ -12,7 +12,7 @@ import {WinNoticeEvent} from "./pages/game/store/actions";
 import Toast from "./pages/component/toast";
 
 export function connection(token){
-    const ws = new WebSocket('ws://192.168.50.181:9090/ws/three/'+token);
+    const ws = new WebSocket('ws://47.75.109.171:8080/ws/three/'+token);
     store.dispatch(SetWebsocket(ws));
 
     ws.onopen = () => {
@@ -84,6 +84,8 @@ function triggerEvent(data){
             Toast.error(data.data.msg,1000);
             var gold = store.getState().auth.get('gold') + parseFloat(data.data.gold);
             store.dispatch(PlayerGoldChange(gold));
+            break;
+        default:
             break;
     }
 }

@@ -23,12 +23,15 @@ class AnnouncementComponent extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.announcementList){
-            this.announcementList = nextProps.announcementList
+            this.announcementList = nextProps.announcementList;
             this.publish();
         }
     }
 
     publish(){
+        if(!this.announcementList){
+            return;
+        }
         if(!this.announcementList[this.counter]){
             this.counter = 0;
         }
@@ -38,6 +41,10 @@ class AnnouncementComponent extends React.Component {
         this.announce.current.style = `left:${margin}px`;
         const that = this;
         this.interval = setInterval(function () {
+            if(!that.announce.current){
+                clearInterval(that.interval);
+                return
+            }
             margin = margin-0.2;
             that.announce.current.style = `left:${margin}px`;
             if(margin <= -announceW){

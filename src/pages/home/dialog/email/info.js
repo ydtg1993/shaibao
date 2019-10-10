@@ -1,5 +1,4 @@
 import React from 'react';
-import "animate.css";
 import {connect} from 'react-redux';
 import * as Actions from "../../../home/store/actions";
 import {
@@ -27,16 +26,16 @@ class EmailInfoComponent extends React.Component {
 
     render() {
         const {visible, emailInfo} = this.props;
-        return visible && (
-            <React.Fragment>
+        return (
                 <EmailDialogInfo className={visible ? 'show fadeIn faster animated' : ''}>
                     <DialogTop>
                         <InfoTitle/>
                         <Close onClick={this.props.CloseEmailInfo}/>
                     </DialogTop>
                     <EmailDialogInfoContent>
-                        {emailInfo.content_type === 'TEXT' ? (<EmailContent>{emailInfo.content}</EmailContent>) : (
-                            <img style={{width: '100%'}} src={emailInfo.content}/>)}
+                        {emailInfo.content_type === 'TEXT' ?
+                            (<EmailContent>{emailInfo.content}</EmailContent>) : (<img style={{width: '100%'}} src={emailInfo.content ? emailInfo.content : ''} alt="title"/>)
+                        }
                         {emailInfo.exist_annex ? (
                             <EmailRemark>
                                 <span>{emailInfo.annex.value} X</span><EnvelopeCoin/>
@@ -52,7 +51,6 @@ class EmailInfoComponent extends React.Component {
                         }
                     </EmailDialogInfoBottom>
                 </EmailDialogInfo>
-            </React.Fragment>
         );
     }
 }

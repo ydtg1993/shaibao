@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-
-import gonggao_bg from '../../../resource/zhujiemian/gonggao.png';
-
+import {img_home_announcement_bg} from '../../../resource';
 
 export const AnnouncementFloor = styled.div`
    
@@ -10,14 +8,14 @@ export const AnnouncementFloor = styled.div`
 export const Announcement = styled.div`
     display:inline-block;
     position:relative;
-    width: 280px;
-    padding-left: 40px;
+    width: 80%;
+    padding-left: 42px;
     height:22px;
     line-height: 22px;
     top: 50%;
     transform: translateY(-50%) translateX(-50%);
     left:50%;
-    background: url('${gonggao_bg}') no-repeat;  
+    background: url('${img_home_announcement_bg}') no-repeat;  
     background-size: 100% 22px;    
     color:white;
     font-weight: 300;

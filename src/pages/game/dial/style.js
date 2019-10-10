@@ -1,12 +1,21 @@
 import styled from 'styled-components';
-import bg from '../../../resource/youxijiemian/section1.png';
+import {
+    img_game_back,
+    img_game_section1,
+    img_game_record_tag,
+    img_game_tag_rule,
+    img_game_tag_service,
+    img_game_tag_online
+} from '../../../resource';
 
 export const DialWrapper = styled.div`
-    background: url('${bg}') center no-repeat 
+    background: url('${img_game_section1}') center no-repeat 
     background-size:100% 101%;
 `;
 
-export const Back = styled.img`
+export const Back = styled.img.attrs({
+    src:`${img_game_back}`
+})`
     position:absolute;
     top: 0px;
     left:0;
@@ -41,16 +50,34 @@ export const Tools = styled.div`
     grid-template-columns: auto 45px;
 `;
 
-export const Record = styled.img`
+export const Record = styled.img.attrs({
+    src:`${img_game_record_tag}`
+})`
     margin-top:35px;
     width:22px;
+    position:relative;
+    z-index:10000;
      &.hidden {
          display: none;
     }
 `;
 
 export const Tab = styled.img`
+    position:relative;
+    z-index:10000;
     width:40px;
     margin-top:10px;
     display:block;
 `;
+
+export const Tab1 = styled(Tab).attrs({
+    src:`${img_game_tag_service}`
+})``;
+
+export const Tab2 = styled(Tab).attrs({
+    src:`${img_game_tag_rule}`
+})``;
+
+export const Tab3 = styled(Tab).attrs({
+    src:`${img_game_tag_online}`
+})``;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import Toast from "../../component/toast";
 import Cookies from "universal-cookie";
-import {CLEAR_USER_INFO, PlayerGoldChange, SetPlayerPosition} from "../../auth/store/actions";
+import {CLEAR_USER_INFO, PlayerGoldChange} from "../../auth/store/actions";
 import {Host} from "../../../index";
 
 export const OPEN_WEBSOCKET_CONNECTION = 'open_websocket_connection';
@@ -33,9 +33,9 @@ export const LOTTERY_RESULT_STAGE = 'LotteryResultStage';
 export const SETTLE_STAGE = 'SettleStage';
 export const WIN_STAGE = 'WinStage';
 export const OVER_STAGE = 'OverStage';
-/*init stage*/
-export const INIT_STAGE_EVENT = 'init_stage_event';
+
 export const SET_LOTTERY_TIME_COUNTDOWN = 'set_lottery_time_countdown';
+export const SET_ENTER_HALL_REQUEST_LOCK = 'set_enter_hall_request_lock';
 
 const ajaxHeaders = function () {
     const cookies = new Cookies();
@@ -65,24 +65,20 @@ export const CloseWebsocket = ()=>({
     type:CLOSE_WEBSOCKET_CONNECTION
 });
 
-export const InitStage = ()=>({
-    type:INIT_STAGE_EVENT
-});
-
 export const EnterHall = (hall_tag)=> {
     return (dispatch) => {
         axios.post(Host + 'three/hall/client/enter_hall', {
             hall_tag: hall_tag
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
+            dispatch(SetEnterHallRequestLock(false));
             if (data.code === 20000) {
                 dispatch({
                     type:ENTER_HALL,
                     data:data.data
                 });
                 dispatch(PlayerGoldChange(data.data.player.gold));
-                dispatch(SetPlayerPosition(hall_tag));
-                if(data.data.stage !== START_STAGE || data.data.stage !== BET_STAGE){
+                if(data.data.stage !== START_STAGE && data.data.stage !== BET_STAGE && data.stage !== OVER_STAGE){
                     Toast.info('正在开奖中...');
                 }
             } else if(data.code === 40001){
@@ -159,6 +155,11 @@ export const WinNoticeEvent = (win_gold,positions)=>({
 
 export const GameOverNotice = ()=>({
     type:GAME_OVER_NOTICE_EVENT
+});
+
+export const SetEnterHallRequestLock = (bool) => ({
+    type: SET_ENTER_HALL_REQUEST_LOCK,
+    bool
 });
 
 

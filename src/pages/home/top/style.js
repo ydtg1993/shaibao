@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import tou_bg from '../../../resource/zhujiemian/tou bg.png';
 import {MoneyDigital, MoneyInput} from "../style";
+import {img_home_top_nav_bg,img_home_avatar_hr} from '../../../resource';
 
 export const TopFloor = styled.div`
-    background: url('${tou_bg}') no-repeat;  
+    background: url('${img_home_top_nav_bg}') no-repeat;  
     background-size: 100% 100%;
     display:grid;
     grid-template-columns: auto 160px 15%;
@@ -43,7 +43,9 @@ export const Username = styled.div`
     line-height: 12px;
 `;
 
-export const Line = styled.img`
+export const Line = styled.img.attrs({
+    src:`${img_home_avatar_hr}`
+})`
     width:100%;
     display: list-item;
 `;
