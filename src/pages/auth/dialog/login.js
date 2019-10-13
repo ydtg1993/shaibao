@@ -7,7 +7,6 @@ import Toast from '../../component/toast';
 import {Redirect} from "react-router";
 import Cookies from 'universal-cookie';
 import {connection} from "../../../websocket";
-import {CloseMongolia} from "../../../index";
 import {POSITION_ROOM_FAST} from "../store/actions";
 import {POSITION_ROOM_ONE} from "../store/actions";
 import {POSITION_ROOM_FIVE} from "../store/actions"
