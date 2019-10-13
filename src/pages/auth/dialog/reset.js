@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {DialogTop,ResetTitle,DialogContent,Close, Input, ResetDialog, SubmitButton} from './style';
 import * as Actions from "../store/actions";
 import Toast from "../../component/toast";
-import {CloseMongolia} from "../../../index";
 
 class ResetComponent extends React.Component{
     render() {

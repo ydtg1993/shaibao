@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import * as Actions from "../store/actions";
 import {DialogTop, RegisterTitle, DialogContent, Close, Input, RegisterDialog, SubmitButton} from "./style";
 import Toast from "../../component/toast";
-import {CloseMongolia} from "../../../index";
 
 class Register extends React.Component {
     componentWillReceiveProps(next) {
