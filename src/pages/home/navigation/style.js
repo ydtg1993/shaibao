@@ -9,9 +9,9 @@ export const NavigationFloor = styled.div`
 `;
 
 export const TabList = styled.div`
-    display: grid;
-    width：100%;
-    grid-template-columns:25% 25% 25% 25%;
+    display: flex;
+    height:100%;
+    align-items: center;
 `;
 
 export const NavigationTab = styled.img`

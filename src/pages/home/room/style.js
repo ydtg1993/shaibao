@@ -6,12 +6,14 @@ export const RoomFloor = styled.div`
 `;
 
 export const RoomList = styled.div`
-    width:55%;
-    margin:0 auto;
-    height:100%;
-    overflow:scroll;
-    -ms-overflow-style: none;
-    overflow: -moz-scrollbars-none;
+    width: 55%;
+    max-width: 300px;
+    margin: 0 auto;
+    height: 100%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     &::-webkit-scrollbar { width: 0 !important }
 `;
 

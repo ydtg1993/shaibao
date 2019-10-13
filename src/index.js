@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+
 export const Host = 'http://47.75.109.171:8080/';
+export const WebsocketHost = 'ws://47.75.109.171:8080/ws/three/';
 
 export const OpenMongolia = ()=>{
     let MongolianScreen = document.getElementById('MongolianScreen');

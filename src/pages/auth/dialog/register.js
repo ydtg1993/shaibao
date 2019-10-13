@@ -98,7 +98,6 @@ const mapDispatchToProps = (dispatch) => {
                 return false;
             }
             dispatch(Actions.UserRegister(mobile, password, verify, invite));
-            CloseMongolia();
         },
         sendVerifyCode(sendVerify, mobileElem) {
             if (sendVerify) {

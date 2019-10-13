@@ -75,12 +75,13 @@ export const CommitChargeOrder = (pay_type,account_id,player_name,pay_money)=>{
     }
 };
 
-export const GetChargeOrderList = (current_page)=>{
+export const GetChargeOrderList = (current_page,callback=function () {})=>{
     return (dispatch) => {
         axios.post(Host + 'three/finance/pay/record', {
             current_page,page_size:15
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
+            callback();
             if (data.code === 20000) {
                 if(current_page>1){
                     dispatch({
@@ -168,13 +169,14 @@ export const GetAnnouncementList = () => {
     }
 };
 
-export const GetEmailList = (current_page) => {
+export const GetEmailList = (current_page,callback=function (){})=> {
     return (dispatch) => {
         axios.post(Host + 'three/mail/mail/list', {
             current_page,
             page_size: 15
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
+            callback();
             if (data.code === 20000) {
                 if (current_page > 1) {
                     dispatch({
@@ -299,14 +301,15 @@ export const GetRankList = (current_page) => {
     }
 };
 
-export const GetBetRecord = (current_page, type) => {
+export const GetBetRecord = (current_page, type,callback = function () {}) => {
     return (dispatch) => {
         axios.post(Host + 'three/player/bet/bet_record', {
             current_page,
             types: type,
-            page_size: 30
+            page_size: 15
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
+            callback();
             if (data.code === 20000) {
                 if (current_page > 1) {
                     dispatch({
@@ -428,12 +431,13 @@ export const BindBankCard = (name,number,bank_id,bank_branch) => {
     }
 };
 
-export const GetExchangeMoneyList = (current_page)=>{
+export const GetExchangeMoneyList = (current_page,callback=function () {})=>{
     return (dispatch) => {
         axios.post(Host + 'three/finance/withdraw/search', {
             current_page,page_size:10
         }, ajaxHeaders()).then((res) => {
             let data = res.data;
+            callback();
             if (data.code === 20000) {
                 if(current_page > 1){
                     dispatch({

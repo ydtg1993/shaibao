@@ -1,6 +1,5 @@
-import styled,{ createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import {Dialog,Button} from "../style";
-import MyFont from '../../../../resource/font/heiguiti.otf';
 import {
     img_home_email_list_title,
     img_home_email_info_title,
@@ -13,15 +12,6 @@ import {
     img_home_email_tag_readed,
     img_home_email_tag_unaccalimed,
 } from '../../../../resource';
-
-export const GlobalStyle = createGlobalStyle`
-body {
-  @font-face {
-     font-family: 'MyFont';
-     src: url('${MyFont}');
-  }
-}
-`;
 
 export const EmailDialog = styled(Dialog)`
     grid-template-rows: 37px 330px;
@@ -76,7 +66,7 @@ export const EmailList = styled.div`
     background-image: radial-gradient(ellipse 100% 50% at bottom center,#1b4084,#1f263a);
     position:relative;
     z-index: 2001;
-    padding: 0 4px 0px 4px;
+    padding: 4px 4px 0px 4px;
     overflow-y:auto;
 `;
 

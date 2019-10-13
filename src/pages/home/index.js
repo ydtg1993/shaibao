@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    HomeWrapper,
-    GlobalStyle
+    HomeWrapper
 } from './style';
 import {connect} from 'react-redux';
 import {SetPlayerPosition, POSITION_HOME} from '../auth/store/actions';
@@ -65,7 +64,6 @@ class Home extends React.Component {
         }
         return (
             <React.Fragment>
-                <GlobalStyle/>
                 <HomeWrapper>
                     <TopComponent userinfo={this.props.userInfo} OpenCharge={this.OpenCharge.bind(this)}/>
                     <AnnouncementComponent/>

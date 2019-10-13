@@ -21,7 +21,7 @@ class EmailComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            page:1,
+            page: 1,
             isLoadingMore: false,
             emailInfoVisible: false
         };
@@ -29,48 +29,52 @@ class EmailComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const that =this;
+        const that = this;
         this.emailList.current && this.emailList.current.addEventListener('scroll', function () {
             var afterScrollTop = this.scrollTop;
-            if(afterScrollTop < this.beforeScrollTop){
+            if (afterScrollTop < this.beforeScrollTop) {
                 this.beforeScrollTop = this.scrollTop;
                 return;
             }
             this.beforeScrollTop = this.scrollTop;
 
-            if(this.scrollHeight - 20 <= this.clientHeight + this.scrollTop) {
-                if(that.state.isLoadingMore){
+            if (this.scrollHeight - 20 <= this.clientHeight + this.scrollTop) {
+                if (that.state.isLoadingMore) {
                     return;
                 }
                 let page = that.state.page + 1;
                 that.setState({
                     isLoadingMore: true,
                     page:page
+                },()=>{
+                    new Promise(function(resolve) {
+                        that.props.getEmailList(page, resolve);
+                    }).then(()=>{
+                        that.setState(() =>({
+                            isLoadingMore: false
+                        }));
+                    });
                 });
-                that.props.getEmailList(page);
             }
         });
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         if (this.props.emailList.length !== nextProps.emailList.length) {
-            this.setState({
-                isLoadingMore: false
-            });
             return true;
         } else if (this.props.visible !== nextProps.visible) {
             return true;
-        } else if(this.state.emailInfoVisible !== nextState.emailInfoVisible){
+        } else if (this.state.emailInfoVisible !== nextState.emailInfoVisible) {
             return true;
         }
         return false;
     }
 
     OpenEmailInfo(email_id) {
-        this.props.readEmail(email_id);
         this.setState({
             emailInfoVisible: true
         });
+        this.props.readEmail(email_id);
     }
 
     CloseEmailInfo() {
@@ -79,12 +83,74 @@ class EmailComponent extends React.Component {
         });
     }
 
-    CloseEmailList(){
+    CloseEmailList() {
         this.setState({
-            page:1,
+            page: 1,
             isLoadingMore: false
         });
         this.props.CloseEmail();
+    }
+
+    SelectMailDom(data){
+        if(!data.is_read){
+              return (
+                  <React.Fragment>
+                      <div>{data.exist_annex ? (<EnvelopeCoin/>) : (<EnvelopeClosed/>)}</div>
+                      <div>
+                          <div><span className='type'>【{data.tag}】</span><span
+                              className='title'>{data.title}</span></div>
+                          <div className='time'>{data.create_at}</div>
+                      </div>
+                      <div>
+                          <EmailRead onClick={this.OpenEmailInfo.bind(this, data.id)}/>
+                      </div>
+                  </React.Fragment>);
+        }
+        /*mail read*/
+        if(!data.exist_annex){
+            return (
+                <React.Fragment>
+                    <div><EnvelopeOpened/></div>
+                    <div>
+                        <div><span className='type'>【{data.tag}】</span><span
+                            className='title'>{data.title}</span></div>
+                        <div className='time'>{data.create_at}</div>
+                    </div>
+                    <div>
+                        <EmailReaded onClick={this.OpenEmailInfo.bind(this, data.id)}/>
+                    </div>
+                </React.Fragment>);
+        }
+        /*exist_annex read didnt receive*/
+        if(!data.is_receive){
+            return (
+                <React.Fragment>
+                    <div><EnvelopeCoin/></div>
+                    <div>
+                        <div><span className='type'>【{data.tag}】</span><span
+                            className='title'>{data.title}</span></div>
+                        <div className='time'>{data.create_at}</div>
+                    </div>
+                    <div>
+                        <EnvelopeCoinReaded onClick={this.OpenEmailInfo.bind(this, data.id)}/>
+                    </div>
+                </React.Fragment>
+            )
+        }
+
+        return (
+            <React.Fragment>
+                <div><EnvelopeCoin/></div>
+                <div>
+                    <div><span className='type'>【{data.tag}】</span><span
+                        className='title'>{data.title}</span></div>
+                    <div className='time'>{data.create_at}</div>
+                </div>
+                <div>
+                    <EnvelopeCoinReaded onClick={this.OpenEmailInfo.bind(this, data.id)}/>
+                </div>
+            </React.Fragment>
+        )
     }
 
     render() {
@@ -101,43 +167,15 @@ class EmailComponent extends React.Component {
                         {emailList && emailList.map(function (data) {
                             return (
                                 <Email key={data.id} className={data.is_read ? 'read' : ''} id={`email_id_${data.id}`}>
-                                    {
-                                        !data.is_read ? (
-                                                <React.Fragment>
-                                                    <div>{data.exist_annex ? (<EnvelopeCoin/>) : (<EnvelopeClosed/>)}</div>
-                                                    <div>
-                                                        <div><span className='type'>【{data.tag}】</span><span
-                                                            className='title'>{data.title}</span></div>
-                                                        <div className='time'>{data.create_at}</div>
-                                                    </div>
-                                                    <div>
-                                                        <EmailRead onClick={that.OpenEmailInfo.bind(that, data.id)}/>
-                                                    </div>
-                                                </React.Fragment>) :
-                                            (
-                                                <React.Fragment>
-                                                    <div>{data.exist_annex ? (<EnvelopeCoin/>) : (
-                                                        <EnvelopeOpened/>)}</div>
-                                                    <div>
-                                                        <div><span className='type'>【{data.tag}】</span><span
-                                                            className='title'>{data.title}</span></div>
-                                                        <div className='time'>{data.create_at}</div>
-                                                    </div>
-                                                    <div>
-                                                        {data.exist_annex ? (<EnvelopeCoinReaded
-                                                            onClick={that.OpenEmailInfo.bind(that, data.id)}/>) : (
-                                                            <EmailReaded
-                                                                onClick={that.OpenEmailInfo.bind(that, data.id)}/>)}
-                                                    </div>
-                                                </React.Fragment>)
-                                    }
+                                    {that.SelectMailDom(data)}
                                 </Email>
                             )
                         })}
                     </EmailList>
                     <BottomDecoration/>
                 </EmailDialog>
-                <EmailInfoComponent visible={this.state.emailInfoVisible} CloseEmailInfo={this.CloseEmailInfo.bind(this)}/>
+                <EmailInfoComponent visible={this.state.emailInfoVisible}
+                                    CloseEmailInfo={this.CloseEmailInfo.bind(this)}/>
             </React.Fragment>
         );
     }
@@ -154,8 +192,8 @@ const mapDispatchToProps = (dispatch) => {
         readEmail(email_id) {
             dispatch(Actions.ReadEmail(email_id))
         },
-        getEmailList(page) {
-            dispatch(Actions.GetEmailList(page))
+        getEmailList(page,callback) {
+            dispatch(Actions.GetEmailList(page,callback))
         },
     }
 };

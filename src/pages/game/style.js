@@ -8,5 +8,5 @@ export const GameWrapper = styled.div`
     bottom: 0px;    
     overflow:hidden;
     display: grid;
-    grid-template-rows: 38% auto 5% 55px;
+    grid-template-rows: 35% auto 5% 55px;
 `;

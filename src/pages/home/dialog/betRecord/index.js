@@ -54,20 +54,26 @@ class BetRecordComponent extends React.Component {
                 that.setState({
                     isLoadingMore: true,
                     page:page
+                },()=>{
+                    new Promise(function(resolve) {
+                        let type = that.state.record_all ? [] : [1];
+                        that.props.getBetRecords(page, type, resolve);
+                    }).then(()=>{
+                        that.setState(() =>({
+                            isLoadingMore: false
+                        }));
+                    });
                 });
-                let type = that.state.record_all ? [] : [1];
-                that.props.getBetRecords(page, type);
             }
         });
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         if (this.props.betRecordList.length !== nextProps.betRecordList.length) {
-            this.setState({
-                isLoadingMore: false
-            });
             return true;
         } else if (this.props.visible !== nextProps.visible) {
+            return true;
+        } else if(this.state.record_all !== nextState.record_all){
             return true;
         }
         return false;
@@ -83,16 +89,24 @@ class BetRecordComponent extends React.Component {
     }
 
     watchAll() {
-        this.props.getBetRecords(1,[]);
+        const that = this;
         this.setState({
+            page:1,
+            isLoadingMore: false,
             record_all: true
+        },()=>{
+            that.props.getBetRecords(1,[]);
         });
     }
 
     watchReward() {
-        this.props.getBetRecords(1,[1]);
+        const that = this;
         this.setState({
+            page:1,
+            isLoadingMore: false,
             record_all: false
+        },()=>{
+            that.props.getBetRecords(1,[1]);
         });
     }
 
@@ -242,8 +256,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getBetRecords(page, type) {
-            dispatch(Actions.GetBetRecord(page, type))
+        getBetRecords(page, type,callback) {
+            dispatch(Actions.GetBetRecord(page, type,callback))
         }
     }
 };

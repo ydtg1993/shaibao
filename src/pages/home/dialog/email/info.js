@@ -43,10 +43,10 @@ class EmailInfoComponent extends React.Component {
                         ) : ''}
                     </EmailDialogInfoContent>
                     <EmailDialogInfoBottom>
-                        {emailInfo.exist_annex ? (
-                            <SubmitButton onClick={this.receiveCoin.bind(this, emailInfo.id)}>领 取</SubmitButton>
+                        {emailInfo.exist_annex && !emailInfo.is_receive? (
+                            <SubmitButton onClick={this.receiveCoin.bind(this, emailInfo.id)}>领取</SubmitButton>
                         ) : (
-                            <SubmitButton onClick={this.deleteMail.bind(this, emailInfo.id)}>删 除</SubmitButton>
+                            <SubmitButton onClick={this.deleteMail.bind(this, emailInfo.id)}>删除</SubmitButton>
                         )
                         }
                     </EmailDialogInfoBottom>

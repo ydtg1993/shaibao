@@ -50,7 +50,6 @@ export default (state = defaultState, action) => {
             let recordList = state.get('exchangeRecordList').concat(action.list);
             return state.set('exchangeRecordList',recordList);
         case Actions.GET_CHARGE_ORDER_LIST:
-            console.log(action.list);
             return state.set('chargeOrderList',action.list);
         case Actions.ADD_CHARGE_ORDER_LIST:
             let chargeOrderList = state.get('chargeOrderList').concat(action.list);

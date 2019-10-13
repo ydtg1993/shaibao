@@ -26,7 +26,7 @@ export const Dialog = styled.div`
 
 export const DialogTop = styled.div`
     background: url('${img_dialog_top}') center no-repeat 
-    background-size:100% 100%;
+    background-size:cover;
 `;
 
 export const DialogContent = styled.div`

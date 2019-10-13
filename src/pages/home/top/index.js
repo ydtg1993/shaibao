@@ -26,7 +26,7 @@ class TopComponent extends React.Component {
         super(props);
         this.money = React.createRef();
         this.state = {
-            userInfoVisible:false
+            userInfoVisible: false
         };
     }
 
@@ -42,14 +42,14 @@ class TopComponent extends React.Component {
     OpenUserInfoDialog() {
         OpenMongolia();
         this.setState({
-            userInfoVisible:true
+            userInfoVisible: true
         });
     }
 
-    CloseUserInfoDialog(){
+    CloseUserInfoDialog() {
         CloseMongolia();
         this.setState({
-            userInfoVisible:false
+            userInfoVisible: false
         });
     }
 
@@ -59,8 +59,9 @@ class TopComponent extends React.Component {
                 <TopFloor>
                     <UserSection>
                         <div>
-                            <Avatar src={this.props.userinfo.avatar !== '' ? this.props.userinfo.avatar : img_home_default_avatar}
-                                    onClick={this.OpenUserInfoDialog.bind(this)}/>
+                            <Avatar
+                                src={this.props.userinfo.avatar !== '' ? this.props.userinfo.avatar : img_home_default_avatar}
+                                onClick={this.OpenUserInfoDialog.bind(this)}/>
                             <UserInfo>
                                 <Username>{this.props.userinfo.username}</Username>
                                 <Line/>
@@ -68,15 +69,20 @@ class TopComponent extends React.Component {
                             </UserInfo>
                         </div>
                     </UserSection>
-                    <MoneySection>
-                        <MoneyGold/>
-                        <MoneyCharge onClick={this.props.OpenCharge}/>
-                        <MoneyDigital2 ref={this.money}>{parseInt(this.props.gold)}</MoneyDigital2>
-                        <MoneyInput2/>
-                    </MoneySection>
-                    <div></div>
+                    <div>
+                        <MoneySection>
+                            <MoneyGold/>
+                            <MoneyCharge onClick={this.props.OpenCharge}/>
+                            <MoneyDigital2 ref={this.money}>{parseInt(this.props.gold)}</MoneyDigital2>
+                            <MoneyInput2/>
+                        </MoneySection>
+                    </div>
+                    <div>
+                        <UserInfoComponent visible={this.state.userInfoVisible}
+                                           CloseUserInfoDialog={this.CloseUserInfoDialog.bind(this)}
+                                           OpenCharge={this.props.OpenCharge}/>
+                    </div>
                 </TopFloor>
-                <UserInfoComponent visible={this.state.userInfoVisible} CloseUserInfoDialog={this.CloseUserInfoDialog.bind(this)} OpenCharge={this.props.OpenCharge}/>
             </React.Fragment>
         )
     }

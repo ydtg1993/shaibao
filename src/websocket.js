@@ -10,9 +10,10 @@ import {GameOverNotice} from "./pages/game/store/actions";
 import store from "./store";
 import {WinNoticeEvent} from "./pages/game/store/actions";
 import Toast from "./pages/component/toast";
+import {WebsocketHost} from "./index";
 
 export function connection(token){
-    const ws = new WebSocket('ws://47.75.109.171:8080/ws/three/'+token);
+    const ws = new WebSocket(WebsocketHost+token);
     store.dispatch(SetWebsocket(ws));
 
     ws.onopen = () => {

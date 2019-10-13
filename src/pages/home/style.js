@@ -1,21 +1,5 @@
-import styled,{createGlobalStyle} from 'styled-components';
-import MyFont from "../../resource/font/heiguiti.otf";
-import LangFont from "../../resource/font/langqing.otf";
+import styled from 'styled-components';
 import {img_home_bg,img_money_input_bg,img_money_charge,img_money_gold_tag} from '../../resource';
-
-export const GlobalStyle = createGlobalStyle`
-body {
-  @font-face {
-     font-family: 'LangFont';
-     src: url('${LangFont}');
-  }
-  
-   @font-face {
-     font-family: 'MyFont';
-     src: url('${MyFont}');
-  }
-}
-`;
 
 export const HomeWrapper = styled.div`
     height: 100%;  
@@ -24,14 +8,16 @@ export const HomeWrapper = styled.div`
     top: 0px;  
     bottom: 0px;  
     background: url('${img_home_bg}') no-repeat;  
-    background-size: 100%, 100%;
+    background-size: cover;
     overflow:hidden;
     display: grid;
-    grid-template-rows: 7% 7% 10% 68% 8%;
+    grid-template-rows: 7% 6% 11% 66% 10%;
+    grid-template-columns:100%;
 `;
 
 export const MoneySection = styled.div`
     height:100%;
+    width:160px;
     display: flex;
     flex-direction: row;
     justify-content: center;

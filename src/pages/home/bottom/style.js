@@ -10,23 +10,22 @@ import {
 
 export const BottomFloor = styled.div`
     background: url('${img_home_bottom_bg}') center no-repeat 
-    background-size:100% 100%;
+    background-size: 100% 85%;
+    background-position: bottom;
 `;
 
 export const BottomTabList = styled.div`
-    display: grid;
-    width:100%;
-    height:100%;
-    grid-template-columns:17% 17% 32% 17% 17%;
+    display: flex;
+    height:92%;
+    flex-wrap: nowrap;
+    justify-content:space-between;
+    align-items:flex-end;
+    padding:0 10px 0 10px;
 `;
 
 export const BottomTab = styled.img`
-    width: 20px;
-    height:30px;
-    position:relative;
-    margin:0 auto;
-    top: 60%;
-    transform: translateY(-50%);
+    width: 5.5%;
+    max-width:42px;
 `;
 
 export const BottomTab1 = styled(BottomTab).attrs({
@@ -45,17 +44,9 @@ export const BottomTab4 = styled(BottomTab).attrs({
     src: `${img_home_bottom_tag_4}`
 })``;
 
-
-export const BottomTabMain = styled.div`
-    position:relative;
-`;
-
-export const BottomTabMainImg = styled.img.attrs({
+export const BottomTabMain = styled.img.attrs({
     src: `${img_home_bottom_tag_rank}`
 })`
-    position:absolute;
-    width:60%;
-    top:10%;
-    transform: translateY(-50%) translateX(-50%);
-    left:50%;
+    width:20%;
+    max-width:160px;
 `;

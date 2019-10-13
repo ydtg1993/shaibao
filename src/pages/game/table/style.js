@@ -9,7 +9,7 @@ export const TableWrapper = styled.div`
     background: url('${img_game_section2}') center no-repeat 
     background-size:100% 101%;
     display:grid;
-    grid-template-rows: 48% auto;
+    grid-template-rows: 45% auto;
 `;
 
 export const Up = styled.div`
@@ -18,13 +18,16 @@ export const Up = styled.div`
 `;
 
 export const Left = styled.div`
-    padding-left:5px;
-    padding-right:5px;
-   
+    padding:0 5px 0 5px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
 `;
 
 export const Middle = styled.div`
-    
+    position:relative;
+    overflow: hidden;
+    height:100%;
 `;
 
 export const Period = styled.div`
@@ -38,7 +41,7 @@ export const Title = styled.p`
     color:white;
     margin:0;
     font-size: 13px;
-    font-weight:200;
+    font-weight:300;
     letter-spacing:1px;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -49,7 +52,7 @@ export const TimeLine = styled.p`
     text-align:center;
     color:white;
     letter-spacing:1px;
-    font-weight:600;
+    font-weight:500;
     font-size: 18px;
     margin:0;
     margin-block-start: 0;
@@ -57,24 +60,21 @@ export const TimeLine = styled.p`
 `;
 
 export const Pan = styled.div`
-    height:95px;
-    position:relative;
-    overflow: hidden;
+    
 `;
 
 export const PanDick = styled.img.attrs({
     src:`${img_game_period_dice_base}`
 })`
-     position:absolute;
-     left: 50%;
-     top: -5px;
-     width:100px;
-     margin-left: -50px;
+    position:absolute;
+    width: 90px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
 `;
 
-export const Right = styled.div`
-    padding-left:5px;
-    padding-right:5px;
+export const Right = styled(Left)`
+
 `;
 
 export const Down = styled.div`
@@ -85,12 +85,10 @@ export const Down = styled.div`
 `;
 
 export const Plate = styled.div`
-    height:42%;
+    height:45%;
     background:#284c80;
     border:2px #2a6792 solid;
-    margin-top:7%;
     position:relative;
-    &:first-child{margin-top:0;}
 `;
 
 export const SPlate = styled.div`
@@ -148,12 +146,12 @@ export const Dice1 = styled(Dice)`
 
 export const Dice2 = styled(Dice)`
     top: 36px;
-    left: 27%;
+    left: calc(50% - 30px);
     transform: translateX(-50%);
 `;
 
 export const Dice3 = styled(Dice)`
     top: 32px;
-    left: 36%;
+    left: calc(50% - 20px);
     transform: translateX(-50%);
 `;

@@ -282,7 +282,6 @@ class TableComponent extends React.Component {
                                 <Title>{that.props.sequence}期截止时间</Title>
                                 <TimeLineComponent/>
                             </Period>
-                            <Pan>
                                 <PanDick/>
                                 {
                                     this.props.priorResult.map(function (data, index) {
@@ -295,7 +294,6 @@ class TableComponent extends React.Component {
                                         }
                                     })
                                 }
-                            </Pan>
                         </Middle>
                         <Right>
                             <Plate ref={this.plate3}>

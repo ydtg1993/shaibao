@@ -1,5 +1,6 @@
 import React from 'react';
 import "animate.css";
+import {GlobalStyle} from './style'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 /*redux*/
 import { Provider } from 'react-redux';
@@ -13,6 +14,7 @@ class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
+                <GlobalStyle/>
                 <Router>
                     <React.Fragment>
                         <Route exact path="/auth" component={Auth}/>
@@ -22,7 +24,7 @@ class App extends React.Component {
                 </Router>
                 <div id='MongolianScreen' className='CloseMongolian fadeIn faster animated'/>
                 <div id='GameMongolianScreen' className='CloseMongolian fadeIn faster animated'/>
-                <div id="VerticalScreen">为了更好的用户体验请使用手机竖屏模式</div>
+                <div id="VerticalScreen">为了更好的用户体验请使用大屏手机竖屏模式</div>
             </Provider>
         )
     }

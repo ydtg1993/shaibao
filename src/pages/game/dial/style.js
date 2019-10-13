@@ -5,7 +5,8 @@ import {
     img_game_record_tag,
     img_game_tag_rule,
     img_game_tag_service,
-    img_game_tag_online
+    img_game_tag_online,
+    img_game_woman
 } from '../../../resource';
 
 export const DialWrapper = styled.div`
@@ -48,6 +49,7 @@ export const Tools = styled.div`
     height: 90%; 
     display: grid;
     grid-template-columns: auto 45px;
+    position:relative;
 `;
 
 export const Record = styled.img.attrs({
@@ -57,7 +59,7 @@ export const Record = styled.img.attrs({
     width:22px;
     position:relative;
     z-index:10000;
-     &.hidden {
+    &.hidden {
          display: none;
     }
 `;
@@ -81,3 +83,13 @@ export const Tab2 = styled(Tab).attrs({
 export const Tab3 = styled(Tab).attrs({
     src:`${img_game_tag_online}`
 })``;
+
+export const Woman = styled.img.attrs({
+    src:`${img_game_woman}`
+})`
+    height: 100%;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+`;

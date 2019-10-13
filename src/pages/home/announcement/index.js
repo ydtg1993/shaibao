@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {
     AnnouncementFloor,
     Announcement,
+    Horn,
     Text
 } from './style';
 
@@ -10,6 +11,7 @@ class AnnouncementComponent extends React.Component {
     constructor(props){
         super(props);
         this.announce = React.createRef();
+        this.announceBox = React.createRef();
         this.announcementList = false;
         this.counter = 0;
     }
@@ -37,7 +39,7 @@ class AnnouncementComponent extends React.Component {
         }
         this.announce.current.textContent = this.announcementList[this.counter];
         let announceW = this.announce.current.clientWidth + 10;
-        let margin = 350;
+        let margin = this.announceBox.current.clientWidth;
         this.announce.current.style = `left:${margin}px`;
         const that = this;
         this.interval = setInterval(function () {
@@ -62,8 +64,8 @@ class AnnouncementComponent extends React.Component {
     render() {
         return (
                 <AnnouncementFloor>
-                    <Announcement>
-                        <div><Text ref={this.announce}></Text></div>
+                    <Announcement ref={this.announceBox}>
+                        <Horn/><div><Text ref={this.announce}></Text></div>
                     </Announcement>
                 </AnnouncementFloor>
         )

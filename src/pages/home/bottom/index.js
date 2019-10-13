@@ -6,8 +6,7 @@ import {
     BottomTab4,
     BottomFloor,
     BottomTabList,
-    BottomTabMain,
-    BottomTabMainImg
+    BottomTabMain
 } from './style';
 import EmailComponent from "../dialog/email/index";
 import RankComponent from "../dialog/rank";
@@ -78,9 +77,7 @@ class BottomComponent extends React.Component {
                 <BottomTabList>
                     <BottomTab1 onClick={this.OpenExchange.bind(this)}/>
                     <BottomTab2 onClick={this.OpenEmail.bind(this)}/>
-                    <BottomTabMain>
-                        <BottomTabMainImg onClick={this.OpenRank.bind(this)}/>
-                    </BottomTabMain>
+                    <BottomTabMain onClick={this.OpenRank.bind(this)}/>
                     <BottomTab3/>
                     <BottomTab4/>
                 </BottomTabList>

@@ -30,12 +30,13 @@ class Login extends React.Component{
     }
 
     componentDidMount() {
+        /*preloading images*/
         const imgs = [
             img_game_cup_base,img_game_cup_cover,img_congratulate_hikaru
         ];
         let len = imgs.length;
         for (let i = 0; i < len; i++) {
-            let imgObj = new Image(); // 创建图片对象
+            let imgObj = new Image();
             imgObj.src = imgs[i];
             imgObj.addEventListener('load', function () {
             }, false);
@@ -108,7 +109,6 @@ const mapDispatchToProps = (dispatch) => {
                 return false;
             }
             dispatch(Actions.UserLogin(mobile,password));
-            CloseMongolia();
         },
         setUserInfo(userinfo){
             let action = Actions.SetUserInfo(userinfo);

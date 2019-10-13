@@ -16,103 +16,102 @@ import {CloseMongolia, OpenMongolia} from "../../../index";
 import PigComponent from "../dialog/pig";
 
 class NavigationComponent extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            pigVisible:false,
-            betRecordVisible:false,
-            activityVisible:false,
-            signInVisible:false
+            pigVisible: false,
+            betRecordVisible: false,
+            activityVisible: false,
+            signInVisible: false
         }
     }
 
-    OpenPig(){
+    OpenPig() {
         OpenMongolia();
         this.setState({
-            pigVisible:true,
+            pigVisible: true,
         })
     }
 
-    ClosePig(){
+    ClosePig() {
         CloseMongolia();
         this.setState({
-            pigVisible:false,
+            pigVisible: false,
         })
     }
 
-    OpenSignIn(){
+    OpenSignIn() {
         OpenMongolia();
         this.setState({
-            signInVisible:true,
+            signInVisible: true,
         })
     }
 
-    CloseSignIn(){
+    CloseSignIn() {
         CloseMongolia();
         this.setState({
-            signInVisible:false
+            signInVisible: false
         })
     }
 
-    OpenBetRecord(){
+    OpenBetRecord() {
         OpenMongolia();
-        this.props.getBetRecords(1,[]);
+        this.props.getBetRecords(1, []);
         this.setState({
-            betRecordVisible:true,
+            betRecordVisible: true,
         });
     }
 
-    CloseBetRecord(){
+    CloseBetRecord() {
         CloseMongolia();
         this.setState({
-            betRecordVisible:false,
+            betRecordVisible: false,
         })
     }
 
-    OpenActivity(){
+    OpenActivity() {
         OpenMongolia();
         this.props.getActivityList();
         this.setState({
-            activityVisible:true,
+            activityVisible: true,
         });
     }
 
-    CloseActivity(){
+    CloseActivity() {
         CloseMongolia();
         this.setState({
-            activityVisible:false,
+            activityVisible: false,
         });
     }
 
     render() {
         return (
-            <React.Fragment>
-                <NavigationFloor>
-                    <TabList>
-                        <NavigationTab1 onClick={this.OpenPig.bind(this)}/>
-                        <NavigationTab2 onClick={this.OpenSignIn.bind(this)}/>
-                        <NavigationTab3 onClick={this.OpenBetRecord.bind(this)}/>
-                        <NavigationTab4 onClick={this.OpenActivity.bind(this)}/>
-                    </TabList>
-                </NavigationFloor>
+            <NavigationFloor>
+                <TabList>
+                    <NavigationTab1 onClick={this.OpenPig.bind(this)}/>
+                    <NavigationTab2 onClick={this.OpenSignIn.bind(this)}/>
+                    <NavigationTab3 onClick={this.OpenBetRecord.bind(this)}/>
+                    <NavigationTab4 onClick={this.OpenActivity.bind(this)}/>
+                </TabList>
                 <PigComponent visible={this.state.pigVisible} ClosePig={this.ClosePig.bind(this)}/>
                 <SignInComponent visible={this.state.signInVisible} CloseSignIn={this.CloseSignIn.bind(this)}/>
-                <BetRecordComponent visible={this.state.betRecordVisible} CloseBetRecord={this.CloseBetRecord.bind(this)}/>
+                <BetRecordComponent visible={this.state.betRecordVisible}
+                                    CloseBetRecord={this.CloseBetRecord.bind(this)}/>
                 <ActivityComponent visible={this.state.activityVisible} CloseActivity={this.CloseActivity.bind(this)}/>
-            </React.Fragment>
+            </NavigationFloor>
         )
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getBetRecords(page,type){
-            dispatch(Actions.GetBetRecord(page,type))
+        getBetRecords(page, type) {
+            dispatch(Actions.GetBetRecord(page, type))
         },
-        getActivityList(){
+        getActivityList() {
             dispatch(Actions.GetActivityList());
         }
     }
 };
 
-export default connect(null,mapDispatchToProps)(NavigationComponent);
+export default connect(null, mapDispatchToProps)(NavigationComponent);

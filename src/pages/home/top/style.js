@@ -6,7 +6,7 @@ export const TopFloor = styled.div`
     background: url('${img_home_top_nav_bg}') no-repeat;  
     background-size: 100% 100%;
     display:grid;
-    grid-template-columns: auto 160px 15%;
+    grid-template-columns: 1fr 1fr 15%;
     grid-auto-rows: 100%;
 `;
 
@@ -28,10 +28,15 @@ export const Avatar = styled.img`
 `;
 
 export const UserInfo = styled.div`
-    width: 70%;
+    width: 60%;
     height: 30px;
-    margin-left:2%;
-    display:inline-block;
+    margin-left: 2%;
+    display: inline-block;
+    div{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    }
 `;
 
 export const Username = styled.div`

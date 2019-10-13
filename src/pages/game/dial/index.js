@@ -9,7 +9,8 @@ import {
     Tab1,
     Tab2,
     Tab3,
-    Text
+    Text,
+    Woman
 } from './style';
 import {Link} from "react-router-dom";
 import RecordComponent from "../dialog/record";
@@ -26,6 +27,7 @@ class DialComponent extends React.Component {
             publishLock: false
         };
         this.announce = React.createRef();
+        this.announceBox = React.createRef();
         this.announcementList = false;
         this.counter = 0;
     }
@@ -56,7 +58,7 @@ class DialComponent extends React.Component {
         }
         this.announce.current.textContent = this.announcementList[this.counter];
         let announceW = this.announce.current.clientWidth + 10;
-        let margin = 350;
+        let margin = this.announceBox.current.clientWidth;
         this.announce.current.style = `left:${margin}px`;
         const that = this;
         this.interval = setInterval(function () {
@@ -104,7 +106,7 @@ class DialComponent extends React.Component {
                 <DialWrapper>
                     <Link to='/home' style={{position: 'relative', zIndex: 10000}}><Back/></Link>
                     <Announcement>
-                        <AnnouncementBox>
+                        <AnnouncementBox ref={this.announceBox}>
                             <Text ref={this.announce}></Text>
                         </AnnouncementBox>
                     </Announcement>
@@ -118,6 +120,7 @@ class DialComponent extends React.Component {
                             <Tab2 onClick={this.OpenIntroduction.bind(this)}/>
                             <Tab3/>
                         </div>
+                        <Woman/>
                     </Tools>
                 </DialWrapper>
                 <IntroductionComponent visible={this.state.introductionVisible} CloseIntroduction={this.CloseIntroduction.bind(this)}/>
