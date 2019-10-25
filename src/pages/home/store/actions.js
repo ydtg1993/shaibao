@@ -1,20 +1,13 @@
 import axios from 'axios';
 import Toast from "../../component/toast";
-import Cookies from "universal-cookie";
 import {Host} from "../../../index";
-import {ClearUserInfo, PlayerGoldChange, SET_BANK_CARD_INFO} from "../../auth/store/actions";
+import {ajaxHeaders, ClearUserInfo, PlayerGoldChange, SET_BANK_CARD_INFO} from "../../auth/store/actions";
 import ReactDOM from "react-dom";
 import Congratulation from "../../component/congratulation";
 import React from "react";
 import store from "../../../store";
+import {img_home_email_received} from "../../../resource";
 
-const ajaxHeaders = function () {
-    const cookies = new Cookies();
-    const userinfo = cookies.get('userinfo');
-    let token = userinfo ? userinfo.token : '';
-    let ajaxConfig = {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}, timeout: 3000};
-    return ajaxConfig;
-};
 export const SET_REQUEST_LOCK = 'set_request_lock';
 export const GET_ANNOUNCEMENT_LIST = 'get_announcement_list';
 export const GET_EMAIL_LIST = 'get_email_list';
@@ -31,6 +24,7 @@ export const ADD_EXCHANGE_RECORD_LIST = 'add_exchange_record_list';
 export const GET_CHARGE_INFO = 'get_charge_info';
 export const GET_CHARGE_ORDER_LIST = 'get_charge_order_list';
 export const ADD_CHARGE_ORDER_LIST = 'add_charge_order_list';
+export const GET_PIG_INFO = 'get_pig_info';
 
 export const GetChargeInfo = () => {
     return (dispatch) => {
@@ -54,11 +48,12 @@ export const GetChargeInfo = () => {
     }
 };
 
-export const CommitChargeOrder = (pay_type,account_id,player_name,pay_money)=>{
+export const CommitChargeOrder = (pay_type,account_id,player_name,pay_money,callback=function () {})=>{
     return (dispatch) => {
         axios.post(Host + 'three/finance/pay/to_pay', {
             pay_type,account_id,player_name,pay_money
         }, ajaxHeaders()).then((res) => {
+            callback();
             let data = res.data;
             if (data.code === 20000) {
                 Toast.success('订单提交成功');
@@ -107,6 +102,48 @@ export const GetChargeOrderList = (current_page,callback=function () {})=>{
     }
 };
 
+export const GetPigInfo = ()=> {
+    return (dispatch) => {
+        axios.post(Host + 'three/announcement/pig/info', {
+        }, ajaxHeaders()).then((res) => {
+            let data = res.data.data;
+            dispatch({
+                type:GET_PIG_INFO,
+                data
+            })
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+};
+
+export const OpenPig = (callback=function () {})=>{
+    return (dispatch) => {
+        axios.post(Host + 'three/announcement/pig/open', {
+        }, ajaxHeaders()).then((res) => {
+            let receiveGold = parseFloat(res.data.data.gold);
+            const div = document.createElement('div');
+            let dom = document.getElementById('beginPigLight');
+            if(dom) {
+                dom.appendChild(div);
+                ReactDOM.render(<Congratulation coin={receiveGold}/>, div);
+                var interval = setInterval(function () {
+                    clearInterval(interval);
+                    ReactDOM.unmountComponentAtNode(div);
+                    callback();
+                }, 3200);
+            }
+
+            let gold = store.getState().auth.get('gold') + receiveGold;
+            dispatch(PlayerGoldChange(gold));
+        }).catch((error) => {
+            console.log(error);
+            Toast.error('服务器开小差了', 1000);
+        });
+    }
+}
+
 export const PlayerSignIn = (day) => {
     return (dispatch) => {
         axios.post(Host + 'three/sign/sign/sign', {}, ajaxHeaders()).then((res) => {
@@ -127,7 +164,8 @@ export const PlayerSignIn = (day) => {
                 if(dom) {
                     dom.appendChild(div);
                     ReactDOM.render(<Congratulation coin={data.data.value}/>, div);
-                    setInterval(function () {
+                    var interval = setInterval(function () {
+                        clearInterval(interval)
                         ReactDOM.unmountComponentAtNode(div);
                     }, 3200);
                 }
@@ -235,8 +273,8 @@ export const DeleteMail = (mail_id) => {
             if (data.code === 20000) {
                 Toast.success('删除成功');
                 let dom = document.getElementById(`email_id_${mail_id}`);
-                if (dom) {
-                    dom.parentNode.removeChild(dom)
+                if(dom) {
+                    dom.className = dom.className + ' hidden';
                 }
             } else if (data.code === 40001) {
                 Toast.info(data.message);
@@ -260,9 +298,9 @@ export const ReceiveCoin = (mail_id) => {
             if (data.code === 20000) {
                 Toast.success('领取成功');
                 let dom = document.getElementById(`email_id_${mail_id}`);
-                if (dom) {
-                    dom.parentNode.removeChild(dom)
-                }
+                let img = dom.childNodes[2].childNodes[0];
+                img.setAttribute('style','width: 35px;float: right;margin-right: 10px;');
+                img.setAttribute('src',img_home_email_received)
             } else if (data.code === 40001) {
                 Toast.info(data.message);
                 dispatch(ClearUserInfo());

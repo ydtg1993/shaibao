@@ -60,6 +60,7 @@ class ChargeComponent extends React.Component {
         this.transferName = React.createRef();
         this.transferChargeValue = React.createRef();
         this.bankInfo = false;
+        this.requestLock = false;
     }
 
     ClearInput(pos) {
@@ -107,6 +108,17 @@ class ChargeComponent extends React.Component {
             default:
                 return;
         }
+    }
+
+    CommitChargeOrder(type,id, accountElem, chargeValue){
+        if (this.requestLock) {
+            return
+        }
+        this.requestLock = true;
+        const that = this;
+        this.props.commitChargeOrder(type,id, accountElem, chargeValue,function () {
+            that.requestLock = false;
+        })
     }
 
     ScanDom() {
@@ -177,7 +189,7 @@ class ChargeComponent extends React.Component {
                 </ChargeContentInfo>
                 <ChargeBottom>
                     <SubmitButton
-                        onClick={() => this.props.commitChargeOrder('fast',fastInfo.id, this.accountElem, this.chargeValue)}><span>提交订单</span><SmallInputBg/></SubmitButton>
+                        onClick={()=>this.CommitChargeOrder('fast',fastInfo.id, this.accountElem, this.chargeValue)}><span>提交订单</span><SmallInputBg/></SubmitButton>
                 </ChargeBottom>
             </ChargeContent>
         );
@@ -258,7 +270,7 @@ class ChargeComponent extends React.Component {
                 </ChargeContentInfo>
                 <ChargeBottom>
                     <SubmitButton
-                        onClick={() => this.props.commitChargeOrder('bank',bankInfo.id, this.transferName, this.transferChargeValue)}><span>提交订单</span><SmallInputBg/></SubmitButton>
+                        onClick={()=>this.CommitChargeOrder('bank',bankInfo.id, this.transferName, this.transferChargeValue)}><span>提交订单</span><SmallInputBg/></SubmitButton>
                 </ChargeBottom>
             </ChargeContent>
         );
@@ -326,7 +338,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        commitChargeOrder(pay_type,account_id, nameElem, moneyElem) {
+        commitChargeOrder(pay_type,account_id, nameElem, moneyElem,callback) {
             let player_name = nameElem.current.value;
             var pay_money = moneyElem.current.value;
             if (!player_name || !pay_money) {
@@ -338,7 +350,7 @@ const mapDispatchToProps = (dispatch) => {
                 Toast.info('请填输入正确金额');
                 return
             }
-            dispatch(CommitChargeOrder(pay_type,account_id, player_name, pay_money));
+            dispatch(CommitChargeOrder(pay_type,account_id, player_name, pay_money,callback));
         },
         getChargeOrderList(){
             dispatch(GetChargeOrderList(1));

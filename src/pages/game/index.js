@@ -22,6 +22,7 @@ class Game extends React.Component {
         this.state = {
             chargeVisible:false
         };
+        this.requestLock = false;
         let room = POSITION_ROOM_FAST;
         switch (parseInt(this.props.match.params.room_id)) {
             case 2:
@@ -33,9 +34,12 @@ class Game extends React.Component {
             default:
                 break;
         }
-        if(!this.props.requestLock) {
-            this.props.setRequestLock(true);
-            this.props.enterHall(room);
+        if(this.props.userInfo && !this.requestLock) {
+            const that = this;
+            this.requestLock = true;
+            this.props.enterHall(room,function () {
+                that.requestLock = false;
+            });
             !this.props.announcementList && this.props.getAnnouncementList();
         }
     }
@@ -90,12 +94,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setRequestLock(bool) {
-            dispatch(actions.SetEnterHallRequestLock(bool));
-        },
-        enterHall(room){
+        enterHall(room,callback){
             dispatch(SetPlayerPosition(room));
-            dispatch(actions.EnterHall(room));
+            dispatch(actions.EnterHall(room,callback));
         },
         getAnnouncementList() {
             dispatch(GetAnnouncementList());

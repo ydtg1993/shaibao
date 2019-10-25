@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Cookies from 'universal-cookie';
+import Cookies from 'js-cookie';
 import Toast from '../../component/toast';
 import {CloseMongolia, Host} from "../../../index";
 import store from "../../../store";
@@ -21,17 +21,14 @@ export const POSITION_ROOM_FIVE = 'FivesMinute';
 
 const ajaxConfig = {headers: {'Content-Type': 'application/json'},timeout: 1500};
 
-export const GetPlayerInfo = (token)=>{
+export const GetPlayerInfo = ()=>{
     return (dispatch)=>{
-        let ajaxConfig = {headers: {'Content-Type': 'application/json','Authorization':'Token '+token},timeout: 3000};
-        axios.post(Host+'three/player/player/player_info',{},ajaxConfig).then((res)=>{
+        axios.post(Host+'three/player/player/player_info',{},ajaxHeaders()).then((res)=>{
             let data = res.data;
             if(data.code === 20000){
                 let userInfo = store.getState().auth.get('userInfo');
                 if(JSON.stringify(userInfo) !== JSON.stringify(data.data)){
-                    const cookies = new Cookies();
-                    let info = cookies.get('userinfo');
-
+                    let info = Cookies.get('userinfo');
                     let userinfo = {
                         id:data.data.serial,
                         username:data.data.name,
@@ -39,10 +36,10 @@ export const GetPlayerInfo = (token)=>{
                         avatar:data.data.avatar,
                         token:data.data.token,
                         mobile:data.data.phone,
-                        expires:info.expires
+                        expires:info.expires ? info.expires : new Date(Date.now()+600000000)
                     };
                     dispatch(SetUserInfo(userinfo));
-                    cookies.set('userinfo', userinfo, { path: '/',expires: new Date(info.expires)});
+                    Cookies.set('userinfo', userinfo, { path: '/',expires: new Date(info.expires)});
                 }
             }else {
                 Toast.info(data.message);
@@ -95,8 +92,7 @@ export const UserRegister = (mobile,password,verify,invite) => {
                 };
                 dispatch(SetUserInfo(userinfo));
                 Toast.success('注册成功',1000);
-                const cookies = new Cookies();
-                cookies.set('userinfo', userinfo, { path: '/',expires: expires});
+                Cookies.set('userinfo', userinfo, { path: '/',expires: new Date(expires)});
             }else {
                 Toast.info(data.message);
             }
@@ -127,8 +123,7 @@ export const UserLogin = (mobile,password) => {
                 };
                 dispatch(SetUserInfo(userinfo));
                 Toast.success('登录成功',1000);
-                const cookies = new Cookies();
-                cookies.set('userinfo', userinfo, { path: '/',expires: expires});
+                Cookies.set('userinfo', userinfo, { path: '/',expires: new Date(expires)});
             }else {
                 Toast.info(data.message);
             }
@@ -159,8 +154,7 @@ export const UserReset = (mobile,password,verify) => {
                 };
                 dispatch(SetUserInfo(userinfo));
                 Toast.success('重置密码成功',1000);
-                const cookies = new Cookies();
-                cookies.set('userinfo', userinfo, { path: '/',expires: expires});
+                Cookies.set('userinfo', userinfo, { path: '/',expires: new Date(expires)});
             }else {
                 Toast.info(data.message);
             }
@@ -191,8 +185,7 @@ export const GetBankCardInfo = (token) => {
 
 export const ClearUserInfo = ()=>{
     return (dispatch)=>{
-        const cookies = new Cookies();
-        cookies.remove('userinfo', { path: '/' });
+        Cookies.remove('userinfo', { path: '/' });
         dispatch({
             type:CLEAR_USER_INFO
         });
@@ -222,4 +215,11 @@ export const SetPlayerPosition = (position) => ({
     type:SET_PLAYER_POSITION,
     position
 });
+
+export const ajaxHeaders = function () {
+    let userinfo = store.getState().auth.get('userInfo');
+    let token = userinfo ? userinfo.token : '';
+    let ajaxConfig = {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}, timeout: 3000};
+    return ajaxConfig;
+};
 

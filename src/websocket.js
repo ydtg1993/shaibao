@@ -51,6 +51,13 @@ function triggerEvent(data){
         return;
     }
     let position = store.getState().auth.get('playerPosition');
+    /*player win gold*/
+    let win_gold;
+    if(data.event === actions.WINNING_NOTICE_EVENT && position !== data.hall_tag){
+        win_gold = parseFloat(data.data.win_gold);
+        store.dispatch(PlayerGoldChange(store.getState().auth.get('gold') + win_gold));
+        return;
+    }
     if(position !== data.hall_tag){
         return;
     }
@@ -75,7 +82,7 @@ function triggerEvent(data){
             break;
         /*player receive gold*/
         case actions.WINNING_NOTICE_EVENT:
-            var win_gold = parseFloat(data.data.win_gold);
+            win_gold = parseFloat(data.data.win_gold);
             store.dispatch(WinNoticeEvent(win_gold,data.data.positions));
             break;
         /*player bet*/

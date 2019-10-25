@@ -10,7 +10,8 @@ import {
     EnvelopeClosed,
     EmailReaded,
     EmailRead,
-    EnvelopeCoinReaded
+    EnvelopeCoinReaded,
+    EnvelopeCoinReceived
 } from './style';
 import {Close} from "../style";
 import {DialogTop, BottomDecoration} from "../style";
@@ -147,7 +148,7 @@ class EmailComponent extends React.Component {
                     <div className='time'>{data.create_at}</div>
                 </div>
                 <div>
-                    <EnvelopeCoinReaded onClick={this.OpenEmailInfo.bind(this, data.id)}/>
+                    <EnvelopeCoinReceived onClick={this.OpenEmailInfo.bind(this, data.id)}/>
                 </div>
             </React.Fragment>
         )

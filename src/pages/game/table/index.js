@@ -12,7 +12,6 @@ import {
     Middle,
     Title,
     Period,
-    Pan,
     PanDick,
     Right,
     Bets,
@@ -81,11 +80,6 @@ class TableComponent extends React.Component {
             let positions = nextProps.win_event_data.positions;
 
             const that = this;
-            const interval = setInterval(function () {
-                clearInterval(interval);
-                that.props.playerGoldChange(that.props.myGold+win_gold);
-            },1000);
-
             positions.map(function (position) {
                 var doms = document.querySelectorAll(`#betsBox${position} div`);
                 for (let i = 0; i < doms.length; i++) {
@@ -96,7 +90,10 @@ class TableComponent extends React.Component {
                         translateX:[0,moneyBoxDomPosition.left - domPosition.left],
                         translateY: [0, moneyBoxDomPosition.top - domPosition.top],
                         duration: 500,
-                        easing: "easeInOutCirc"
+                        easing: "easeInOutCirc",
+                        complete: function() {
+                            that.props.playerGoldChange(that.props.myGold+win_gold);
+                        }
                     })
                 }
                 return true;

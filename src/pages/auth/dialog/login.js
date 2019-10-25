@@ -4,62 +4,10 @@ import {connect} from 'react-redux';
 import { DialogTop,LoginTitle,DialogContent,Close,LoginDialog,Input,Reset,SubmitButton} from './style';
 import * as Actions from "../store/actions";
 import Toast from '../../component/toast';
-import {Redirect} from "react-router";
-import Cookies from 'universal-cookie';
-import {connection} from "../../../websocket";
-import {POSITION_ROOM_FAST} from "../store/actions";
-import {POSITION_ROOM_ONE} from "../store/actions";
-import {POSITION_ROOM_FIVE} from "../store/actions"
-
-/*preloading image*/
-import {img_game_cup_base,img_game_cup_cover,img_congratulate_hikaru} from '../../../resource';
 
 class Login extends React.Component{
-    constructor(props){
-        super(props);
-        const cookies = new Cookies();
-        const userinfo = cookies.get('userinfo');
-        if(!this.props.userInfo && userinfo){
-            this.props.setUserInfo(userinfo);
-            const that = this;
-            Promise.resolve().then(function () {
-                that.props.getPlayerInfo(userinfo.token);
-            });
-        }
-    }
-
-    componentDidMount() {
-        /*preloading images*/
-        const imgs = [
-            img_game_cup_base,img_game_cup_cover,img_congratulate_hikaru
-        ];
-        let len = imgs.length;
-        for (let i = 0; i < len; i++) {
-            let imgObj = new Image();
-            imgObj.src = imgs[i];
-            imgObj.addEventListener('load', function () {
-            }, false);
-        }
-    }
-
     render() {
         const {visible} = this.props;
-        const that = this;
-        if(this.props.userInfo){
-            Promise.resolve().then(function () {
-                connection(that.props.userInfo.token);
-            });
-            switch (this.props.playerPosition) {
-                case POSITION_ROOM_FAST:
-                    return (<Redirect to={{pathname: "/game/1"}}/>);
-                case POSITION_ROOM_ONE:
-                    return (<Redirect to={{pathname: "/game/2"}}/>);
-                case POSITION_ROOM_FIVE:
-                    return (<Redirect to={{pathname: "/game/3"}}/>);
-                default:
-                    return (<Redirect to={{pathname: "/home"}}/>);
-            }
-        }
         return (
             <LoginDialog className={visible ? 'show fadeInUp faster animated':'hidden'}>
                 <DialogTop>
@@ -83,13 +31,6 @@ class Login extends React.Component{
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        userInfo: state.auth.get('userInfo'),
-        playerPosition:state.auth.get('playerPosition')
-    }
-};
-
 const mapDispatchToProps = (dispatch) => {
     return {
         login(mobileElem,passwordElem){
@@ -108,15 +49,8 @@ const mapDispatchToProps = (dispatch) => {
                 return false;
             }
             dispatch(Actions.UserLogin(mobile,password));
-        },
-        setUserInfo(userinfo){
-            let action = Actions.SetUserInfo(userinfo);
-            dispatch(action);
-        },
-        getPlayerInfo(token){
-            dispatch(Actions.GetPlayerInfo(token));
         }
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
+export default connect(null, mapDispatchToProps)(withRouter(Login))

@@ -90,6 +90,7 @@ import img_home_email_tag_mail from './home/email/mail.png';
 import img_home_email_tag_opened from './home/email/opened.png';
 import img_home_email_tag_readed from './home/email/readed.png';
 import img_home_email_tag_unaccalimed from './home/email/unaccalimed.png';
+import img_home_email_received from './home/email/received.png';
 /*home dialog pig*/
 import img_home_pig_title from './home/pig/title.png';
 import img_home_pig_bg from './home/pig/bg.png';
@@ -274,6 +275,7 @@ export {
     img_home_email_tag_opened,
     img_home_email_tag_readed,
     img_home_email_tag_unaccalimed,
+    img_home_email_received,
     /*pig*/
     img_home_pig_title,
     img_home_pig_bg,

@@ -22,6 +22,8 @@ import {
 } from "./style";
 import PigRuleComponent from "./rule";
 import PigBeginComponent from "./begin";
+import Toast from "../../../component/toast";
+import * as Actions from "../../store/actions";
 
 class PigComponent extends React.Component {
     constructor(props) {
@@ -30,21 +32,16 @@ class PigComponent extends React.Component {
             ruleVisible: false,
             beginVisible:false
         };
-        this.boardList = [
-            {name: 'xxx', money: '12'},
-            {name: 'xxx', money: '12'},
-            {name: 'xxx', money: '12'},
-            {name: 'xxx', money: '12'},
-            {name: 'xxx', money: '12'}];
         this.boardListRef = React.createRef();
     }
 
-    componentDidMount() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        clearInterval(this.interval);
         this.publish();
     }
 
     publish() {
-        if (!this.boardList) {
+        if (!this.props.pigInfo.record) {
             return;
         }
         let boardListH = this.boardListRef.current.clientHeight;
@@ -78,19 +75,24 @@ class PigComponent extends React.Component {
     }
 
     OpenBegin(){
+        if(isNaN(this.props.pigInfo.player_integral) || this.props.pigInfo.player_integral < 500){
+            Toast.info('您的积分不足');
+            return
+        }
         this.setState({
             beginVisible: true
         });
     }
 
     CloseBegin(){
+        this.props.getPigInfo();
         this.setState({
             beginVisible: false
         });
     }
 
     render() {
-        const {visible} = this.props;
+        const {visible,pigInfo} = this.props;
         return (
             <React.Fragment>
                 <Dialog className={visible ? 'show fadeInUp faster animated' : 'hidden'}>
@@ -103,11 +105,11 @@ class PigComponent extends React.Component {
                             <Pig>
                                 <PigTitle>剩余钱罐</PigTitle>
                                 <PigRestMoney>
-                                    <div>5</div>
-                                    <div>5</div>
-                                    <div>5</div>
-                                    <div>5</div>
-                                    <div>5</div>
+                                    {pigInfo.total ? pigInfo.total.split('').map(function (data,key) {
+                                          return (<div key={key}>{data}</div>)
+                                        }) : [0,0,0,0,0].map(function (data,key) {
+                                        return (<div key={key}>{data}</div>)
+                                    })}
                                 </PigRestMoney>
                                 <BrokeButton onClick={this.OpenBegin.bind(this)}/>
                             </Pig>
@@ -115,7 +117,7 @@ class PigComponent extends React.Component {
                         <DescriptionSection>
                             <DescriptionTitle onClick={this.OpenRule.bind(this)}/>
                             <Description>500积分/次</Description>
-                            <Description>剩余积分: 0</Description>
+                            <Description>剩余积分: {pigInfo.player_integral}</Description>
                         </DescriptionSection>
                     </MiddleSection>
                     <BoardSection>
@@ -126,9 +128,8 @@ class PigComponent extends React.Component {
                             <div>
                                 <BoardContent>
                                     <BorderListRef ref={this.boardListRef}>
-                                        <BoardText>恭喜<span>【xxx】</span>用户砸金猪获得了<span>15元</span>红包</BoardText>
-                                        {this.boardList.map(function (data,key) {
-                                            return (<BoardText key={key}>恭喜<span>【{data.name}】</span>用户砸金猪获得了<span>{data.money}元</span>红包</BoardText>)
+                                        {pigInfo.record && pigInfo.record.map(function (data,key) {
+                                            return (<BoardText key={key}>恭喜<span>【{data.player}】</span>用户砸金猪获得了<span>{data.gold}元</span>红包</BoardText>)
                                         })}
                                     </BorderListRef>
                                 </BoardContent>
@@ -143,4 +144,18 @@ class PigComponent extends React.Component {
     }
 }
 
-export default PigComponent;
+const mapStateToProps = (state) => {
+    return {
+        pigInfo: state.home.get('pigInfo')
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getPigInfo(){
+            dispatch(Actions.GetPigInfo());
+        }
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(PigComponent);

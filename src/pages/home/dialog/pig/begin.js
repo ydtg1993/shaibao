@@ -6,29 +6,41 @@ import {
     Close,
     BeginTitle,
     PigBox,
-    PigPig
+    PigPig,
+    Light
 } from "./style";
+import {OpenPig} from "../../store/actions";
 
 class PigBeginComponent extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.pigBox = React.createRef();
+        this.requestLock = false;
     }
 
-    Choice(){
+    Choice() {
+        if (this.requestLock) {
+            return
+        }
+        this.requestLock = true;
         let nodes = this.pigBox.current.childNodes;
-        for (let i in nodes){
-            if(nodes[i] instanceof HTMLElement){
+        for (let i in nodes) {
+            if (nodes[i] instanceof HTMLElement) {
                 nodes[i].className = nodes[i].className + ' active';
             }
         }
+        const that = this;
+        this.props.openPig(function () {
+            that.requestLock = false;
+            that.CloseBegin();
+        });
     }
 
-    CloseBegin(){
+    CloseBegin() {
         let nodes = this.pigBox.current.childNodes;
-        for (let i in nodes){
-            if(nodes[i] instanceof HTMLElement){
-                nodes[i].className = nodes[i].className.replace(/ active/,'')
+        for (let i in nodes) {
+            if (nodes[i] instanceof HTMLElement) {
+                nodes[i].className = nodes[i].className.replace(/ active/, '')
             }
         }
         this.props.CloseBegin();
@@ -54,9 +66,18 @@ class PigBeginComponent extends React.Component {
                         <PigPig onClick={this.Choice.bind(this)}/>
                     </PigBox>
                 </div>
+                <Light id='beginPigLight'/>
             </BeginDialog>
         );
     }
 }
 
-export default PigBeginComponent;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        openPig(callback) {
+            dispatch(OpenPig(callback));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(PigBeginComponent);

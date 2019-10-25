@@ -1,5 +1,6 @@
 import * as Actions from './actions';
 import { fromJS } from 'immutable';
+import Cookies from 'js-cookie';
 
 const defaultState = fromJS({
     sendVerify:false,
@@ -22,6 +23,7 @@ export default (state = defaultState, action) => {
         case Actions.PLAYER_GOLD_CHANGE:
             return state.set('gold',action.gold);
         case Actions.SET_PLAYER_POSITION:
+            Cookies.set('playerPosition',action.position);
             return state.set('playerPosition',action.position);
         case Actions.SET_BANK_CARD_INFO:
             return state.set('cardInfo',action.data);

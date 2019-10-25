@@ -1,7 +1,6 @@
 import axios from "axios";
 import Toast from "../../component/toast";
-import Cookies from "universal-cookie";
-import {CLEAR_USER_INFO, PlayerGoldChange} from "../../auth/store/actions";
+import {ajaxHeaders, ClearUserInfo, PlayerGoldChange} from "../../auth/store/actions";
 import {Host} from "../../../index";
 
 export const OPEN_WEBSOCKET_CONNECTION = 'open_websocket_connection';
@@ -35,21 +34,6 @@ export const WIN_STAGE = 'WinStage';
 export const OVER_STAGE = 'OverStage';
 
 export const SET_LOTTERY_TIME_COUNTDOWN = 'set_lottery_time_countdown';
-export const SET_ENTER_HALL_REQUEST_LOCK = 'set_enter_hall_request_lock';
-
-const ajaxHeaders = function () {
-    const cookies = new Cookies();
-    const userinfo = cookies.get('userinfo');
-    let token = userinfo ? userinfo.token : '';
-    let ajaxConfig = {headers: {'Content-Type': 'application/json','Authorization':'Token '+token},timeout: 3000};
-    return ajaxConfig;
-};
-
-const ClearUserInfo = function () {
-    const cookies = new Cookies();
-    cookies.remove('userinfo', { path: '/' });
-    return {type:CLEAR_USER_INFO}
-};
 
 export const SetBetChip = (chip)=>({
     type:SET_BET_CHIP,
@@ -65,13 +49,13 @@ export const CloseWebsocket = ()=>({
     type:CLOSE_WEBSOCKET_CONNECTION
 });
 
-export const EnterHall = (hall_tag)=> {
+export const EnterHall = (hall_tag,callback)=> {
     return (dispatch) => {
         axios.post(Host + 'three/hall/client/enter_hall', {
             hall_tag: hall_tag
         }, ajaxHeaders()).then((res) => {
+            callback();
             let data = res.data;
-            dispatch(SetEnterHallRequestLock(false));
             if (data.code === 20000) {
                 dispatch({
                     type:ENTER_HALL,
@@ -155,11 +139,6 @@ export const WinNoticeEvent = (win_gold,positions)=>({
 
 export const GameOverNotice = ()=>({
     type:GAME_OVER_NOTICE_EVENT
-});
-
-export const SetEnterHallRequestLock = (bool) => ({
-    type: SET_ENTER_HALL_REQUEST_LOCK,
-    bool
 });
 
 

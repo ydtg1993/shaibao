@@ -13,7 +13,8 @@ const defaultState = fromJS({
     signInList:false,
     bankList:false,
     exchangeRecordList:false,
-    chargeOrderList:false
+    chargeOrderList:false,
+    pigInfo:false
 });
 
 export default (state = defaultState, action) => {
@@ -24,6 +25,8 @@ export default (state = defaultState, action) => {
             return state.set('chargeInfo',action.data);
         case Actions.GET_ANNOUNCEMENT_LIST:
             return state.set('announcementList',action.list);
+        case Actions.GET_PIG_INFO:
+            return state.set('pigInfo',action.data);
         case Actions.GET_EMAIL_LIST:
             return state.set('emailList',action.list);
         case Actions.ADD_EMAIL_LIST:

@@ -11,6 +11,7 @@ import {
     img_home_email_tag_opened,
     img_home_email_tag_readed,
     img_home_email_tag_unaccalimed,
+    img_home_email_received
 } from '../../../../resource';
 
 export const EmailDialog = styled(Dialog)`
@@ -83,6 +84,7 @@ export const Email = styled.div`
     align-items: center;
     grid-template-columns: 30px auto 90px;
     font-weight: 300;
+    &.hidden{visibility: hidden;position: absolute;width: 0;height: 0;}
     & div{white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;}
@@ -120,6 +122,14 @@ export const EmailReaded = styled.img.attrs({
 
 export const EnvelopeCoinReaded = styled.img.attrs({
     src:`${img_home_email_tag_unaccalimed}`
+})`
+    width: 35px;
+    float: right;
+    margin-right: 10px;
+`;
+
+export const EnvelopeCoinReceived = styled.img.attrs({
+    src:`${img_home_email_received}`
 })`
     width: 35px;
     float: right;

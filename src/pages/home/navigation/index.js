@@ -28,6 +28,7 @@ class NavigationComponent extends React.Component {
 
     OpenPig() {
         OpenMongolia();
+        this.props.getPigInfo();
         this.setState({
             pigVisible: true,
         })
@@ -105,6 +106,9 @@ class NavigationComponent extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getPigInfo(){
+            dispatch(Actions.GetPigInfo());
+        },
         getBetRecords(page, type) {
             dispatch(Actions.GetBetRecord(page, type))
         },

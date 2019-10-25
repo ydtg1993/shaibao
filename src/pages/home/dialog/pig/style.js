@@ -250,3 +250,9 @@ export const PigPig = styled.div`
     background-position: -85px 0px;
     &.active{background-position: 5px 0px;}
 `;
+
+export const Light = styled.div`
+    position: absolute;
+    top: -45px;
+    left: -15px;
+`;

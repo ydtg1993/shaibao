@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 /*router*/
-import Auth from './pages/auth';
-import Home from './pages/home/loadable';
-import Game from './pages/game/loadable';
+import Auth from './pages/auth/loadable';
+import Home from './pages/home';
+import Game from './pages/game';
 
 class App extends React.Component {
     render() {

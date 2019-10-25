@@ -5,6 +5,11 @@ import Login from './dialog/login';
 import ResetComponent from './dialog/reset';
 import Register from './dialog/register';
 import {CloseMongolia, OpenMongolia} from "../../index";
+import {connect} from "react-redux";
+import {connection} from "../../websocket";
+import {GetPlayerInfo, POSITION_ROOM_FAST, POSITION_ROOM_FIVE, POSITION_ROOM_ONE, SetUserInfo} from "./store/actions";
+import {Redirect} from "react-router";
+import Cookies from "js-cookie";
 
 class Auth extends React.Component {
     constructor(props){
@@ -14,6 +19,14 @@ class Auth extends React.Component {
             registerVisible:false,
             resetVisible:false
         };
+        const cookieUserInfo = Cookies.get('userinfo') ? JSON.parse(Cookies.get('userinfo')) : null;
+        if(!this.props.userInfo && cookieUserInfo){
+            this.props.setPlayerInfo(cookieUserInfo);
+            const that = this;
+            Promise.resolve().then(function () {
+                that.props.getPlayerInfo();
+            });
+        }
     }
 
     OpenLoginDialog(){
@@ -60,6 +73,23 @@ class Auth extends React.Component {
     }
 
     render() {
+        if(this.props.userInfo){
+            const that = this;
+            Promise.resolve().then(function () {
+                connection(that.props.userInfo.token);
+            });
+            let playerPosition = Cookies.get('playerPosition');
+            switch (playerPosition) {
+                case POSITION_ROOM_FAST:
+                    return (<Redirect to={{pathname: "/game/1"}}/>);
+                case POSITION_ROOM_ONE:
+                    return (<Redirect to={{pathname: "/game/2"}}/>);
+                case POSITION_ROOM_FIVE:
+                    return (<Redirect to={{pathname: "/game/3"}}/>);
+                default:
+                    return (<Redirect to={{pathname: "/home"}}/>);
+            }
+        }
         return (
             <React.Fragment>
                 <LoginWrapper>
@@ -74,4 +104,21 @@ class Auth extends React.Component {
     }
 }
 
-export default Auth
+const mapStateToProps = (state) => {
+    return {
+        userInfo: state.auth.get('userInfo')
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setPlayerInfo(userinfo){
+            dispatch(SetUserInfo(userinfo));
+        },
+        getPlayerInfo(){
+            dispatch(GetPlayerInfo());
+        }
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Auth)

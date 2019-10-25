@@ -22,8 +22,6 @@ class Home extends React.Component {
             chargeVisible:false
         };
         this.props.setPlayerPosition();
-        CloseGameMongolia();
-        CloseMongolia();
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -36,7 +34,9 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.requestLock) {
+        CloseGameMongolia();
+        CloseMongolia();
+        if (this.props.userInfo && !this.props.requestLock) {
             this.props.setRequestLock(true);
             !this.props.announcementList && this.props.getAnnouncementList();
             !this.props.signInList && this.props.getSignInList();

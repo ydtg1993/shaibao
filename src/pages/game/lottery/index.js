@@ -89,23 +89,23 @@ class LotteryComponent extends React.Component {
                         targets: that.shaibao.current,
                         rotate: [
                             {
-                                value: 30,
+                                value: 28,
                                 duration: 65,
-                                easing: 'easeInOutSine'
+                                easing: 'linear'
                             },
                             {
-                                value: -30,
+                                value: -28,
                                 duration: 130,
-                                easing: 'easeInOutSine'
+                                easing: 'linear'
                             },
                             {
                                 value: 0,
                                 duration: 65,
-                                easing: 'easeInOutSine'
+                                easing: 'linear'
                             }
                         ],
                         direction: 'reverse',
-                        easing: 'easeInOutSine',
+                        easing: 'linear',
                         loop: true
                     });
                     that.animation_lottery = animation_lottery;
