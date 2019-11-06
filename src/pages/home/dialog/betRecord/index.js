@@ -37,7 +37,7 @@ class BetRecordComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const that =this;
+        const that = this;
         this.betList.current && this.betList.current.addEventListener('scroll', function () {
             var afterScrollTop = this.scrollTop;
             if(afterScrollTop < this.beforeScrollTop){
@@ -66,17 +66,6 @@ class BetRecordComponent extends React.Component {
                 });
             }
         });
-    }
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (this.props.betRecordList.length !== nextProps.betRecordList.length) {
-            return true;
-        } else if (this.props.visible !== nextProps.visible) {
-            return true;
-        } else if(this.state.record_all !== nextState.record_all){
-            return true;
-        }
-        return false;
     }
 
     CloseBetRecord(){

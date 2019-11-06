@@ -118,9 +118,9 @@ import img_home_signin_box3 from './home/signin/box3.png';
 import img_home_signin_box4 from './home/signin/box4.png';
 import img_home_signin_box5 from './home/signin/box5.png';
 import img_home_signin_box6 from './home/signin/box6.png';
-import img_home_signin_coin from './home/signin/coin.png';
+import img_home_signin_box7 from './home/signin/box7.png';
 import img_home_signin_compelete from './home/signin/complete.png';
-import img_home_signin_box_bg from './home/signin/box_bg.png';
+
 
 /*Game*/
 import img_game_back from './room/fanhui.png';
@@ -303,9 +303,8 @@ export {
     img_home_signin_box4,
     img_home_signin_box5,
     img_home_signin_box6,
-    img_home_signin_coin,
-    img_home_signin_compelete,
-    img_home_signin_box_bg,
+    img_home_signin_box7,
+    img_home_signin_compelete
 }
 
 /*room export*/

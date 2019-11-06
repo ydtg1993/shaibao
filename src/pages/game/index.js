@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import {
     GameWrapper,
 } from './style';
@@ -12,15 +12,15 @@ import MoneyComponent from './money';
 import BetComponent from './bet';
 import LotteryComponent from "./lottery";
 import {POSITION_ROOM_FAST, POSITION_ROOM_ONE, POSITION_ROOM_FIVE, SetPlayerPosition} from "../auth/store/actions";
- import {OpenGameMongolia, CloseGameMongolia, OpenMongolia, CloseMongolia} from "../../index";
- import {GetAnnouncementList, GetChargeInfo} from "../home/store/actions";
- import ChargeComponent from "../home/dialog/charge";
+import {OpenGameMongolia, CloseGameMongolia, OpenMongolia, CloseMongolia} from "../../index";
+import {GetAnnouncementList, GetChargeInfo} from "../home/store/actions";
+import ChargeComponent from "../home/dialog/charge";
 
 class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            chargeVisible:false
+            chargeVisible: false
         };
         this.requestLock = false;
         let room = POSITION_ROOM_FAST;
@@ -34,28 +34,28 @@ class Game extends React.Component {
             default:
                 break;
         }
-        if(this.props.userInfo && !this.requestLock) {
+        if (this.props.userInfo && !this.requestLock) {
             const that = this;
             this.requestLock = true;
-            this.props.enterHall(room,function () {
+            this.props.enterHall(room, function () {
                 that.requestLock = false;
             });
             !this.props.announcementList && this.props.getAnnouncementList();
         }
     }
 
-    OpenCharge(){
+    OpenCharge() {
         OpenMongolia();
         this.props.getChargeInfo();
         this.setState({
-            chargeVisible:true
+            chargeVisible: true
         });
     }
 
-    CloseCharge(){
+    CloseCharge() {
         CloseMongolia();
         this.setState({
-            chargeVisible:false
+            chargeVisible: false
         });
     }
 
@@ -63,9 +63,9 @@ class Game extends React.Component {
         if (!this.props.userInfo) {
             return (<Redirect to={{pathname: "/auth"}}/>)
         }
-        if(this.props.stage !== actions.START_STAGE && this.props.stage !== actions.BET_STAGE){
+        if (this.props.stage !== actions.START_STAGE && this.props.stage !== actions.BET_STAGE) {
             OpenGameMongolia();
-        }else {
+        } else {
             CloseGameMongolia();
         }
         return (
@@ -85,23 +85,23 @@ class Game extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        requestLock:state.game.get('requestLock'),
+        requestLock: state.game.get('requestLock'),
         userInfo: state.auth.get('userInfo'),
-        stage:state.game.get('stage'),
+        stage: state.game.get('stage'),
         announcementList: state.home.get('announcementList')
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        enterHall(room,callback){
+        enterHall(room, callback) {
             dispatch(SetPlayerPosition(room));
-            dispatch(actions.EnterHall(room,callback));
+            dispatch(actions.EnterHall(room, callback));
         },
         getAnnouncementList() {
             dispatch(GetAnnouncementList());
         },
-        getChargeInfo(){
+        getChargeInfo() {
             dispatch(GetChargeInfo());
         }
     }

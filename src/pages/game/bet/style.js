@@ -12,8 +12,11 @@ import {
 export const BetWrapper = styled.div`
     background: url('${img_game_section4}') center no-repeat 
     background-size:100% 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 12px 0 12px;
 `;
 
 export const Chip = styled.div`
@@ -22,7 +25,6 @@ export const Chip = styled.div`
     text-align: center;
     line-height: 30px;
     display:block;
-    margin:12px auto;
     font-size: 12px;
     color: #313169;
     font-weight: 500;

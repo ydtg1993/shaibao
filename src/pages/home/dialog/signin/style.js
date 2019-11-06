@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import {Dialog} from '../style';
 import {
     img_home_signin_title,
-    img_home_signin_compelete,
-    img_home_signin_box_bg,
+    img_home_signin_compelete
 } from '../../../../resource';
 
 export const SignInDialog = styled(Dialog)`
@@ -27,31 +26,21 @@ export const Content = styled.div`
     margin-top: 20px;
     display:grid;
     height:174px;
-    grid-template-rows: 50% 50%;
-    grid-template-columns: 1fr 1fr 1fr 1fr
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+`;
+
+export const AwardBox = styled.div`
+    padding:0 1.5px 6px 1.5px;
+    &.last{
+    grid-column-start: 3;
+    grid-column-end: 5;
+    }
 `;
 
 export const Award = styled.div`
-    width:72px;
-    height:80px;
-    margin:0 auto;
     position:relative;
-`;
-
-export const AwardBg = styled.img.attrs({
-    src:`${img_home_signin_box_bg}`
-})`
-    text-shadow: 0 2px 2px rgb(0, 0, 0);
-    position:absolute;
     height:100%;
-    width:100%;
-    top: 0;
-    left:0;
-`;
-
-export const AwardContent = styled.div`
-    position:relative;
-    z-index:1;
 `;
 
 export const Day = styled.div`
@@ -67,21 +56,24 @@ export const Day = styled.div`
 `;
 
 export const Box = styled.img`
-    width: 36px;
-    height: 28px;
-    margin: 6px auto 0;
-    display:block;
+    text-shadow: 0 2px 2px rgb(0, 0, 0);
+    position:absolute;
+    height:100%;
+    width:100%;
+    top: 0;
+    left:0;
 `;
 
-export const Complete = styled.img.attrs({
-    src:`${img_home_signin_compelete}`
-})`
+export const Complete = styled.div`
     height:100%;
     width:100%;
     top: 0;
     left:0;
     position: absolute;
     z-index: 1;
+    background: url(${img_home_signin_compelete}) #15151582 no-repeat;
+    background-size: 35px 35px;
+    background-position: right 0 bottom 0;
 `;
 
 export const Light = styled.div`

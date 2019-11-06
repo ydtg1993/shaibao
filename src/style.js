@@ -12,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #282c34;
   font-weight: 300;
-    
+
   @font-face {
      font-family: 'LangFont';
      src: url('${LangFont}');

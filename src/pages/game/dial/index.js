@@ -23,8 +23,7 @@ class DialComponent extends React.Component {
         super(props);
         this.state = {
             recordVisible: false,
-            introductionVisible: false,
-            publishLock: false
+            introductionVisible: false
         };
         this.announce = React.createRef();
         this.announceBox = React.createRef();
@@ -47,12 +46,9 @@ class DialComponent extends React.Component {
     }
 
     publish() {
-        if (this.state.publishLock || !this.announcementList) {
+        if (!this.announcementList) {
             return;
         }
-        this.setState({
-            publishLock: true
-        });
         if (!this.announcementList[this.counter]) {
             this.counter = 0;
         }

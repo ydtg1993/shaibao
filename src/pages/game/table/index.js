@@ -90,14 +90,15 @@ class TableComponent extends React.Component {
                         translateX:[0,moneyBoxDomPosition.left - domPosition.left],
                         translateY: [0, moneyBoxDomPosition.top - domPosition.top],
                         duration: 500,
-                        easing: "easeInOutCirc",
-                        complete: function() {
-                            that.props.playerGoldChange(that.props.myGold+win_gold);
-                        }
+                        easing: "easeInOutCirc"
                     })
                 }
                 return true;
             });
+            var interval = setInterval(function () {
+                clearInterval(interval);
+                that.props.playerGoldChange(that.props.myGold + win_gold);
+            },1000);
         } else if (nextProps.stage === actions.OVER_STAGE || nextProps.stage === actions.START_STAGE) {
             /*clear bets*/
             for(let i=1;i<=18;i++){

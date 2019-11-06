@@ -7,8 +7,9 @@ import { Provider } from 'react-redux';
 import store from './store';
 /*router*/
 import Auth from './pages/auth/loadable';
-import Home from './pages/home';
-import Game from './pages/game';
+import Home from './pages/home/loadable';
+import Game from './pages/game/loadable';
+
 
 class App extends React.Component {
     render() {
