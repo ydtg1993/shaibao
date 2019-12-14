@@ -24,7 +24,7 @@ class PigBeginComponent extends React.Component {
         }
         this.requestLock = true;
         let nodes = this.pigBox.current.childNodes;
-        for (let i in nodes) {
+        for (var i in nodes) {
             if (nodes[i] instanceof HTMLElement) {
                 nodes[i].className = nodes[i].className + ' active';
             }
@@ -38,7 +38,7 @@ class PigBeginComponent extends React.Component {
 
     CloseBegin() {
         let nodes = this.pigBox.current.childNodes;
-        for (let i in nodes) {
+        for (var i in nodes) {
             if (nodes[i] instanceof HTMLElement) {
                 nodes[i].className = nodes[i].className.replace(/ active/, '')
             }

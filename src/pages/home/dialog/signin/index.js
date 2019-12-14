@@ -56,7 +56,7 @@ class SignInComponent extends React.Component {
                     <Content>
                         {signInList && Object.keys(signInList).map(function (day) {
                             return (
-                                <AwardBox key={day} className={day == 7 ? 'last':''}>
+                                <AwardBox key={day} className={day === 7 ? 'last':''}>
                                     <Award onClick={that.sign.bind(that,signInList[day].allow,day)}>
                                         {that.selectBox(day)}
                                         {signInList[day].is_sign ? <Complete/>:''}

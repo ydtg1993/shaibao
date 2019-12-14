@@ -26,6 +26,7 @@ const LoadableComponent = Loadable({
             ].map(function (data) {
                 let imgObj = new Image();
                 imgObj.src = data;
+                return true;
             });
             clearInterval(interval)
         },1000);
